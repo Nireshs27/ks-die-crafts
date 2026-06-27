@@ -49,7 +49,7 @@ const stats = [
 
 export function StatsSection() {
   return (
-    <section className="relative z-20 -mt-8 sm:-mt-12 mb-8 bg-background shadow-xl shadow-black/5 ring-1 ring-border/50 max-w-7xl mx-auto rounded-2xl py-10 sm:py-14">
+    <section className="relative z-20 -mt-8 sm:-mt-12 mb-8 bg-background shadow-xl shadow-black/5 ring-1 ring-border/50 max-w-[1400px] mx-auto rounded-2xl py-10 sm:py-14">
       <Container>
         <StaggerContainer className="grid grid-cols-1 gap-8 sm:grid-cols-3 lg:gap-12">
           {stats.map((stat, idx) => (

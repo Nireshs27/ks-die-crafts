@@ -11,7 +11,7 @@ export function ProductsPageContent() {
   return (
     <>
       <section className="bg-surface py-24 sm:py-32">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8">
           <Reveal>
             <nav aria-label="Breadcrumb" className="mb-10">
               <ol className="flex flex-wrap items-center gap-2 text-xs text-muted">

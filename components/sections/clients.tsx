@@ -7,7 +7,7 @@ import { siteConfig } from "@/lib/site";
 export function ClientsSection() {
   return (
     <section className="bg-background py-24 sm:py-32">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8">
         <Reveal>
           <div className="mx-auto max-w-3xl text-center">
             <div className="flex items-center justify-center gap-3">
@@ -34,7 +34,7 @@ export function ClientsSection() {
       </Reveal>
 
       <Reveal delay={0.3}>
-        <div className="mx-auto mt-16 max-w-7xl px-4 sm:mt-20 sm:px-6 lg:px-8">
+        <div className="mx-auto mt-16 max-w-[1400px] px-4 sm:mt-20 sm:px-6 lg:px-8">
           <div className="relative overflow-hidden rounded-3xl border border-border bg-surface py-14 text-center shadow-sm sm:py-20">
             <div
               className="pointer-events-none absolute -left-32 -top-32 h-96 w-96 rounded-full bg-cta/5 blur-[100px]"

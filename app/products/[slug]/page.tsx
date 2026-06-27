@@ -69,7 +69,7 @@ export default async function ProductDetailPage({
       />
 
       <section className="bg-surface py-24 sm:py-32">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8">
           <nav aria-label="Breadcrumb" className="mb-10">
             <ol className="flex flex-wrap items-center gap-2 text-xs text-muted">
               <li><Link href="/" className="transition-colors hover:text-foreground">Home</Link></li>
@@ -167,7 +167,7 @@ export default async function ProductDetailPage({
       </section>
 
       <section className="py-24 sm:py-32">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8">
           <div className="grid gap-12 lg:grid-cols-2">
             <div>
               <div className="flex items-center gap-3">

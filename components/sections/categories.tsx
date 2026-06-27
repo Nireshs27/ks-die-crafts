@@ -8,7 +8,7 @@ import { categories } from "@/lib/categories";
 export function CategoriesSection() {
   return (
     <section id="categories" className="bg-surface py-24 sm:py-32">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8">
         <Reveal>
           <div className="mx-auto max-w-3xl text-center">
             <div className="flex items-center justify-center gap-3">
