@@ -11,8 +11,8 @@ type Faq = {
 
 export function FaqSection({ faqs }: { faqs: readonly Faq[] }) {
   return (
-    <section className="py-24 sm:py-32">
-      <div className="mx-auto max-w-3xl">
+    <section className="bg-background py-24 sm:py-32">
+      <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
         <Reveal>
           <div className="mx-auto max-w-3xl text-center">
             <div className="flex items-center justify-center gap-3">
@@ -23,7 +23,7 @@ export function FaqSection({ faqs }: { faqs: readonly Faq[] }) {
               <span className="h-px w-8 bg-cta" />
             </div>
             <h2 className="mt-3 text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
-              Common questions, answered
+              Frequently Asked Questions
             </h2>
             <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-muted">
               Everything you need to know about our die manufacturing process.
@@ -44,7 +44,7 @@ export function FaqSection({ faqs }: { faqs: readonly Faq[] }) {
         </Reveal>
 
         <Reveal delay={0.3}>
-          <div className="mt-12 rounded-2xl border border-border bg-surface-muted p-8 text-center">
+          <div className="mt-12 rounded-2xl border border-border bg-surface p-8 text-center">
             <p className="text-base font-medium text-foreground">
               Still have questions?
             </p>

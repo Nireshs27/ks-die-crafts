@@ -32,8 +32,8 @@ const openings = [
 
 export function CareerSection() {
   return (
-    <section id="career" className="py-16 sm:py-20">
-      <div className="mx-auto max-w-7xl">
+    <section id="career" className="bg-surface py-16 sm:py-20">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <Reveal>
           <div className="mx-auto max-w-3xl text-center">
             <div className="flex items-center justify-center gap-3">
@@ -56,7 +56,7 @@ export function CareerSection() {
         <StaggerContainer className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {openings.map((role) => (
             <StaggerItem key={role.title}>
-              <article className="group flex h-full flex-col rounded-2xl border border-border bg-surface p-5 transition-all hover:border-border hover:shadow-md">
+              <article className="group flex h-full flex-col rounded-2xl border border-border bg-background p-5 transition-all hover:border-border hover:shadow-md">
                 <span className="inline-flex w-fit rounded-full bg-foreground/5 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-muted">
                   {role.type}
                 </span>

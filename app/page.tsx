@@ -2,9 +2,10 @@ import { HeroSection } from "@/components/sections/hero";
 import { StatsSection } from "@/components/sections/stats";
 import { ClientsSection } from "@/components/sections/clients";
 import { CategoriesSection } from "@/components/sections/categories";
+import { RecentWorkSection } from "@/components/sections/recent-work";
 import { ServicesSection } from "@/components/sections/services";
 import { WhyUsSection } from "@/components/sections/why-us";
-import { OurStorySection } from "@/components/sections/our-story";
+import { AboutUsSection } from "@/components/sections/our-story";
 import { TestimonialsSection } from "@/components/sections/testimonials";
 import { ContactSection } from "@/components/sections/contact";
 import { FaqSection } from "@/components/sections/faq";
@@ -17,9 +18,10 @@ export default function Home() {
       <HeroSection />
       <StatsSection />
       <CategoriesSection />
+      <RecentWorkSection />
       <ServicesSection />
       <WhyUsSection />
-      <OurStorySection />
+      <AboutUsSection />
       <ClientsSection />
       <ContactSection />
       <FaqSection faqs={faqs} />

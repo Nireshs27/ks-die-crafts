@@ -42,9 +42,8 @@ function Counter({
 }
 
 const stats = [
-  { value: 200, suffix: "+", label: "Dies Delivered" },
-  { value: 50, suffix: "+", label: "Happy Clients" },
-  { value: 25, suffix: "+", label: "Years Experience" },
+  { value: 5000, suffix: "+", label: "Dies Delivered" },
+  { value: 1000, suffix: "+", label: "Happy Clients" },
   { value: 100, suffix: "%", label: "Quality Assured" },
 ];
 
@@ -52,7 +51,7 @@ export function StatsSection() {
   return (
     <section className="relative z-20 -mt-8 sm:-mt-12 mb-8 bg-background shadow-xl shadow-black/5 ring-1 ring-border/50 max-w-7xl mx-auto rounded-2xl py-10 sm:py-14">
       <Container>
-        <StaggerContainer className="grid grid-cols-2 gap-8 md:grid-cols-4 lg:gap-12">
+        <StaggerContainer className="grid grid-cols-1 gap-8 sm:grid-cols-3 lg:gap-12">
           {stats.map((stat, idx) => (
             <StaggerItem
               key={idx}

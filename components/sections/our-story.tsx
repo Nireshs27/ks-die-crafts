@@ -1,204 +1,322 @@
 "use client";
 
 import Image from "next/image";
-import { useRef } from "react";
-import { useScroll, useTransform, motion } from "framer-motion";
+import Link from "next/link";
+import { useEffect, useRef } from "react";
+import {
+  useInView,
+  useMotionValue,
+  useSpring,
+} from "framer-motion";
 import { Reveal, StaggerContainer, StaggerItem } from "@/components/motion";
-import { siteConfig } from "@/lib/site";
 
-const pillars = [
+function Counter({
+  from = 0,
+  to,
+  duration = 2,
+}: {
+  from?: number;
+  to: number;
+  duration?: number;
+}) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-50px" });
+  const motionValue = useMotionValue(from);
+  const springValue = useSpring(motionValue, {
+    duration: duration * 1000,
+    bounce: 0,
+  });
+
+  useEffect(() => {
+    if (inView) {
+      motionValue.set(to);
+    }
+  }, [inView, motionValue, to]);
+
+  useEffect(() => {
+    return springValue.on("change", (latest) => {
+      if (ref.current) {
+        ref.current.textContent = Intl.NumberFormat("en-US").format(
+          Math.floor(latest)
+        );
+      }
+    });
+  }, [springValue]);
+
+  return <span ref={ref}>{from}</span>;
+}
+
+
+const stats = [
   {
     icon: (
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        className="h-5 w-5"
-        aria-hidden="true"
-      >
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
+        <path d="M12 15l-2 5-9-5 9-5 2 5z" />
+        <circle cx="12" cy="8" r="5" />
+        <path d="M8.5 11.5L5 21l7-3 7 3-3.5-9.5" />
+      </svg>
+    ),
+    value: 40,
+    suffix: "+",
+    label: "Years in Jewellery Manufacturing",
+  },
+  {
+    icon: (
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
+        <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" />
         <circle cx="12" cy="12" r="3" />
-        <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
       </svg>
     ),
-    title: "Engineering-first mindset",
-    description:
-      "Every die is built to solve a production problem — not just to look good on the bench.",
+    value: 3,
+    suffix: "+",
+    label: "Years Manufacturing Dies",
   },
   {
     icon: (
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        className="h-5 w-5"
-        aria-hidden="true"
-      >
-        <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" />
-        <path d="M8 10h8M8 14h5" />
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
+        <rect x="2" y="6" width="20" height="12" rx="2" />
+        <path d="M6 12h4M14 12h4M12 6v12" />
       </svg>
     ),
-    title: "Honest communication",
-    description:
-      "Clear timelines, regular updates, and no surprises from quote to delivery.",
+    value: 6,
+    suffix: "",
+    label: "CNC Machines",
   },
   {
     icon: (
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        className="h-5 w-5"
-        aria-hidden="true"
-      >
-        <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
-        <circle cx="9" cy="7" r="4" />
-        <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" />
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
+        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
+        <circle cx="12" cy="10" r="3" />
       </svg>
     ),
-    title: "Partnership beyond delivery",
-    description:
-      "We stay available after handover because long-term trust matters more than a single order.",
+    textValue: "Across India",
+    label: "Serving Manufacturers Pan India",
   },
 ];
 
-export function OurStorySection() {
-  const imageRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: imageRef,
-    offset: ["start end", "end start"],
-  });
+/* const timeline = [
+  {
+    era: "1980s",
+    title: "The Foundation",
+    description:
+      "Our family enters jewellery manufacturing through KSAN Industries LLP, learning the craft from the ground up.",
+  },
+  {
+    era: "40+ Years",
+    title: "Building Expertise",
+    description:
+      "Four decades of jewellery production sharpen our understanding of what makes a product exceptional — it begins with the die.",
+  },
+  {
+    era: "Today",
+    title: "KS Die Crafts",
+    description:
+      "We channel generations of manufacturing knowledge into precision dies, built with modern CNC technology and trusted across India.",
+  },
+]; */
 
-  const imageY = useTransform(scrollYProgress, [0, 1], ["-10%", "10%"]);
+function HeritageIntro() {
+  return (
+    <div className="mt-14 grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-8 items-center">
+
+      {/* Left Column - Text */}
+      <Reveal direction="right" className="lg:col-span-5">
+        <div className="flex items-center gap-3">
+          <span className="h-px w-8 bg-cta" aria-hidden="true" />
+          <span className="text-xs font-semibold uppercase tracking-widest text-cta">
+            Our Roots
+          </span>
+        </div>
+
+        <h3 className="mt-3 text-xl font-semibold tracking-tight text-foreground sm:text-2xl">
+          A Family Legacy in Manufacturing
+        </h3>
+
+        <p className="mt-4 text-base leading-relaxed text-muted">
+          While our dedicated die manufacturing journey began three years ago, our
+          roots go back more than four decades through our family&apos;s jewellery
+          manufacturing business.
+        </p>
+
+        <ul className="mt-6 space-y-4">
+          {[
+            "Working in jewellery manufacturing taught us that every exceptional product begins with a well-engineered die.",
+            "Today, we combine generations of manufacturing knowledge with modern CNC technology to build dies trusted by manufacturers across India.",
+          ].map((point) => (
+            <li key={point} className="flex items-start gap-3">
+              <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-cta/8 text-cta ring-1 ring-cta/15">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="h-3 w-3" aria-hidden="true">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
+              </span>
+              <span className="text-sm leading-relaxed text-muted">{point}</span>
+            </li>
+          ))}
+        </ul>
+
+        <div className="mt-8">
+          <Link
+            href="/#recent-work"
+            className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-cta px-8 text-sm font-medium text-white transition-all hover:bg-cta-hover hover:scale-[1.02]"
+          >
+            Explore Our Work
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4">
+              <path d="M5 12h14" />
+              <path d="m12 5 7 7-7 7" />
+            </svg>
+          </Link>
+        </div>
+      </Reveal>
+
+      {/* Right Column - Image & Stats */}
+      <div className="lg:col-span-7 relative mt-10 lg:mt-0">
+        <Reveal direction="left" delay={0.2}>
+          <div className="relative aspect-[4/3] sm:aspect-[16/10] lg:aspect-[4/3] w-full overflow-hidden rounded-3xl bg-background shadow-sm ring-1 ring-border">
+            <Image
+              src="/images/ks-diecraft-owners.png"
+              alt="The team behind KS Die Crafts"
+              fill
+              className="object-cover object-[center_35%]"
+              sizes="(max-width: 1024px) 100vw, 60vw"
+              priority={false}
+            />
+          </div>
+        </Reveal>
+
+        {/* Stats Card */}
+        <Reveal delay={0.4} className="relative lg:absolute lg:-bottom-12 lg:-left-12 lg:-right-6 mt-8 lg:mt-0 z-10">
+          <div className="rounded-[2rem] border border-border bg-background p-6 shadow-xl sm:p-8">
+            <StaggerContainer className="grid grid-cols-2 gap-y-8 sm:grid-cols-4 sm:gap-y-0 sm:divide-x sm:divide-border/50">
+              {stats.map((stat) => (
+                <StaggerItem
+                  key={stat.label}
+                  className="flex flex-col items-center text-center px-2 sm:px-4"
+                >
+                  <span className="text-cta mb-3">
+                    {stat.icon}
+                  </span>
+                  <div className="flex items-baseline text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
+                    {stat.textValue ? (
+                      <span className="text-xl sm:text-2xl">{stat.textValue}</span>
+                    ) : (
+                      <>
+                        <Counter to={stat.value!} duration={2} />
+                        <span>{stat.suffix}</span>
+                      </>
+                    )}
+                  </div>
+                  <p className="mt-2 text-xs font-medium leading-snug text-muted sm:text-sm">
+                    {stat.label}
+                  </p>
+                </StaggerItem>
+              ))}
+            </StaggerContainer>
+          </div>
+        </Reveal>
+      </div>
+
+    </div>
+  );
+}
+
+/* function StoryTimeline() {
+  const lineRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: lineRef,
+    offset: ["start center", "end center"],
+  });
+  const lineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
 
   return (
-    <section
-      id="our-story"
-      className="border-t border-border bg-surface-muted py-16 sm:py-24"
-    >
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+    <div className="mt-24 sm:mt-32 lg:mt-40">
+      <Reveal>
+        <div className="mx-auto max-w-3xl text-center">
+          <h3 className="text-xl font-semibold tracking-tight text-foreground sm:text-2xl">
+            A Story Built on Manufacturing
+          </h3>
+          <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-muted">
+            Working in jewellery manufacturing taught us that every exceptional
+            product begins with a well-engineered die. That experience now drives
+            everything we manufacture.
+          </p>
+        </div>
+      </Reveal>
+
+      <div ref={lineRef} className="relative mx-auto mt-16 max-w-3xl">
+        <div
+          className="absolute left-5 top-2 bottom-2 w-px bg-border sm:left-1/2 sm:-translate-x-1/2"
+          aria-hidden="true"
+        >
+          <motion.div
+            style={{ height: lineHeight }}
+            className="absolute left-0 top-0 w-px bg-cta"
+          />
+        </div>
+
+        <StaggerContainer
+          className="space-y-12 sm:space-y-16"
+          staggerDelay={0.15}
+        >
+          {timeline.map((node, index) => (
+            <StaggerItem key={node.era}>
+              <div
+                className={`relative pl-16 sm:w-1/2 sm:pl-0 ${
+                  index % 2 === 0
+                    ? "sm:pr-12 sm:text-right"
+                    : "sm:ml-auto sm:pl-12 sm:text-left"
+                }`}
+              >
+                <span
+                  className={`absolute top-1 left-5 z-10 h-3.5 w-3.5 -translate-x-1/2 rounded-full bg-cta ring-4 ring-background sm:top-2 ${
+                    index % 2 === 0
+                      ? "sm:left-auto sm:-right-[7px] sm:translate-x-0"
+                      : "sm:-left-[7px] sm:translate-x-0"
+                  }`}
+                  aria-hidden="true"
+                />
+                <p className="text-2xl font-bold tracking-tight text-cta sm:text-3xl">
+                  {node.era}
+                </p>
+                <h4 className="mt-1 text-lg font-semibold text-foreground">
+                  {node.title}
+                </h4>
+                <p className="mt-2 text-base leading-relaxed text-muted">
+                  {node.description}
+                </p>
+              </div>
+            </StaggerItem>
+          ))}
+        </StaggerContainer>
+      </div>
+    </div>
+  );
+} */
+
+export function AboutUsSection() {
+  return (
+    <section id="about-us" className="bg-surface py-24 sm:py-32 overflow-hidden">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <Reveal>
           <div className="mx-auto max-w-3xl text-center">
             <div className="flex items-center justify-center gap-3">
               <span className="h-px w-8 bg-cta" aria-hidden="true" />
               <span className="text-xs font-semibold uppercase tracking-widest text-cta">
-                Our Story
+                About KS Die Crafts
               </span>
               <span className="h-px w-8 bg-cta" aria-hidden="true" />
             </div>
             <h2 className="mt-3 text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
-              Built on precision. Sustained by trust.
+              Four Decades of Manufacturing Heritage, Focused on Better Dies
             </h2>
-            <p className="mx-auto mt-3 max-w-2xl text-base leading-relaxed text-muted">
-              For over two decades, we have focused on what most overlook — the
-              die itself. That focus is why manufacturers across India rely on
-              us when quality and consistency cannot be compromised.
+            <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-muted">
+              KS Die Crafts was founded with a simple belief — better dies create
+              better products.
             </p>
           </div>
         </Reveal>
 
-        <div className="mt-10 grid items-start gap-8 lg:grid-cols-3 lg:gap-10">
-          <Reveal delay={0.1} className="lg:col-span-1">
-            <div>
-              <div className="mb-4 flex items-center gap-3">
-                <span className="h-px w-8 bg-cta" aria-hidden="true" />
-                <span className="text-xs font-semibold uppercase tracking-widest text-cta">
-                  How we started
-                </span>
-              </div>
-
-              <div className="space-y-4 text-base leading-relaxed text-muted">
-                <p>
-                  K.S. Die Crafts was started by people who had seen production
-                  lines struggle — not because of finishing or polishing, but
-                  because the tooling underneath was never right.
-                </p>
-                <p>
-                  We chose a different path. Instead of chasing volume alone, we
-                  built a workshop around accuracy, material discipline, and
-                  direct collaboration with every client.
-                </p>
-                <p>
-                  Today, that same standard guides every project — from prototype
-                  validation to full production runs — so your press performs
-                  reliably from the first strike.
-                </p>
-              </div>
-            </div>
-          </Reveal>
-
-          <Reveal delay={0.15} direction="right" className="lg:col-span-2">
-            <div ref={imageRef} className="relative mx-auto aspect-[4/5] w-full max-w-[17rem] sm:max-w-xs lg:mx-0 lg:ml-auto lg:max-w-none lg:aspect-[16/10]">
-              <div
-                className="pointer-events-none absolute -bottom-4 -left-4 z-0 h-28 w-28 opacity-40 sm:h-32 sm:w-32"
-                style={{
-                  backgroundImage:
-                    "radial-gradient(circle, var(--muted) 1.5px, transparent 1.5px)",
-                  backgroundSize: "14px 14px",
-                }}
-                aria-hidden="true"
-              />
-
-              <div className="absolute inset-0 z-[1] overflow-hidden rounded-3xl bg-background shadow-sm">
-                <motion.div style={{ y: imageY }} className="absolute -top-[20%] left-0 right-0 h-[140%] w-full">
-                  <Image
-                    src="/images/ks-diecraft-owners.jpeg"
-                    alt="Founders of K.S. Die Crafts"
-                    fill
-                    className="object-cover object-[center_40%]"
-                    sizes="(max-width: 1024px) 90vw, 420px"
-                  />
-                </motion.div>
-              </div>
-
-              <div className="absolute -bottom-6 -left-6 z-[3] w-[10.5rem] rounded-2xl bg-background px-5 py-4 text-center shadow-[0_12px_40px_rgba(0,0,0,0.12)] sm:-bottom-8 sm:-left-8 sm:w-[11.5rem]">
-                <p className="text-3xl font-bold tracking-tight text-cta">
-                  25+
-                </p>
-                <p className="mt-0.5 text-sm font-semibold leading-snug text-foreground">
-                  Years of die craftsmanship
-                </p>
-              </div>
-            </div>
-          </Reveal>
-        </div>
-
-        <StaggerContainer className="mt-12 grid gap-8 border-t border-border pt-10 md:grid-cols-3 md:gap-0 md:divide-x md:divide-border">
-          {pillars.map((pillar, index) => (
-            <StaggerItem key={pillar.title}>
-              <article
-                className={`h-full ${
-                  index === 0
-                    ? "md:pr-8"
-                    : index === pillars.length - 1
-                      ? "md:pl-8"
-                      : "md:px-8"
-                }`}
-              >
-                <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-cta/10 text-cta ring-1 ring-cta/15">
-                  {pillar.icon}
-                </span>
-                <h3 className="mt-4 text-base font-semibold text-foreground">
-                  {pillar.title}
-                </h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted">
-                  {pillar.description}
-                </p>
-              </article>
-            </StaggerItem>
-          ))}
-        </StaggerContainer>
+        <HeritageIntro />
+        {/* <StoryTimeline /> */}
       </div>
     </section>
   );

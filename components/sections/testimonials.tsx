@@ -28,8 +28,8 @@ const testimonials = [
 
 export function TestimonialsSection() {
   return (
-    <section className="border-t border-border bg-surface-muted py-24 sm:py-32">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+    <section className="bg-background py-24 sm:py-32">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <Reveal>
           <div className="mx-auto max-w-3xl text-center">
             <div className="flex items-center justify-center gap-3">
@@ -48,7 +48,7 @@ export function TestimonialsSection() {
         <StaggerContainer className="mt-14 grid gap-6 lg:grid-cols-3">
           {testimonials.map((t, idx) => (
             <StaggerItem key={idx}>
-              <figure className="flex h-full flex-col rounded-2xl border border-border bg-background p-6 shadow-sm transition-all hover:shadow-lg">
+              <figure className="flex h-full flex-col rounded-2xl border border-border bg-surface p-6 shadow-sm transition-all hover:shadow-lg">
                 <svg
                   aria-hidden="true"
                   viewBox="0 0 32 24"
@@ -61,7 +61,7 @@ export function TestimonialsSection() {
                   />
                 </svg>
                 <blockquote className="mt-5 flex-1 text-base leading-relaxed text-foreground">
-                  "{t.quote}"
+                  &ldquo;{t.quote}&rdquo;
                 </blockquote>
                 <figcaption className="mt-6 flex items-center gap-4 border-t border-border pt-5">
                   <span

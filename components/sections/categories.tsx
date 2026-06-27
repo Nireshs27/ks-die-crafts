@@ -14,17 +14,15 @@ export function CategoriesSection() {
             <div className="flex items-center justify-center gap-3">
               <span className="h-px w-8 bg-cta" />
               <span className="text-xs font-semibold uppercase tracking-widest text-cta">
-                Our Categories
+                What We Do
               </span>
               <span className="h-px w-8 bg-cta" />
             </div>
-            <h2 className="mt-3 text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
-              Precision dies for every jewellery type
+            <h2 className="mt-3 text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">           
+              Dies Built for Every Requirement
             </h2>
             <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-muted">
-              Four core categories, each engineered with the same uncompromising
-              attention to detail. Explore each range — or send us a brief and
-              we&apos;ll build something entirely custom.
+            From coin and jewellery dies to religious designs and fully custom solutions, we manufacture dies that match your exact production needs with consistent quality and craftsmanship.
             </p>
           </div>
         </Reveal>
@@ -48,7 +46,7 @@ export function CategoriesSection() {
             href="/products"
             className="inline-flex items-center gap-2 text-sm font-medium text-cta transition-all hover:gap-3"
           >
-            View all categories
+            View more details
             <svg
               viewBox="0 0 24 24"
               fill="none"

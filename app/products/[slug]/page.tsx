@@ -69,7 +69,7 @@ export default async function ProductDetailPage({
       />
 
       <section className="bg-surface py-24 sm:py-32">
-        <div className="mx-auto max-w-7xl">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <nav aria-label="Breadcrumb" className="mb-10">
             <ol className="flex flex-wrap items-center gap-2 text-xs text-muted">
               <li><Link href="/" className="transition-colors hover:text-foreground">Home</Link></li>
@@ -79,6 +79,17 @@ export default async function ProductDetailPage({
               <li className="text-foreground">{product.title}</li>
             </ol>
           </nav>
+
+          <Link
+            href="/#categories"
+            className="mb-10 inline-flex items-center gap-2 text-sm font-medium text-cta transition-all hover:gap-3"
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4">
+              <path d="M19 12H5" />
+              <path d="m12 19-7-7 7-7" />
+            </svg>
+            Back to All Categories
+          </Link>
 
           <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-2 lg:gap-16">
             <div className="relative aspect-square overflow-hidden rounded-3xl border border-border bg-surface-muted shadow-sm">
@@ -156,7 +167,7 @@ export default async function ProductDetailPage({
       </section>
 
       <section className="py-24 sm:py-32">
-        <div className="mx-auto max-w-7xl">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid gap-12 lg:grid-cols-2">
             <div>
               <div className="flex items-center gap-3">

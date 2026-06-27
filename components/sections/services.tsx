@@ -1,18 +1,14 @@
-"use client";
-
 import Image from "next/image";
-import { useEffect, useRef } from "react";
-import { Reveal } from "@/components/motion";
 
 const services = [
   {
     number: "01",
     tag: "Validation",
-    title: "Prototype and Development",
+    title: "Prototype & Development",
     description:
-      "We provide design to die conversion prototype development for die manufacturing, where expert application is required, to validate the design for production.",
+      "We don't directly jump to production. We validate. Design-to-die conversion with prototype development ensures your design works in real manufacturing — not just on screen.",
     image: "/images/process/prototype.jpg",
-    imageAlt: "Precision jewellery die prototype for production validation",
+    imageAlt: "Die prototype validation — precision measurement with digital caliper at KS Die Crafts workshop",
     imagePosition: "object-center",
     highlights: ["Design-to-die conversion", "Production validation"],
     icon: (
@@ -28,11 +24,11 @@ const services = [
     tag: "3D & ArtCAM",
     title: "Design Support",
     description:
-      "From concept to final die, we offer complete design support with advanced 3d modelling, artcam expertise that fits your die requirements. We also provide innovative design ideas for coin die makers.",
+      "From concept to final die, we support the full process: 3D modelling, ARTCAM execution, and design optimisation for die compatibility. We also help coin die makers refine and improve their designs before production.",
     image: "/images/process/design-office.jpg",
-    imageAlt: "Coin die design with advanced 3D modelling in an office setting",
+    imageAlt: "Designer working on 3D jewellery die model in ArtCAM at the design office",
     imagePosition: "object-center",
-    highlights: ["3D modelling", "ArtCAM expertise"],
+    highlights: ["3D modelling & ARTCAM execution", "Design optimisation for die compatibility"],
     icon: (
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5">
         <path d="M12 20h9" />
@@ -42,14 +38,31 @@ const services = [
   },
   {
     number: "03",
+    tag: "Precision",
+    title: "Finishes That Define Output",
+    description:
+      "Each finish is not just visual — it is built on precision and accuracy at every level of the die. From micro-level detailing to surface consistency, these factors directly control the sharpness, clarity and overall quality of your final product.",
+    image: "/images/process/finishes.jpg",
+    imageAlt: "Three jewellery dies showing matte, mirror and Bombay polish finishes side by side",
+    imagePosition: "object-center",
+    highlights: ["Matte Finish", "Mirror Finish", "Bombay Polish"],
+    icon: (
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5">
+        <path d="M12 3l1.9 5.2L19 10l-5.1 1.8L12 17l-1.9-5.2L5 10l5.1-1.8L12 3z" />
+        <path d="M5 19l.8 2 .8-2 .8-.6-.8-.6-.8-2-.8 2-.8.6.8.6z" />
+      </svg>
+    ),
+  },
+  {
+    number: "04",
     tag: "Turnaround",
     title: "Lead Time",
     description:
-      "Fast turnaround with lead time based on design complexity and order size without compromising on quality throughout the process. Lead time will be communicated prior to order confirmation; regular updates will be provided at relevant key stages.",
+      "Lead time depends on design complexity and order size. We'll tell you upfront — before we start. Regular updates at every key stage.",
     image: "/images/process/turnaround.jpg",
-    imageAlt: "Finished precision die ready for delivery",
+    imageAlt: "Finished precision dies packaged and ready for dispatch at the workshop",
     imagePosition: "object-center",
-    highlights: ["Pre-order timelines", "Stage updates"],
+    highlights: ["Upfront timelines", "Regular stage updates"],
     icon: (
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5">
         <circle cx="12" cy="12" r="10" />
@@ -67,7 +80,7 @@ function ServiceRow({
   reversed?: boolean;
 }) {
   return (
-    <article className="group overflow-hidden rounded-3xl border border-border bg-background shadow-sm transition-all duration-500 hover:border-border hover:shadow-xl">
+    <article className="group overflow-hidden rounded-3xl border border-border bg-background shadow-sm transition-all duration-500 hover:border-transparent hover:shadow-xl">
       <div className="grid lg:grid-cols-[1fr_1.05fr]">
         <div
           className={`relative min-h-[16rem] sm:min-h-[20rem] lg:min-h-[26rem] ${
@@ -149,38 +162,10 @@ function ServiceRow({
 }
 
 export function ServicesSection() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const titleRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const section = sectionRef.current;
-    const title = titleRef.current;
-    if (!section || !title) return;
-
-    const lg = window.matchMedia("(min-width: 1024px)");
-    const update = () => {
-      const header = lg.matches ? 80 : 64;
-      section.style.setProperty(
-        "--svc-card-top",
-        `${header + title.offsetHeight + 24}px`,
-      );
-    };
-
-    update();
-    const ro = new ResizeObserver(update);
-    ro.observe(title);
-    lg.addEventListener("change", update);
-    return () => {
-      ro.disconnect();
-      lg.removeEventListener("change", update);
-    };
-  }, []);
-
   return (
     <section
-      ref={sectionRef}
       id="services"
-      className="relative border-t border-border bg-background py-24 sm:py-32"
+      className="relative bg-surface py-24 sm:py-32"
     >
       <div
         className="pointer-events-none absolute inset-0 overflow-hidden"
@@ -191,52 +176,30 @@ export function ServicesSection() {
         <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
       </div>
 
-      <div className="relative mx-auto max-w-7xl">
-        <div
-          ref={titleRef}
-          className="sticky top-16 z-30 bg-background pb-8 pt-2 lg:top-20"
-        >
-          <Reveal>
-            <div className="mx-auto max-w-3xl text-center">
-              <div className="flex items-center justify-center gap-3">
-                <span className="h-px w-8 bg-cta" />
-                <span className="text-xs font-semibold uppercase tracking-widest text-cta">
-                  Our Process
-                </span>
-                <span className="h-px w-8 bg-cta" />
-              </div>
-              <h2 className="mt-3 text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
-                From prototype to production,
-                <span className="mt-1 block text-muted">with full design support</span>
-              </h2>
-              <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-muted">
-                Expert validation, end-to-end design assistance, and dependable
-                turnaround — everything you need to move from concept to a
-                production-ready die.
-              </p>
-            </div>
-          </Reveal>
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-3xl text-center">
+          <div className="flex items-center justify-center gap-3">
+            <span className="h-px w-8 bg-cta" />
+            <span className="text-xs font-semibold uppercase tracking-widest text-cta">
+              Beyond Die Making
+            </span>
+            <span className="h-px w-8 bg-cta" />
+          </div>
+          <h2 className="mt-3 text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
+          Complete Die Solutions - Built for Production
+          </h2>
+          <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-muted">
+          From design validation and technical support to surface finishing and transparent project updates, we work with you at every stage to ensure your die performs reliably in production.
+          </p>
         </div>
 
-        <div className="mt-8 sm:mt-12">
+        <div className="mt-8 space-y-6 sm:mt-12 sm:space-y-8">
           {services.map((service, index) => (
-            <div
+            <ServiceRow
               key={service.title}
-              className="sticky"
-              style={{
-                top: `calc(var(--svc-card-top, 180px) + ${index * 16}px)`,
-                zIndex: 10 + index,
-              }}
-            >
-              <div className={index > 0 ? "pt-6 sm:pt-8" : ""}>
-                <Reveal direction="none">
-                  <ServiceRow
-                    service={service}
-                    reversed={index % 2 === 1}
-                  />
-                </Reveal>
-              </div>
-            </div>
+              service={service}
+              reversed={index % 2 === 1}
+            />
           ))}
         </div>
       </div>

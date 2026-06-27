@@ -1,28 +1,28 @@
 export const faqs = [
   {
-    question: "How can I place orders?",
+    question: "How can I place an order?",
     answer:
-      "Send your requirement on WhatsApp or through the form below. We'll take it forward.",
+      "Send your requirement via WhatsApp or the enquiry form. We'll take it forward from there.",
   },
   {
-    question: "Can you create die with our design?",
+    question: "Can you make dies from our design?",
     answer:
-      "Yes, if your design works technically, we'll make it into a proper production die.",
+      "Yes — if the design is technically feasible, we'll convert it into a production-ready die.",
   },
   {
-    question: "Do you offer different die polishing techniques?",
+    question: "Do you offer different polishing techniques?",
     answer:
-      "Yes, we offer different finishes — matte, mirror, Bombay polish — based on your final output.",
+      "Yes — matte, mirror, and Bombay polish based on your final output requirement.",
   },
   {
-    question: "How do we ensure quality?",
+    question: "How do you ensure quality?",
     answer:
-      "We don't skip the basics — material, engraving depth, hardness, everything is checked properly before delivery.",
+      "We don't skip the basics — material selection, engraving depth, hardness — everything is checked before delivery.",
   },
   {
-    question: "Do we take single order or bulk order?",
+    question: "What happens if the die doesn't perform well in production?",
     answer:
-      "Single or bulk — doesn't matter. We handle both the same way.",
+      "We don't disappear after delivery. We review the issue, identify the root cause, and guide you on the fix.",
   },
 ] as const;
 

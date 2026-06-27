@@ -5,15 +5,24 @@ import { siteConfig } from "@/lib/site";
 type LogoProps = {
   className?: string;
   priority?: boolean;
+  src?: string;
+  width?: number;
+  height?: number;
 };
 
-export function Logo({ className = "h-9 w-auto", priority = false }: LogoProps) {
+export function Logo({
+  className = "h-7 w-auto",
+  priority = false,
+  src = siteConfig.logo,
+  width = 300,
+  height = 139,
+}: LogoProps) {
   return (
     <Image
-      src={siteConfig.logo}
+      src={src}
       alt={`${siteConfig.name} logo`}
-      width={240}
-      height={48}
+      width={width}
+      height={height}
       priority={priority}
       className={className}
     />
@@ -23,11 +32,20 @@ export function Logo({ className = "h-9 w-auto", priority = false }: LogoProps) 
 export function LogoLink({
   className,
   priority,
+  src,
+  width,
+  height,
   onClick,
 }: LogoProps & { onClick?: () => void }) {
   return (
     <Link href="/" className="inline-flex shrink-0" onClick={onClick}>
-      <Logo className={className} priority={priority} />
+      <Logo
+        className={className}
+        priority={priority}
+        src={src}
+        width={width}
+        height={height}
+      />
     </Link>
   );
 }

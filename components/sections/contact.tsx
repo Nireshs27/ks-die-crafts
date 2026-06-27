@@ -12,8 +12,8 @@ export function ContactSection({
   defaultService,
 }: { defaultService?: string } = {}) {
   return (
-    <section id="contact" className="scroll-mt-24 border-t border-border py-24 sm:py-32">
-      <div className="mx-auto max-w-7xl">
+    <section id="contact" className="scroll-mt-24 bg-surface py-24 sm:py-32">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <Reveal>
           <div className="mx-auto max-w-3xl text-center">
             <div className="flex items-center justify-center gap-3">
@@ -40,7 +40,7 @@ export function ContactSection({
         <Reveal delay={0.15}>
           <div className="mt-14 grid grid-cols-1 items-stretch gap-10 lg:grid-cols-2 lg:gap-12">
             <div className="flex flex-col gap-6">
-              <div className="rounded-2xl border border-border bg-surface p-6 shadow-sm">
+              <div className="rounded-2xl border border-border bg-background p-6 shadow-sm">
                 <h3 className="text-base font-semibold text-foreground">
                   Reach us directly
                 </h3>
@@ -106,7 +106,7 @@ export function ContactSection({
                 </p>
               </div>
 
-              <div className="flex min-h-0 flex-1 flex-col rounded-2xl border border-border bg-surface p-6 shadow-sm">
+              <div className="flex min-h-0 flex-1 flex-col rounded-2xl border border-border bg-background p-6 shadow-sm">
                 <div className="flex items-start justify-between gap-4">
                   <h3 className="text-base font-semibold text-foreground">Visit us</h3>
                   <a

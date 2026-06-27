@@ -3,10 +3,10 @@
 import Image from "next/image";
 
 const clients = [
-  { name: "CaratLane Jewellers", logo: "/images/client-logo/caratlane-jewellers.avif" },
-  { name: "GRT Jewellers", logo: "/images/client-logo/grt-jewellers.avif" },
-  { name: "Lalithaa Jewellery", logo: "/images/client-logo/lalithaa-jewellers.avif" },
-  { name: "Vummidi Bangaru Jewellers", logo: "/images/client-logo/vummidi-bangaru-jewellers.avif" },
+  { name: "GRT Jewellers", logo: "/images/client-logo/grt-jewellers.png" },
+  { name: "Lalithaa Jewellery", logo: "/images/client-logo/lalithaa-jewellers.png" },
+  { name: "Vummidi Bangaru Jewellers", logo: "/images/client-logo/vummidi-bangaru-jewellers.png" },
+  { name: "CaratLane Jewellers", logo: "/images/client-logo/caratlane-jewellers.png" },
 ] as const;
 
 function ClientLogo({ name, logo }: { name: string; logo: string }) {

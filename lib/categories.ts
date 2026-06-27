@@ -13,8 +13,8 @@ export const categories: readonly Category[] = [
     title: "Coin Dies",
     subtitle: "Precision dies across all metals",
     features: [
-      "Designed for clean strikes and consistent quality",
-      "Available across all shapes and sizes",
+      "Built for clean strikes and sharp detailing",
+      "Consistent output across every batch",
     ],
     image: "/images/categories/coin-die.webp",
     imageAlt: "Precision-engineered coin dies",
@@ -24,8 +24,8 @@ export const categories: readonly Category[] = [
     title: "Jewellery Dies",
     subtitle: "Pendants, ornamental & nagas dies",
     features: [
-      "Dies for pendants and ornamental custom designs",
-      "Nagas dies with fine detailing",
+      "Pendants and ornamental custom designs",
+      "Nagas work executed with fine detailing",
     ],
     image: "/images/categories/jewellery-die.webp",
     imageAlt: "Detailed jewellery dies with intricate patterns",
@@ -33,10 +33,10 @@ export const categories: readonly Category[] = [
   {
     slug: "religious-dies",
     title: "Religious Dies",
-    subtitle: "Vel, Soolam, Villaku & God figure dies",
+    subtitle: "Vel, Soolam, Villaku, God figures & more",
     features: [
-      "Thalli dies, Patta Gundu, and Manga kasu dies",
-      "And more devotional ranges",
+      "Vel, Soolam, Villaku, God figures, Thalli, Patta Gundu, Manga Kasu and more",
+      "Designed with clarity, depth and traditional accuracy",
     ],
     image: "/images/categories/religious-die.webp",
     imageAlt: "Religious symbol dies",
@@ -44,12 +44,13 @@ export const categories: readonly Category[] = [
   {
     slug: "custom-dies",
     title: "Custom Dies",
-    subtitle: "Logo, branding & special applications",
+    subtitle: "Logos, faces, portraits & special applications",
     features: [
-      "Fully customised dies to your exact requirement",
-      "Special application and cutting die models",
+      "Fully customised dies to match your exact requirement",
+      "High-detail face and portrait dies with sharp definition",
+      "Precision cutting die models",
     ],
     image: "/images/categories/custom-die.webp",
-    imageAlt: "Custom and branding dies",
+    imageAlt: "Custom logo, portrait and cutting dies",
   },
 ];
