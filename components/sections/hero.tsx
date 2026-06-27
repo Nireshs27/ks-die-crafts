@@ -28,7 +28,7 @@ export function HeroSection() {
           loop
           muted
           playsInline
-          poster="/images/categories/jewellery-die.webp"
+          poster="/images/hero-poster.webp"
           className="h-full w-full object-cover"
         >
           <source src="/hero-section-video.mp4" type="video/mp4" />
