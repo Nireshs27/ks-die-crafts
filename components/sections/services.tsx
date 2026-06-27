@@ -80,7 +80,7 @@ function ServiceRow({
   reversed?: boolean;
 }) {
   return (
-    <article className="group overflow-hidden rounded-3xl border border-border bg-background shadow-sm transition-all duration-500 hover:border-transparent hover:shadow-xl">
+    <article className="group overflow-hidden rounded-3xl bg-background shadow-sm transition-all duration-500 hover:shadow-xl">
       <div className="grid lg:grid-cols-[1fr_1.05fr]">
         <div
           className={`relative min-h-[16rem] sm:min-h-[20rem] lg:min-h-[26rem] ${
@@ -113,10 +113,10 @@ function ServiceRow({
         </div>
 
         <div
-          className={`relative flex flex-col justify-center border-border p-7 sm:p-9 lg:p-11 ${
+          className={`relative flex flex-col justify-center p-7 sm:p-9 lg:p-11 ${
             reversed
-              ? "lg:order-1 lg:border-r"
-              : "border-t lg:border-t-0 lg:border-l"
+              ? "lg:order-1"
+              : ""
           }`}
         >
           <span

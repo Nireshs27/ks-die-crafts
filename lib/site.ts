@@ -22,7 +22,7 @@ export const siteConfig = {
     region: "Tamil Nadu",
     postalCode: "600017",
     country: "IN",
-    geo: { latitude: 13.0418, longitude: 80.2341 },
+    geo: { latitude: 13.04709, longitude: 80.236259 },
     workingHours: "Monday-Saturday: 9:30 – 19:30\nSunday: Closed",
     workingHoursStructured: {
       days: "Mo-Sa",
