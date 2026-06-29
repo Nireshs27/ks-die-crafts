@@ -82,6 +82,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${effra.variable} h-full`}>
+      <head>
+        <link
+          rel="preload"
+          as="image"
+          href="/images/hero-poster.webp"
+          type="image/webp"
+        />
+      </head>
       <body className="flex min-h-full flex-col bg-background font-sans text-foreground antialiased overflow-x-hidden">
         <StructuredData />
         <Header />

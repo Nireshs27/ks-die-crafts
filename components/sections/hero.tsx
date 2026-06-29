@@ -1,24 +1,23 @@
 "use client";
 
-import Image from "next/image";
 import { useRef, useEffect, useState } from "react";
 import { Button } from "@/components/button";
 
 export function HeroSection() {
   const ref = useRef<HTMLElement>(null);
-  const [isDesktop, setIsDesktop] = useState(false);
+  const [showVideo, setShowVideo] = useState(false);
 
   useEffect(() => {
     const mq = window.matchMedia("(min-width: 768px)");
-    setIsDesktop(mq.matches);
-    const handler = (e: MediaQueryListEvent) => setIsDesktop(e.matches);
+    if (mq.matches) setShowVideo(true);
+    const handler = (e: MediaQueryListEvent) => setShowVideo(e.matches);
     mq.addEventListener("change", handler);
     return () => mq.removeEventListener("change", handler);
   }, []);
 
   useEffect(() => {
     const section = ref.current;
-    if (!section || !isDesktop) return;
+    if (!section || !showVideo) return;
 
     const bg = section.querySelector<HTMLElement>("[data-hero-bg]");
     if (!bg) return;
@@ -37,7 +36,7 @@ export function HeroSection() {
 
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, [isDesktop]);
+  }, [showVideo]);
 
   return (
     <section
@@ -49,7 +48,16 @@ export function HeroSection() {
         data-hero-bg
         className="absolute -top-[20%] left-0 right-0 h-[140%] w-full"
       >
-        {isDesktop ? (
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/images/hero-poster.webp"
+          alt=""
+          fetchPriority="high"
+          decoding="async"
+          className={`absolute inset-0 h-full w-full object-cover${showVideo ? " hidden" : ""}`}
+        />
+
+        {showVideo && (
           <video
             autoPlay
             loop
@@ -57,20 +65,10 @@ export function HeroSection() {
             playsInline
             aria-hidden="true"
             preload="none"
-            poster="/images/hero-poster.webp"
-            className="h-full w-full object-cover"
+            className="absolute inset-0 h-full w-full object-cover"
           >
             <source src="/hero-section-video.mp4" type="video/mp4" />
           </video>
-        ) : (
-          <Image
-            src="/images/hero-poster.webp"
-            alt=""
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover"
-          />
         )}
       </div>
 
