@@ -1,7 +1,10 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-import { useInView, useMotionValue, useSpring } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+
+function easeOutCubic(t: number) {
+  return 1 - Math.pow(1 - t, 3);
+}
 
 export function Counter({
   from = 0,
@@ -13,28 +16,44 @@ export function Counter({
   duration?: number;
 }) {
   const ref = useRef<HTMLSpanElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-50px" });
-  const motionValue = useMotionValue(from);
-  const springValue = useSpring(motionValue, {
-    duration: duration * 1000,
-    bounce: 0,
-  });
+  const [started, setStarted] = useState(false);
 
   useEffect(() => {
-    if (inView) {
-      motionValue.set(to);
-    }
-  }, [inView, motionValue, to]);
+    const el = ref.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setStarted(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "-50px" },
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
-    return springValue.on("change", (latest) => {
-      if (ref.current) {
-        ref.current.textContent = Intl.NumberFormat("en-US").format(
-          Math.floor(latest)
-        );
-      }
-    });
-  }, [springValue]);
+    const el = ref.current;
+    if (!started || !el) return;
+
+    const ms = duration * 1000;
+    let start: number | null = null;
+    let raf: number;
+
+    const tick = (ts: number) => {
+      if (start === null) start = ts;
+      const elapsed = ts - start;
+      const progress = Math.min(elapsed / ms, 1);
+      const value = Math.floor(from + (to - from) * easeOutCubic(progress));
+      el.textContent = Intl.NumberFormat("en-US").format(value);
+      if (progress < 1) raf = requestAnimationFrame(tick);
+    };
+
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [started, from, to, duration]);
 
   return <span ref={ref}>{from}</span>;
 }
