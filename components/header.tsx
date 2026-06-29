@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import { Container } from "@/components/container";
 import { LogoLink } from "@/components/logo";
 import { siteConfig } from "@/lib/site";
@@ -21,23 +20,20 @@ export function Header() {
   }, []);
 
   return (
-    <motion.header
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.6, ease: [0.25, 0.4, 0.25, 1] }}
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
+    <header
+      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 animate-[header-slide-in_0.6s_cubic-bezier(0.25,0.4,0.25,1)] ${
         scrolled
           ? "border-b border-border/50 bg-background shadow-sm"
           : "bg-transparent"
       }`}
     >
       <Container>
-        <div className="flex h-16 items-center justify-between gap-4 lg:h-20">
+        <div className="relative flex h-16 items-center gap-4 lg:h-20">
           <LogoLink
             src={siteConfig.headerLogo}
             width={312}
             height={261}
-            className={`h-11 w-auto lg:h-14 transition-all duration-300 ${
+            className={`relative z-10 h-11 w-auto shrink-0 lg:h-14 transition-all duration-300 ${
               scrolled ? "invert" : ""
             }`}
             priority
@@ -46,7 +42,7 @@ export function Header() {
 
           <nav
             aria-label="Main navigation"
-            className="hidden items-center gap-8 lg:flex"
+            className="absolute left-1/2 hidden -translate-x-1/2 lg:block"
           >
             <ul className="flex items-center gap-8">
               {siteConfig.nav.map((item) => (
@@ -64,17 +60,18 @@ export function Header() {
                 </li>
               ))}
             </ul>
-            <div className="flex items-center gap-3">
-              <Link
-                href={QUOTE_HREF}
-                className="inline-flex h-10 items-center justify-center rounded-full bg-cta px-6 text-base font-medium text-white transition-all hover:scale-[1.02] hover:bg-cta-hover"
-              >
-                Get Quote
-              </Link>
-            </div>
           </nav>
 
-          <div className="flex items-center gap-2 lg:hidden">
+          <div className="ml-auto hidden items-center lg:flex">
+            <Link
+              href={QUOTE_HREF}
+              className="inline-flex h-10 items-center justify-center rounded-full bg-cta px-6 text-base font-medium text-white transition-all hover:scale-[1.02] hover:bg-cta-hover"
+            >
+              Get Quote
+            </Link>
+          </div>
+
+          <div className="ml-auto flex items-center gap-2 lg:hidden">
             <button
               type="button"
               className={`inline-flex h-10 w-10 items-center justify-center rounded-full transition-colors ${
@@ -98,43 +95,38 @@ export function Header() {
           </div>
         </div>
 
-        <AnimatePresence>
-          {menuOpen && (
-            <motion.nav
-              id="mobile-nav"
-              aria-label="Mobile navigation"
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "auto" }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.3 }}
-              className="overflow-hidden border-t border-border/50 bg-background lg:hidden"
-            >
-              <ul className="flex flex-col gap-1 py-4">
-                {siteConfig.nav.map((item) => (
-                  <li key={item.href}>
-                    <Link
-                      href={item.href}
-                      className="block rounded-lg px-3 py-3 text-base font-medium text-muted transition-colors hover:bg-surface-muted hover:text-foreground"
-                      onClick={() => setMenuOpen(false)}
-                    >
-                      {item.label}
-                    </Link>
-                  </li>
-                ))}
-                <li className="pt-2">
+        <nav
+          id="mobile-nav"
+          aria-label="Mobile navigation"
+          className="accordion-panel border-t border-border/50 bg-background lg:hidden"
+          data-open={menuOpen}
+        >
+          <div>
+            <ul className="flex flex-col gap-1 py-4">
+              {siteConfig.nav.map((item) => (
+                <li key={item.href}>
                   <Link
-                    href={QUOTE_HREF}
-                    className="block rounded-full bg-cta px-6 py-3 text-center text-base font-medium text-white transition-colors hover:bg-cta-hover"
+                    href={item.href}
+                    className="block rounded-lg px-3 py-3 text-base font-medium text-muted transition-colors hover:bg-surface-muted hover:text-foreground"
                     onClick={() => setMenuOpen(false)}
                   >
-                    Get Quote
+                    {item.label}
                   </Link>
                 </li>
-              </ul>
-            </motion.nav>
-          )}
-        </AnimatePresence>
+              ))}
+              <li className="pt-2">
+                <Link
+                  href={QUOTE_HREF}
+                  className="block rounded-full bg-cta px-6 py-3 text-center text-base font-medium text-white transition-colors hover:bg-cta-hover"
+                  onClick={() => setMenuOpen(false)}
+                >
+                  Get Quote
+                </Link>
+              </li>
+            </ul>
+          </div>
+        </nav>
       </Container>
-    </motion.header>
+    </header>
   );
 }

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { SectionHeader } from "@/components/section-header";
 
 const services = [
   {
@@ -91,7 +92,7 @@ function ServiceRow({
             src={service.image}
             alt={service.imageAlt}
             fill
-            className={`object-cover transition-transform duration-700 group-hover:scale-[1.03] ${service.imagePosition}`}
+            className={`object-cover transition-transform duration-500 group-hover:scale-[1.03] ${service.imagePosition}`}
             sizes="(max-width: 1024px) 100vw, 45vw"
           />
           <div
@@ -106,7 +107,7 @@ function ServiceRow({
             <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-white/95 text-foreground shadow-lg ring-1 ring-black/5 backdrop-blur-sm">
               {service.icon}
             </span>
-            <span className="rounded-full bg-black/50 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-white backdrop-blur-md">
+            <span className="rounded-full bg-black/50 px-3 py-1 text-badge font-semibold uppercase tracking-widest text-white backdrop-blur-md">
               Step {service.number}
             </span>
           </div>
@@ -129,7 +130,7 @@ function ServiceRow({
           <div className="relative">
             <div className="flex items-center gap-3">
               <span className="h-px w-8 bg-foreground/20" aria-hidden="true" />
-              <span className="text-xs font-semibold uppercase tracking-[0.2em] text-muted">
+              <span className="text-xs font-semibold uppercase tracking-widest text-muted">
                 {service.tag}
               </span>
             </div>
@@ -177,21 +178,11 @@ export function ServicesSection() {
       </div>
 
       <div className="relative mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-3xl text-center">
-          <div className="flex items-center justify-center gap-3">
-            <span className="h-px w-8 bg-cta" />
-            <span className="text-xs font-semibold uppercase tracking-widest text-cta">
-              Beyond Die Making
-            </span>
-            <span className="h-px w-8 bg-cta" />
-          </div>
-          <h2 className="mt-3 text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
-          Complete Die Solutions - Built for Production
-          </h2>
-          <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-muted">
-          From design validation and technical support to surface finishing and transparent project updates, we work with you at every stage to ensure your die performs reliably in production.
-          </p>
-        </div>
+        <SectionHeader
+          badge="Beyond Die Making"
+          title="Complete Die Solutions - Built for Production"
+          description="From design validation and technical support to surface finishing and transparent project updates, we work with you at every stage to ensure your die performs reliably in production."
+        />
 
         <div className="mt-8 space-y-6 sm:mt-12 sm:space-y-8">
           {services.map((service, index) => (

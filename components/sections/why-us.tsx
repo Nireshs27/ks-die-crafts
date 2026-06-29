@@ -1,6 +1,7 @@
 "use client";
 
 import { Reveal, StaggerContainer, StaggerItem } from "@/components/motion";
+import { SectionHeader } from "@/components/section-header";
 
 const features = [
   {
@@ -68,22 +69,14 @@ export function WhyUsSection() {
     <section id="why-us" className="bg-background py-24 sm:py-32">
       <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8">
         <Reveal>
-          <div className="mx-auto max-w-3xl text-center">
-            <div className="flex items-center justify-center gap-3">
-              <span className="h-px w-8 bg-cta" />
-              <span className="text-xs font-semibold uppercase tracking-widest text-cta">
-                Why Choose Us
-              </span>
-              <span className="h-px w-8 bg-cta" />
-            </div>
-            <h2 className="mt-3 text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
-            Why Manufacturers Choose KS Die Crafts
-            </h2>
-          </div>
+          <SectionHeader
+            badge="Why Choose Us"
+            title="Why Manufacturers Choose KS Die Crafts"
+          />
         </Reveal>
 
         <Reveal>
-          <div className="mt-14 rounded-[2rem] border border-border bg-surface px-6 py-12 sm:rounded-[3rem] sm:px-12 sm:py-20 lg:px-16 lg:py-24">
+          <div className="mt-14 rounded-3xl border border-border bg-surface px-6 py-12 sm:px-12 sm:py-20 lg:px-16 lg:py-24">
             <StaggerContainer className="grid grid-cols-1 gap-y-12 sm:grid-cols-2 sm:gap-x-8 sm:gap-y-16 lg:grid-cols-3 lg:gap-x-12">
               {features.map((item) => (
                 <StaggerItem key={item.text}>

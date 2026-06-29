@@ -1,7 +1,9 @@
 "use client";
 
+import { Button } from "@/components/button";
 import { ClientLogos } from "@/components/client-logos";
 import { Reveal } from "@/components/motion";
+import { SectionHeader } from "@/components/section-header";
 import { siteConfig } from "@/lib/site";
 
 export function ClientsSection() {
@@ -9,21 +11,11 @@ export function ClientsSection() {
     <section className="bg-background py-24 sm:py-32">
       <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8">
         <Reveal>
-          <div className="mx-auto max-w-3xl text-center">
-            <div className="flex items-center justify-center gap-3">
-              <span className="h-px w-8 bg-cta" />
-              <span className="text-xs font-semibold uppercase tracking-widest text-cta">
-                Trusted Partners
-              </span>
-              <span className="h-px w-8 bg-cta" />
-            </div>
-            <h2 className="mt-3 text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
-              Our Clients
-            </h2>
-            <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-muted">
-              Trusted by leading jewellery manufacturers across the country.
-            </p>
-          </div>
+          <SectionHeader
+            badge="Trusted Partners"
+            title="Our Clients"
+            description="Trusted by leading jewellery manufacturers across the country."
+          />
         </Reveal>
       </div>
 
@@ -46,28 +38,30 @@ export function ClientsSection() {
             />
 
             <div className="relative z-10 mx-auto max-w-2xl px-4 sm:px-6">
-              <h2 className="text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
+              <p className="text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
                 Interested in working together?
-              </h2>
+              </p>
               <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-muted">
                 Whether you&apos;re a manufacturer, distributor, or brand — we&apos;d
                 love to explore a long-term partnership.
               </p>
               <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4">
-                <a
+                <Button
                   href={`https://wa.me/${siteConfig.contact.whatsapp}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex h-12 items-center justify-center rounded-full bg-[#25D366] px-8 text-sm font-semibold text-white transition-all hover:opacity-90"
+                  newTab
+                  variant="whatsapp"
+                  size="md"
                 >
                   WhatsApp
-                </a>
-                <a
+                </Button>
+                <Button
                   href={`mailto:${siteConfig.contact.email}?subject=Partnership%20Inquiry`}
-                  className="inline-flex h-12 items-center justify-center rounded-full bg-cta px-8 text-sm font-semibold text-white shadow-sm transition-all hover:bg-cta-hover hover:scale-[1.02]"
+                  variant="primary"
+                  size="md"
+                  className="shadow-sm"
                 >
                   Contact Us
-                </a>
+                </Button>
               </div>
             </div>
           </div>

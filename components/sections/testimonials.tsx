@@ -1,6 +1,7 @@
 "use client";
 
 import { Reveal, StaggerContainer, StaggerItem } from "@/components/motion";
+import { SectionHeader } from "@/components/section-header";
 
 const testimonials = [
   {
@@ -31,18 +32,10 @@ export function TestimonialsSection() {
     <section className="bg-background py-24 sm:py-32">
       <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8">
         <Reveal>
-          <div className="mx-auto max-w-3xl text-center">
-            <div className="flex items-center justify-center gap-3">
-              <span className="h-px w-8 bg-cta" />
-              <span className="text-xs font-semibold uppercase tracking-widest text-cta">
-                What Our Clients Say
-              </span>
-              <span className="h-px w-8 bg-cta" />
-            </div>
-            <h2 className="mt-3 text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
-              Built on long-term partnerships
-            </h2>
-          </div>
+          <SectionHeader
+            badge="What Our Clients Say"
+            title="Built on long-term partnerships"
+          />
         </Reveal>
 
         <StaggerContainer className="mt-14 grid gap-6 lg:grid-cols-3">

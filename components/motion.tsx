@@ -1,7 +1,37 @@
 "use client";
 
-import { motion, useInView } from "framer-motion";
-import { useRef, type ReactNode } from "react";
+import { useRef, useEffect, useState, type ReactNode, type CSSProperties } from "react";
+
+function useIntersection(margin = "-40px") {
+  const ref = useRef<HTMLDivElement>(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: margin },
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [margin]);
+
+  return { ref, visible };
+}
+
+const offsets: Record<string, string> = {
+  up: "translateY(24px)",
+  down: "translateY(-24px)",
+  left: "translateX(24px)",
+  right: "translateX(-24px)",
+  none: "translate(0,0)",
+};
 
 type RevealProps = {
   children: ReactNode;
@@ -18,34 +48,19 @@ export function Reveal({
   direction = "up",
   duration = 0.6,
 }: RevealProps) {
-  const ref = useRef<HTMLDivElement>(null);
+  const { ref, visible } = useIntersection();
 
-  const directionOffset = {
-    up: { y: 40, x: 0 },
-    down: { y: -40, x: 0 },
-    left: { x: 40, y: 0 },
-    right: { x: -40, y: 0 },
-    none: { x: 0, y: 0 },
+  const style: CSSProperties = {
+    opacity: visible ? 1 : 0,
+    transform: visible ? "translate(0,0)" : offsets[direction],
+    transition: `opacity ${duration}s cubic-bezier(0.25,0.4,0.25,1) ${delay}s, transform ${duration}s cubic-bezier(0.25,0.4,0.25,1) ${delay}s`,
+    willChange: visible ? "auto" : "opacity, transform",
   };
 
   return (
-    <motion.div
-      ref={ref}
-      initial={{
-        opacity: 0,
-        ...directionOffset[direction],
-      }}
-      whileInView={{ opacity: 1, x: 0, y: 0 }}
-      viewport={{ once: true, margin: "-40px" }}
-      transition={{
-        duration,
-        delay,
-        ease: [0.25, 0.4, 0.25, 1],
-      }}
-      className={className}
-    >
+    <div ref={ref} className={className} style={style}>
       {children}
-    </motion.div>
+    </div>
   );
 }
 
@@ -60,26 +75,17 @@ export function StaggerContainer({
   className,
   staggerDelay = 0.1,
 }: StaggerContainerProps) {
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-40px" });
+  const { ref, visible } = useIntersection();
 
   return (
-    <motion.div
+    <div
       ref={ref}
-      initial="hidden"
-      animate={isInView ? "visible" : "hidden"}
-      variants={{
-        hidden: {},
-        visible: {
-          transition: {
-            staggerChildren: staggerDelay,
-          },
-        },
-      }}
       className={className}
+      style={{ "--stagger": `${staggerDelay}s` } as CSSProperties}
+      data-stagger-visible={visible || undefined}
     >
       {children}
-    </motion.div>
+    </div>
   );
 }
 
@@ -91,70 +97,8 @@ export function StaggerItem({
   className?: string;
 }) {
   return (
-    <motion.div
-      variants={{
-        hidden: { opacity: 0, y: 30 },
-        visible: {
-          opacity: 1,
-          y: 0,
-          transition: { duration: 0.5, ease: [0.25, 0.4, 0.25, 1] },
-        },
-      }}
-      className={className}
-    >
+    <div className={`stagger-item ${className ?? ""}`}>
       {children}
-    </motion.div>
-  );
-}
-
-export function CountUp({
-  target,
-  suffix = "",
-  className,
-}: {
-  target: number;
-  suffix?: string;
-  className?: string;
-}) {
-  const ref = useRef<HTMLSpanElement>(null);
-  const isInView = useInView(ref, { once: true });
-
-  return (
-    <motion.span
-      ref={ref}
-      className={className}
-      initial={{ opacity: 0 }}
-      animate={isInView ? { opacity: 1 } : {}}
-    >
-      {isInView ? (
-        <motion.span
-          initial={{ opacity: 1 }}
-          animate={{ opacity: 1 }}
-        >
-          <CountUpNumber target={target} />
-          {suffix}
-        </motion.span>
-      ) : (
-        `0${suffix}`
-      )}
-    </motion.span>
-  );
-}
-
-function CountUpNumber({ target }: { target: number }) {
-  const nodeRef = useRef<HTMLSpanElement>(null);
-
-  return (
-    <motion.span
-      ref={nodeRef}
-      style={{ counterReset: `num 0` }}
-      animate={{ "--num": target } as Record<string, number>}
-      transition={{ duration: 2, ease: "easeOut" }}
-      onUpdate={(latest) => {
-        if (nodeRef.current && typeof latest["--num"] === "number") {
-          nodeRef.current.textContent = Math.round(latest["--num"]).toString();
-        }
-      }}
-    />
+    </div>
   );
 }

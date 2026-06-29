@@ -1,51 +1,10 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
-import { useEffect, useRef } from "react";
-import {
-  useInView,
-  useMotionValue,
-  useSpring,
-} from "framer-motion";
+import { Button } from "@/components/button";
+import { Counter } from "@/components/counter";
 import { Reveal, StaggerContainer, StaggerItem } from "@/components/motion";
-
-function Counter({
-  from = 0,
-  to,
-  duration = 2,
-}: {
-  from?: number;
-  to: number;
-  duration?: number;
-}) {
-  const ref = useRef<HTMLSpanElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-50px" });
-  const motionValue = useMotionValue(from);
-  const springValue = useSpring(motionValue, {
-    duration: duration * 1000,
-    bounce: 0,
-  });
-
-  useEffect(() => {
-    if (inView) {
-      motionValue.set(to);
-    }
-  }, [inView, motionValue, to]);
-
-  useEffect(() => {
-    return springValue.on("change", (latest) => {
-      if (ref.current) {
-        ref.current.textContent = Intl.NumberFormat("en-US").format(
-          Math.floor(latest)
-        );
-      }
-    });
-  }, [springValue]);
-
-  return <span ref={ref}>{from}</span>;
-}
-
+import { SectionHeader } from "@/components/section-header";
 
 const stats = [
   {
@@ -94,27 +53,6 @@ const stats = [
   },
 ];
 
-/* const timeline = [
-  {
-    era: "1980s",
-    title: "The Foundation",
-    description:
-      "Our family enters jewellery manufacturing through KSAN Industries LLP, learning the craft from the ground up.",
-  },
-  {
-    era: "40+ Years",
-    title: "Building Expertise",
-    description:
-      "Four decades of jewellery production sharpen our understanding of what makes a product exceptional — it begins with the die.",
-  },
-  {
-    era: "Today",
-    title: "KS Die Crafts",
-    description:
-      "We channel generations of manufacturing knowledge into precision dies, built with modern CNC technology and trusted across India.",
-  },
-]; */
-
 function HeritageIntro() {
   return (
     <div className="mt-14 grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-8 items-center">
@@ -155,16 +93,13 @@ function HeritageIntro() {
         </ul>
 
         <div className="mt-8">
-          <Link
-            href="/#recent-work"
-            className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-cta px-8 text-sm font-medium text-white transition-all hover:bg-cta-hover hover:scale-[1.02]"
-          >
+          <Button href="/#recent-work" variant="primary" size="md">
             Explore Our Work
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4" aria-hidden="true">
               <path d="M5 12h14" />
               <path d="m12 5 7 7-7 7" />
             </svg>
-          </Link>
+          </Button>
         </div>
       </Reveal>
 
@@ -185,7 +120,7 @@ function HeritageIntro() {
 
         {/* Stats Card */}
         <Reveal delay={0.4} className="relative lg:absolute lg:-bottom-12 lg:-left-12 lg:-right-6 mt-8 lg:mt-0 z-10">
-          <div className="rounded-[2rem] border border-border bg-background p-6 shadow-xl sm:p-8">
+          <div className="rounded-3xl border border-border bg-background p-6 shadow-xl sm:p-8">
             <StaggerContainer className="grid grid-cols-2 gap-y-8 sm:grid-cols-4 sm:gap-y-0 sm:divide-x sm:divide-border/50">
               {stats.map((stat) => (
                 <StaggerItem
@@ -219,104 +154,19 @@ function HeritageIntro() {
   );
 }
 
-/* function StoryTimeline() {
-  const lineRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: lineRef,
-    offset: ["start center", "end center"],
-  });
-  const lineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
-
-  return (
-    <div className="mt-24 sm:mt-32 lg:mt-40">
-      <Reveal>
-        <div className="mx-auto max-w-3xl text-center">
-          <h3 className="text-xl font-semibold tracking-tight text-foreground sm:text-2xl">
-            A Story Built on Manufacturing
-          </h3>
-          <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-muted">
-            Working in jewellery manufacturing taught us that every exceptional
-            product begins with a well-engineered die. That experience now drives
-            everything we manufacture.
-          </p>
-        </div>
-      </Reveal>
-
-      <div ref={lineRef} className="relative mx-auto mt-16 max-w-3xl">
-        <div
-          className="absolute left-5 top-2 bottom-2 w-px bg-border sm:left-1/2 sm:-translate-x-1/2"
-          aria-hidden="true"
-        >
-          <motion.div
-            style={{ height: lineHeight }}
-            className="absolute left-0 top-0 w-px bg-cta"
-          />
-        </div>
-
-        <StaggerContainer
-          className="space-y-12 sm:space-y-16"
-          staggerDelay={0.15}
-        >
-          {timeline.map((node, index) => (
-            <StaggerItem key={node.era}>
-              <div
-                className={`relative pl-16 sm:w-1/2 sm:pl-0 ${
-                  index % 2 === 0
-                    ? "sm:pr-12 sm:text-right"
-                    : "sm:ml-auto sm:pl-12 sm:text-left"
-                }`}
-              >
-                <span
-                  className={`absolute top-1 left-5 z-10 h-3.5 w-3.5 -translate-x-1/2 rounded-full bg-cta ring-4 ring-background sm:top-2 ${
-                    index % 2 === 0
-                      ? "sm:left-auto sm:-right-[7px] sm:translate-x-0"
-                      : "sm:-left-[7px] sm:translate-x-0"
-                  }`}
-                  aria-hidden="true"
-                />
-                <p className="text-2xl font-bold tracking-tight text-cta sm:text-3xl">
-                  {node.era}
-                </p>
-                <h4 className="mt-1 text-lg font-semibold text-foreground">
-                  {node.title}
-                </h4>
-                <p className="mt-2 text-base leading-relaxed text-muted">
-                  {node.description}
-                </p>
-              </div>
-            </StaggerItem>
-          ))}
-        </StaggerContainer>
-      </div>
-    </div>
-  );
-} */
-
 export function AboutUsSection() {
   return (
     <section id="about-us" className="bg-surface py-24 sm:py-32 overflow-hidden">
       <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8">
         <Reveal>
-          <div className="mx-auto max-w-3xl text-center">
-            <div className="flex items-center justify-center gap-3">
-              <span className="h-px w-8 bg-cta" aria-hidden="true" />
-              <span className="text-xs font-semibold uppercase tracking-widest text-cta">
-                About KS Die Crafts
-              </span>
-              <span className="h-px w-8 bg-cta" aria-hidden="true" />
-            </div>
-            <h2 className="mt-3 text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
-              Four Decades of Manufacturing Heritage, Focused on Better Dies
-            </h2>
-            <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-muted">
-              KS Die Crafts was founded with a simple belief — better dies create
-              better products.
-            </p>
-          </div>
+          <SectionHeader
+            badge="About KS Die Crafts"
+            title="Four Decades of Manufacturing Heritage, Focused on Better Dies"
+            description="KS Die Crafts was founded with a simple belief — better dies create better products."
+          />
         </Reveal>
 
         <HeritageIntro />
-        {/* <StoryTimeline /> */}
       </div>
     </section>
   );

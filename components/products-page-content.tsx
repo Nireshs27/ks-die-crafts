@@ -4,6 +4,7 @@ import Link from "next/link";
 import { CategoryCard } from "@/components/category-card";
 import { CtaBanner } from "@/components/cta-banner";
 import { Reveal, StaggerContainer, StaggerItem } from "@/components/motion";
+import { SectionHeader } from "@/components/section-header";
 import { categories } from "@/lib/categories";
 import { getProduct } from "@/lib/products";
 
@@ -36,23 +37,12 @@ export function ProductsPageContent() {
               Back to All Categories
             </Link>
 
-            <div className="mx-auto max-w-3xl text-center">
-              <div className="flex items-center justify-center gap-3">
-                <span className="h-px w-8 bg-cta" aria-hidden="true" />
-                <span className="text-xs font-semibold uppercase tracking-widest text-cta">
-                  Our Products
-                </span>
-                <span className="h-px w-8 bg-cta" aria-hidden="true" />
-              </div>
-              <h1 className="mt-3 text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
-                Precision dies for every jewellery type
-              </h1>
-              <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-muted">
-                Four core categories, each engineered with the same uncompromising
-                attention to detail. Explore each range — or send us a brief and
-                we&apos;ll build something entirely custom.
-              </p>
-            </div>
+            <SectionHeader
+              as="h1"
+              badge="Our Products"
+              title="Precision dies for every jewellery type"
+              description="Four core categories, each engineered with the same uncompromising attention to detail. Explore each range — or send us a brief and we'll build something entirely custom."
+            />
           </Reveal>
 
           <StaggerContainer className="mt-14 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4 lg:gap-5">

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { Button } from "@/components/button";
 
 export default function Error({
   error,
@@ -19,13 +20,9 @@ export default function Error({
       <p className="mt-4 max-w-md text-muted">
         An unexpected error occurred. Please try again.
       </p>
-      <button
-        type="button"
-        onClick={reset}
-        className="mt-8 inline-flex h-11 items-center justify-center rounded-md bg-cta px-6 text-sm font-semibold text-cta-foreground transition-colors hover:bg-cta-hover"
-      >
+      <Button onClick={reset} variant="primary" size="sm" className="mt-8">
         Try again
-      </button>
+      </Button>
     </div>
   );
 }

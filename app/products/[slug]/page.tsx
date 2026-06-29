@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { Button } from "@/components/button";
+import { WhatsAppIcon } from "@/components/icons/whatsapp";
 import { ContactSection } from "@/components/sections/contact";
 import { CtaBanner } from "@/components/cta-banner";
 import { products, getProduct } from "@/lib/products";
@@ -101,7 +103,7 @@ export default async function ProductDetailPage({
                 className="object-cover"
                 sizes="(max-width: 1024px) 100vw, 50vw"
               />
-              <span className="absolute right-4 top-4 rounded-full bg-white/95 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-wider text-foreground backdrop-blur-sm ring-1 ring-border">
+              <span className="absolute right-4 top-4 rounded-full bg-white/95 px-3 py-1.5 text-badge font-semibold uppercase tracking-wider text-foreground backdrop-blur-sm ring-1 ring-border">
                 Lead time {product.leadTime}
               </span>
             </div>
@@ -121,29 +123,29 @@ export default async function ProductDetailPage({
               </p>
 
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                <Link
+                <Button
                   href="/#contact"
-                  className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-cta px-7 text-sm font-semibold text-white shadow-lg shadow-cta/20 transition-all hover:bg-cta-hover hover:scale-[1.02]"
+                  variant="primary"
+                  size="md"
+                  className="shadow-lg shadow-cta/20"
                 >
                   Request Quote
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4" aria-hidden="true">
                     <path d="M5 12h14" />
                     <path d="m12 5 7 7-7 7" />
                   </svg>
-                </Link>
-                <a
+                </Button>
+                <Button
                   href={`https://wa.me/${siteConfig.contact.whatsapp}?text=${encodeURIComponent(
                     `Hi KS Diecrafts, I'd like a quote for ${product.title}.`
                   )}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex h-12 items-center justify-center gap-2 rounded-full border border-border bg-white px-7 text-sm font-medium text-foreground transition-all hover:border-foreground/20 hover:shadow-md"
+                  newTab
+                  variant="secondary"
+                  size="md"
                 >
-                  <svg viewBox="0 0 24 24" fill="currentColor" className="h-4 w-4 text-[#25D366]">
-                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.768.967-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347" />
-                  </svg>
+                  <WhatsAppIcon className="h-4 w-4 text-[#25D366]" />
                   WhatsApp Us
-                </a>
+                </Button>
               </div>
 
               <dl className="mt-12 grid grid-cols-1 gap-x-8 gap-y-5 sm:grid-cols-2">
@@ -152,7 +154,7 @@ export default async function ProductDetailPage({
                     key={spec.label}
                     className="border-t border-border pt-4"
                   >
-                    <dt className="text-[10px] font-semibold uppercase tracking-wider text-silver">
+                    <dt className="text-badge font-semibold uppercase tracking-wider text-silver">
                       {spec.label}
                     </dt>
                     <dd className="mt-1.5 text-sm font-semibold text-foreground">

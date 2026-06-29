@@ -5,11 +5,12 @@ import Link from "next/link";
 import { useState, useRef, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Reveal } from "@/components/motion";
+import { SectionHeader } from "@/components/section-header";
 import { recentWork, type RecentWorkItem } from "@/lib/recent-work";
 
 function WorkCard({ item }: { item: RecentWorkItem }) {
   const cardClass =
-    "group relative block w-full overflow-hidden rounded-xl";
+    "group relative block w-full overflow-hidden rounded-2xl";
 
   const inner = (
     <>
@@ -96,21 +97,11 @@ export function RecentWorkSection() {
     <section id="recent-work" className="bg-background py-24 sm:py-32">
       <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8">
         <Reveal>
-          <div className="mx-auto max-w-3xl text-center">
-            <div className="flex items-center justify-center gap-3">
-              <span className="h-px w-8 bg-cta" aria-hidden="true" />
-              <span className="text-xs font-semibold uppercase tracking-widest text-cta">
-                Recent Work
-              </span>
-              <span className="h-px w-8 bg-cta" aria-hidden="true" />
-            </div>
-            <h2 className="mt-3 text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
-            Every Die Tells a Story
-            </h2>
-            <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-muted">
-            Every die is carefully manufactured to achieve clean detailing, consistent quality, and dependable performance in production.
-            </p>
-          </div>
+          <SectionHeader
+            badge="Recent Work"
+            title="Every Die Tells a Story"
+            description="Every die is carefully manufactured to achieve clean detailing, consistent quality, and dependable performance in production."
+          />
         </Reveal>
 
         <Reveal delay={0.2}>

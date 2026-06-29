@@ -1,8 +1,8 @@
 "use client";
 
 import { motion, useScroll, useTransform } from "framer-motion";
-import Link from "next/link";
 import { useRef } from "react";
+import { Button } from "@/components/button";
 
 export function HeroSection() {
   const ref = useRef<HTMLElement>(null);
@@ -28,6 +28,8 @@ export function HeroSection() {
           loop
           muted
           playsInline
+          aria-hidden="true"
+          preload="none"
           poster="/images/hero-poster.webp"
           className="h-full w-full object-cover"
         >
@@ -80,12 +82,14 @@ export function HeroSection() {
             transition={{ duration: 0.8, delay: 0.8, ease: [0.25, 0.4, 0.25, 1] }}
             className="mt-8 flex justify-center"
           >
-            <Link
+            <Button
               href="/#recent-work"
-              className="inline-flex h-12 items-center justify-center rounded-full border border-white/25 bg-white/10 px-8 text-sm font-medium text-white backdrop-blur-sm transition-all hover:bg-white/20"
+              variant="ghost"
+              size="md"
+              className="focus-visible:outline-white"
             >
               Explore Our Work
-            </Link>
+            </Button>
           </motion.div>
         </div>
       </div>

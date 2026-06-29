@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Button } from "@/components/button";
 import { siteConfig } from "@/lib/site";
 
 export default function NotFound() {
@@ -9,12 +9,9 @@ export default function NotFound() {
       <p className="mt-4 max-w-md text-muted">
         The page you are looking for does not exist or has been moved.
       </p>
-      <Link
-        href="/"
-        className="mt-8 inline-flex h-11 items-center justify-center rounded-md bg-cta px-6 text-sm font-semibold text-cta-foreground transition-colors hover:bg-cta-hover"
-      >
+      <Button href="/" variant="primary" size="sm" className="mt-8">
         Back to {siteConfig.name}
-      </Link>
+      </Button>
     </div>
   );
 }

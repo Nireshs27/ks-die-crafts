@@ -17,6 +17,7 @@ function ClientLogo({ name, logo }: { name: string; logo: string }) {
           src={logo}
           alt={`${name} logo`}
           fill
+          sizes="160px"
           className="object-contain"
         />
       </div>

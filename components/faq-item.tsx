@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 
 type FaqItemProps = {
   question: string;
@@ -22,10 +21,8 @@ export function FaqItem({ question, answer }: FaqItemProps) {
         <span className="text-sm font-medium text-foreground sm:text-base">
           {question}
         </span>
-        <motion.span
-          animate={{ rotate: open ? 180 : 0 }}
-          transition={{ duration: 0.3, ease: "easeInOut" }}
-          className="flex-shrink-0 text-muted"
+        <span
+          className={`flex-shrink-0 text-muted transition-transform duration-300 ease-in-out ${open ? "rotate-180" : ""}`}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -39,21 +36,13 @@ export function FaqItem({ question, answer }: FaqItemProps) {
           >
             <polyline points="6 9 12 15 18 9" />
           </svg>
-        </motion.span>
+        </span>
       </button>
-      <AnimatePresence initial={false}>
-        {open && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3, ease: [0.25, 0.4, 0.25, 1] }}
-            className="overflow-hidden"
-          >
-            <p className="pb-5 text-sm leading-7 text-muted">{answer}</p>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      <div className="accordion-panel" data-open={open}>
+        <div>
+          <p className="pb-5 text-sm leading-relaxed text-muted">{answer}</p>
+        </div>
+      </div>
     </div>
   );
 }

@@ -2,38 +2,39 @@
 
 import { useEffect, useRef, useState } from "react";
 import { siteConfig } from "@/lib/site";
-
-const dieOptions = [
-  { value: "coin-dies", label: "Coin Dies" },
-  { value: "jewellery-dies", label: "Jewellery Dies" },
-  { value: "religious-dies", label: "Religious Dies (Vel, Soolam, Thalli)" },
-  { value: "ring-dies", label: "Ring Dies" },
-  { value: "bangle-dies", label: "Bangle Dies" },
-  { value: "pendant-dies", label: "Pendant Dies" },
-  { value: "earring-dies", label: "Earring Dies" },
-  { value: "chain-dies", label: "Chain Dies" },
-  { value: "custom-dies", label: "Custom / Other" },
-] as const;
-
-const contactPreferences = [
-  { value: "whatsapp", label: "WhatsApp" },
-  { value: "phone", label: "Phone" },
-  { value: "email", label: "Email" },
-] as const;
+import {
+  contactFormSchema,
+  contactPreferences,
+  dieOptions,
+  type ContactFieldErrors,
+} from "@/lib/validations/contact";
 
 const fieldClassName =
-  "w-full rounded-lg border border-border bg-white px-3 py-2 text-sm text-foreground placeholder:text-silver outline-none transition-all focus:border-cta/40 focus:ring-2 focus:ring-cta/10";
+  "w-full rounded-lg border border-border bg-background px-3 py-2 text-sm text-foreground placeholder:text-silver outline-none transition-all focus:border-cta/40 focus:ring-2 focus:ring-cta/10";
+
+const fieldErrorClassName =
+  "border-red-300 focus:border-red-400 focus:ring-red-100";
+
+const labelClassName = "sr-only";
+
+function FieldError({ message }: { message?: string }) {
+  if (!message) return null;
+  return <p className="mt-1 text-xs text-red-600">{message}</p>;
+}
 
 function ServiceSelect({
   value,
   onChange,
+  hasError,
 }: {
   value: string;
   onChange: (value: string) => void;
+  hasError?: boolean;
 }) {
   const [open, setOpen] = useState(false);
   const [highlighted, setHighlighted] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
 
   const selected = dieOptions.find((option) => option.value === value);
 
@@ -51,20 +52,61 @@ function ServiceSelect({
   const selectOption = (optionValue: string) => {
     onChange(optionValue);
     setOpen(false);
+    buttonRef.current?.focus();
+  };
+
+  const handleKeyDown = (event: React.KeyboardEvent) => {
+    switch (event.key) {
+      case "ArrowDown":
+        event.preventDefault();
+        if (!open) {
+          setOpen(true);
+          return;
+        }
+        setHighlighted((current) => Math.min(current + 1, dieOptions.length - 1));
+        break;
+      case "ArrowUp":
+        event.preventDefault();
+        if (!open) {
+          setOpen(true);
+          return;
+        }
+        setHighlighted((current) => Math.max(current - 1, 0));
+        break;
+      case "Enter":
+      case " ":
+        event.preventDefault();
+        if (!open) {
+          setOpen(true);
+          return;
+        }
+        selectOption(dieOptions[highlighted].value);
+        break;
+      case "Escape":
+        if (open) {
+          event.preventDefault();
+          setOpen(false);
+        }
+        break;
+      case "Tab":
+        if (open) setOpen(false);
+        break;
+    }
   };
 
   return (
     <div ref={containerRef} className="relative">
-      <input type="hidden" name="service" value={value} required />
-
       <button
+        ref={buttonRef}
         type="button"
         aria-haspopup="listbox"
         aria-expanded={open}
+        aria-label="Die type"
         onClick={() => setOpen((current) => !current)}
+        onKeyDown={handleKeyDown}
         className={`${fieldClassName} flex items-center justify-between text-left ${
           !selected ? "text-silver" : ""
-        }`}
+        } ${hasError ? fieldErrorClassName : ""}`}
       >
         <span>{selected?.label ?? "Select die type..."}</span>
         <svg
@@ -72,6 +114,7 @@ function ServiceSelect({
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
+          aria-hidden="true"
         >
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
         </svg>
@@ -80,7 +123,8 @@ function ServiceSelect({
       {open && (
         <ul
           role="listbox"
-          className="absolute z-20 mt-2 max-h-72 w-full overflow-auto rounded-xl border border-border bg-white py-1 shadow-lg"
+          aria-label="Die type options"
+          className="absolute z-20 mt-2 max-h-72 w-full overflow-auto rounded-xl border border-border bg-background py-1 shadow-lg"
         >
           {dieOptions.map((option, index) => {
             const isSelected = option.value === value;
@@ -95,7 +139,7 @@ function ServiceSelect({
                   className={`w-full px-4 py-2.5 text-left text-sm transition-colors ${
                     isSelected || isHighlighted
                       ? "bg-cta text-white"
-                      : "bg-white text-foreground hover:bg-cta hover:text-white"
+                      : "bg-background text-foreground hover:bg-cta hover:text-white"
                   }`}
                 >
                   {option.label}
@@ -119,58 +163,90 @@ export function LeadForm({
   const [service, setService] = useState(defaultService ?? "");
   const [contactPref, setContactPref] = useState<string>("whatsapp");
   const [errorMsg, setErrorMsg] = useState<string>("");
+  const [fieldErrors, setFieldErrors] = useState<ContactFieldErrors>({});
   const formRef = useRef<HTMLFormElement>(null);
 
-  const accessKey = process.env.NEXT_PUBLIC_WEB3FORMS_KEY;
+  const clearFieldError = (field: keyof ContactFieldErrors) => {
+    setFieldErrors((current) => {
+      if (!current[field]) return current;
+      const next = { ...current };
+      delete next[field];
+      return next;
+    });
+  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setStatus("submitting");
     setErrorMsg("");
 
     const form = e.currentTarget;
     const formData = new FormData(form);
 
-    formData.append("subject", `New die enquiry from ${formData.get("name") ?? "website"}`);
-    formData.append("from_name", "KS Diecrafts website");
-    formData.append("contact_preference", contactPref);
+    const payload = {
+      name: String(formData.get("name") ?? ""),
+      email: String(formData.get("email") ?? ""),
+      phone: String(formData.get("phone") ?? ""),
+      company: String(formData.get("company") ?? ""),
+      service,
+      contactPreference: contactPref,
+      message: String(formData.get("message") ?? ""),
+      botcheck: String(formData.get("botcheck") ?? ""),
+    };
 
-    if (accessKey) {
-      formData.append("access_key", accessKey);
-      try {
-        const res = await fetch("https://api.web3forms.com/submit", {
-          method: "POST",
-          body: formData,
-        });
-        const data = await res.json();
-        if (data.success) {
-          setStatus("success");
-          form.reset();
-          setService("");
-        } else {
-          setStatus("error");
-          setErrorMsg(data.message ?? "Something went wrong. Please try again.");
+    const parsed = contactFormSchema.safeParse(payload);
+
+    if (!parsed.success) {
+      const errors: ContactFieldErrors = {};
+      for (const issue of parsed.error.issues) {
+        const key = issue.path[0];
+        if (typeof key === "string" && !(key in errors)) {
+          errors[key as keyof ContactFieldErrors] = issue.message;
         }
-      } catch {
-        setStatus("error");
-        setErrorMsg("Network error. Please try again or call us directly.");
       }
-    } else {
-      if (process.env.NODE_ENV !== "production") {
-        console.warn(
-          "[LeadForm] NEXT_PUBLIC_WEB3FORMS_KEY is not set. The form will display success without delivering the message. Set the env var to enable real submissions."
-        );
+      setFieldErrors(errors);
+      setStatus("idle");
+      return;
+    }
+
+    setFieldErrors({});
+    setStatus("submitting");
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(parsed.data),
+      });
+
+      const data = await res.json().catch(() => ({}));
+
+      if (res.ok && data.success) {
+        setStatus("success");
+        form.reset();
+        setService("");
+        setContactPref("whatsapp");
+        return;
       }
-      await new Promise((r) => setTimeout(r, 800));
-      setStatus("success");
-      form.reset();
-      setService("");
+
+      if (res.status === 400 && data.errors) {
+        setFieldErrors(data.errors as ContactFieldErrors);
+        setStatus("idle");
+        return;
+      }
+
+      setStatus("error");
+      setErrorMsg(
+        data.message ?? "Something went wrong. Please try again or call us directly."
+      );
+    } catch {
+      setStatus("error");
+      setErrorMsg("Network error. Please try again or call us directly.");
     }
   };
 
   if (status === "success") {
     return (
-      <div className="rounded-2xl border border-border bg-white p-8 text-center shadow-sm">
+      <div className="rounded-2xl border border-border bg-background p-8 text-center shadow-sm">
         <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-emerald-50">
           <svg className="h-7 w-7 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
@@ -202,7 +278,7 @@ export function LeadForm({
 
   return (
     <div
-      className={`flex flex-col rounded-xl border border-border bg-white p-5 shadow-sm sm:p-6${className ? ` ${className}` : ""}`}
+      className={`flex flex-col rounded-2xl border border-border bg-background p-5 shadow-sm sm:p-6${className ? ` ${className}` : ""}`}
     >
       <div className="mb-4 shrink-0">
         <h3 className="text-base font-semibold text-foreground">Request a Free Quote</h3>
@@ -214,6 +290,7 @@ export function LeadForm({
       <form
         ref={formRef}
         onSubmit={handleSubmit}
+        noValidate
         className="flex min-h-0 flex-1 flex-col space-y-3.5"
       >
         {/* Honeypot */}
@@ -226,57 +303,100 @@ export function LeadForm({
         />
 
         <div>
+          <label htmlFor="lead-name" className={labelClassName}>
+            Full Name
+          </label>
           <input
+            id="lead-name"
             type="text"
             name="name"
-            required
             placeholder="Full Name"
-            className={fieldClassName}
+            onChange={() => clearFieldError("name")}
+            aria-invalid={Boolean(fieldErrors.name)}
+            className={`${fieldClassName} ${fieldErrors.name ? fieldErrorClassName : ""}`}
           />
+          <FieldError message={fieldErrors.name} />
         </div>
 
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-          <input
-            type="email"
-            name="email"
-            required
-            placeholder="Email Address"
-            className={fieldClassName}
-          />
-          <input
-            type="tel"
-            name="phone"
-            required
-            placeholder="Phone / WhatsApp"
-            className={fieldClassName}
-          />
+          <div>
+            <label htmlFor="lead-email" className={labelClassName}>
+              Email Address
+            </label>
+            <input
+              id="lead-email"
+              type="email"
+              name="email"
+              placeholder="Email Address"
+              onChange={() => clearFieldError("email")}
+              aria-invalid={Boolean(fieldErrors.email)}
+              className={`${fieldClassName} ${fieldErrors.email ? fieldErrorClassName : ""}`}
+            />
+            <FieldError message={fieldErrors.email} />
+          </div>
+          <div>
+            <label htmlFor="lead-phone" className={labelClassName}>
+              Phone / WhatsApp
+            </label>
+            <input
+              id="lead-phone"
+              type="tel"
+              name="phone"
+              placeholder="Phone / WhatsApp"
+              onChange={() => clearFieldError("phone")}
+              aria-invalid={Boolean(fieldErrors.phone)}
+              className={`${fieldClassName} ${fieldErrors.phone ? fieldErrorClassName : ""}`}
+            />
+            <FieldError message={fieldErrors.phone} />
+          </div>
         </div>
 
-        <input
-          type="text"
-          name="company"
-          placeholder="Company / Brand (optional)"
-          className={fieldClassName}
-        />
-
-        <ServiceSelect value={service} onChange={setService} />
+        <div>
+          <label htmlFor="lead-company" className={labelClassName}>
+            Company / Brand (optional)
+          </label>
+          <input
+            id="lead-company"
+            type="text"
+            name="company"
+            placeholder="Company / Brand (optional)"
+            onChange={() => clearFieldError("company")}
+            aria-invalid={Boolean(fieldErrors.company)}
+            className={`${fieldClassName} ${fieldErrors.company ? fieldErrorClassName : ""}`}
+          />
+          <FieldError message={fieldErrors.company} />
+        </div>
 
         <div>
-          <p className="mb-1.5 text-[11px] font-medium uppercase tracking-wider text-muted">
+          <ServiceSelect
+            value={service}
+            onChange={(value) => {
+              setService(value);
+              clearFieldError("service");
+            }}
+            hasError={Boolean(fieldErrors.service)}
+          />
+          <FieldError message={fieldErrors.service} />
+        </div>
+
+        <fieldset>
+          <legend className="mb-1.5 text-badge font-medium uppercase tracking-wider text-muted">
             Preferred contact
-          </p>
-          <div className="flex flex-wrap gap-1.5">
+          </legend>
+          <div role="radiogroup" aria-label="Preferred contact method" className="flex flex-wrap gap-1.5">
             {contactPreferences.map((opt) => {
               const active = contactPref === opt.value;
               return (
                 <button
                   type="button"
                   key={opt.value}
+                  role="radio"
+                  aria-checked={active}
                   onClick={() => setContactPref(opt.value)}
                   className={`rounded-full border px-3 py-1 text-xs transition-all ${
                     active
                       ? "border-cta bg-cta text-white shadow-sm"
-                      : "border-border bg-white text-muted hover:border-cta/40 hover:text-foreground"
+                      : "border-border bg-background text-muted hover:border-cta/40 hover:text-foreground"
                   }`}
                 >
                   {opt.label}
@@ -284,14 +404,23 @@ export function LeadForm({
               );
             })}
           </div>
-        </div>
+        </fieldset>
 
-        <textarea
-          name="message"
-          rows={4}
-          placeholder="Brief project details (optional)"
-          className={`${fieldClassName} min-h-[7rem] flex-1 resize-none`}
-        />
+        <div className="flex min-h-0 flex-1 flex-col">
+          <label htmlFor="lead-message" className={labelClassName}>
+            Brief project details (optional)
+          </label>
+          <textarea
+            id="lead-message"
+            name="message"
+            rows={4}
+            placeholder="Brief project details (optional)"
+            onChange={() => clearFieldError("message")}
+            aria-invalid={Boolean(fieldErrors.message)}
+            className={`${fieldClassName} min-h-[7rem] flex-1 resize-none ${fieldErrors.message ? fieldErrorClassName : ""}`}
+          />
+          <FieldError message={fieldErrors.message} />
+        </div>
 
         <div className="mt-auto shrink-0 space-y-3">
         {status === "error" && (
@@ -303,7 +432,7 @@ export function LeadForm({
         <button
           type="submit"
           disabled={status === "submitting"}
-          className="inline-flex h-10 items-center justify-center rounded-full bg-cta px-6 text-sm font-semibold text-white shadow-sm transition-all hover:scale-[1.02] hover:bg-cta-hover hover:shadow-md disabled:cursor-not-allowed disabled:opacity-70"
+          className="inline-flex h-10 items-center justify-center rounded-full bg-cta px-6 text-sm font-medium text-white shadow-sm transition-all hover:scale-[1.02] hover:bg-cta-hover hover:shadow-md disabled:cursor-not-allowed disabled:opacity-70"
         >
           {status === "submitting" ? (
             <>

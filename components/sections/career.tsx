@@ -1,6 +1,7 @@
 "use client";
 
 import { Reveal, StaggerContainer, StaggerItem } from "@/components/motion";
+import { SectionHeader } from "@/components/section-header";
 import { siteConfig } from "@/lib/site";
 
 const openings = [
@@ -32,32 +33,21 @@ const openings = [
 
 export function CareerSection() {
   return (
-    <section id="career" className="bg-surface py-16 sm:py-20">
+    <section id="career" className="bg-surface py-24 sm:py-32">
       <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8">
         <Reveal>
-          <div className="mx-auto max-w-3xl text-center">
-            <div className="flex items-center justify-center gap-3">
-              <span className="h-px w-8 bg-cta" />
-              <span className="text-xs font-semibold uppercase tracking-widest text-cta">
-                Join Our Team
-              </span>
-              <span className="h-px w-8 bg-cta" />
-            </div>
-            <h2 className="mt-3 text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
-              Career
-            </h2>
-            <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-muted">
-              We are always looking for skilled craftsmen and engineers to help
-              build the future of jewellery manufacturing.
-            </p>
-          </div>
+          <SectionHeader
+            badge="Join Our Team"
+            title="Career"
+            description="We are always looking for skilled craftsmen and engineers to help build the future of jewellery manufacturing."
+          />
         </Reveal>
 
         <StaggerContainer className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {openings.map((role) => (
             <StaggerItem key={role.title}>
               <article className="group flex h-full flex-col rounded-2xl border border-border bg-background p-5 transition-all hover:border-border hover:shadow-md">
-                <span className="inline-flex w-fit rounded-full bg-foreground/5 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-muted">
+                <span className="inline-flex w-fit rounded-full bg-foreground/5 px-2.5 py-0.5 text-badge font-semibold uppercase tracking-wider text-muted">
                   {role.type}
                 </span>
                 <h3 className="mt-3 text-sm font-semibold text-foreground">
