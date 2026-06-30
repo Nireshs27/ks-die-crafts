@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     follow: true,
   },
   icons: {
-    icon: [{ url: siteConfig.favicon, sizes: "32x32", type: "image/png" }],
+    icon: [{ url: siteConfig.favicon, type: "image/webp" }],
     apple: siteConfig.appleTouchIcon,
   },
   openGraph: {
