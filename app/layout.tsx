@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import { GoogleAnalytics } from "@next/third-parties/google";
 import { Container } from "@/components/container";
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
@@ -84,6 +85,8 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const gaId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
+
   return (
     <html lang="en" className={`${effra.variable} h-full`} suppressHydrationWarning>
       <head>
@@ -104,6 +107,7 @@ export default function RootLayout({
           <Footer />
           <WhatsAppButton />
         </ThemeProvider>
+        {gaId && <GoogleAnalytics gaId={gaId} />}
       </body>
     </html>
   );
