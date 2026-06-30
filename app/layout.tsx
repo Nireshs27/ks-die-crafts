@@ -41,8 +41,8 @@ export const metadata: Metadata = {
     follow: true,
   },
   icons: {
-    icon: siteConfig.headerLogo,
-    apple: siteConfig.headerLogo,
+    icon: [{ url: siteConfig.favicon, sizes: "32x32", type: "image/png" }],
+    apple: siteConfig.appleTouchIcon,
   },
   openGraph: {
     type: "website",
