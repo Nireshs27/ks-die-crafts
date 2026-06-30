@@ -5,10 +5,14 @@ import { Button } from "@/components/button";
 
 export function HeroSection() {
   const ref = useRef<HTMLElement>(null);
+  // Start false so the server-rendered HTML matches the first client render
+  // (avoids a hydration mismatch); the effect upgrades to video after mount.
   const [showVideo, setShowVideo] = useState(false);
 
   useEffect(() => {
     const mq = window.matchMedia("(min-width: 768px)");
+    // Intentional post-mount sync with an external system (matchMedia); safe here.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     if (mq.matches) setShowVideo(true);
     const handler = (e: MediaQueryListEvent) => setShowVideo(e.matches);
     mq.addEventListener("change", handler);
@@ -77,11 +81,11 @@ export function HeroSection() {
       <div className="relative z-10 w-full px-6 pb-20 pt-32 sm:px-10 lg:px-16 lg:py-0">
         <div className="mx-auto max-w-[1400px]">
           <div className="hero-fade-up flex items-center justify-center gap-3 [animation-delay:0.2s]">
-            <span className="h-px w-8 bg-white/50" />
+            
             <span className="text-xs font-semibold uppercase tracking-widest text-white/90">
-              Precision Die Manufacturers
+              Trusted Die Manufacturing Experts
             </span>
-            <span className="h-px w-8 bg-white/50" />
+            
           </div>
 
           <h1 className="hero-fade-up mx-auto mt-6 max-w-4xl text-center text-4xl font-semibold leading-[1.1] tracking-tight text-white sm:text-5xl lg:text-6xl [animation-delay:0.4s]">
@@ -90,17 +94,17 @@ export function HeroSection() {
           </h1>
 
           <p className="hero-fade-up mx-auto mt-5 max-w-2xl text-center text-base leading-relaxed text-white/80 sm:text-lg [animation-delay:0.6s]">
-            At KS Die Crafts, we craft high-precision dies for coins, jewellery pendants, religious designs, portraits, and custom applications — built for exceptional detailing, durability, and consistent production performance.
+            At KS Die Crafts, we craft high precision dies for coins, jewellery pendants, religious designs, portraits, and custom applications  built for exceptional detailing, durability, and consistent production performance.
           </p>
 
           <div className="hero-fade-up mt-8 flex justify-center [animation-delay:0.8s]">
             <Button
-              href="/#recent-work"
+              href="/#categories"
               variant="ghost"
               size="md"
               className="focus-visible:outline-white"
             >
-              Explore Our Work
+              Explore Our Products
             </Button>
           </div>
         </div>

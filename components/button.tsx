@@ -10,7 +10,7 @@ const sizeStyles: Record<Size, string> = {
 };
 
 const variantStyles: Record<Variant, string> = {
-  primary: "bg-cta text-white hover:bg-cta-hover hover:scale-[1.02]",
+  primary: "bg-cta text-cta-foreground hover:bg-cta-hover hover:scale-[1.02]",
   secondary:
     "border border-border bg-background text-foreground hover:border-foreground/20 hover:shadow-md",
   ghost:

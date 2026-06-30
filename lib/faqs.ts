@@ -7,17 +7,17 @@ export const faqs = [
   {
     question: "Can you make dies from our design?",
     answer:
-      "Yes — if the design is technically feasible, we'll convert it into a production-ready die.",
+      "Yes if the design is technically feasible, we'll convert it into a production-ready die.",
   },
   {
     question: "Do you offer different polishing techniques?",
     answer:
-      "Yes — matte, mirror, and Bombay polish based on your final output requirement.",
+      "Yes matte, mirror, and Bombay polish based on your final output requirement.",
   },
   {
     question: "How do you ensure quality?",
     answer:
-      "We don't skip the basics — material selection, engraving depth, hardness — everything is checked before delivery.",
+      "We don't skip the basics material selection, engraving depth, hardness everything is checked before delivery.",
   },
   {
     question: "What happens if the die doesn't perform well in production?",

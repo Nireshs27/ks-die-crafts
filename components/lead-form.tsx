@@ -138,8 +138,8 @@ function ServiceSelect({
                   onClick={() => selectOption(option.value)}
                   className={`w-full px-4 py-2.5 text-left text-sm transition-colors ${
                     isSelected || isHighlighted
-                      ? "bg-cta text-white"
-                      : "bg-background text-foreground hover:bg-cta hover:text-white"
+                      ? "bg-cta text-cta-foreground"
+                      : "bg-background text-foreground hover:bg-cta hover:text-cta-foreground"
                   }`}
                 >
                   {option.label}
@@ -395,7 +395,7 @@ export function LeadForm({
                   onClick={() => setContactPref(opt.value)}
                   className={`rounded-full border px-3 py-1 text-xs transition-all ${
                     active
-                      ? "border-cta bg-cta text-white shadow-sm"
+                      ? "border-cta bg-cta text-cta-foreground shadow-sm"
                       : "border-border bg-background text-muted hover:border-cta/40 hover:text-foreground"
                   }`}
                 >
@@ -432,7 +432,7 @@ export function LeadForm({
         <button
           type="submit"
           disabled={status === "submitting"}
-          className="inline-flex h-10 items-center justify-center rounded-full bg-cta px-6 text-sm font-medium text-white shadow-sm transition-all hover:scale-[1.02] hover:bg-cta-hover hover:shadow-md disabled:cursor-not-allowed disabled:opacity-70"
+          className="inline-flex h-10 items-center justify-center rounded-full bg-cta px-6 text-sm font-medium text-cta-foreground shadow-sm transition-all hover:scale-[1.02] hover:bg-cta-hover hover:shadow-md disabled:cursor-not-allowed disabled:opacity-70"
         >
           {status === "submitting" ? (
             <>
@@ -447,9 +447,7 @@ export function LeadForm({
           )}
         </button>
 
-        <p className="text-xs text-silver">
-          We respond within 24 hours. No spam — ever.
-        </p>
+       
         </div>
       </form>
     </div>

@@ -4,6 +4,7 @@ import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
 import { WhatsAppButton } from "@/components/whatsapp-button";
 import { StructuredData } from "@/components/structured-data";
+import { ThemeProvider } from "@/components/theme-provider";
 import { effra } from "@/lib/fonts";
 import { siteConfig } from "@/lib/site";
 import "./globals.css";
@@ -72,7 +73,10 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#ffffff",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#0a0a0a" },
+  ],
 };
 
 export default function RootLayout({
@@ -81,7 +85,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${effra.variable} h-full`}>
+    <html lang="en" className={`${effra.variable} h-full`} suppressHydrationWarning>
       <head>
         <link
           rel="preload"
@@ -91,13 +95,15 @@ export default function RootLayout({
         />
       </head>
       <body className="flex min-h-full flex-col bg-background font-sans text-foreground antialiased overflow-x-hidden">
-        <StructuredData />
-        <Header />
-        <Container className="flex-1 pt-16 flex flex-col">
-          <main className="flex-1">{children}</main>
-        </Container>
-        <Footer />
-        <WhatsAppButton />
+        <ThemeProvider>
+          <StructuredData />
+          <Header />
+          <Container className="flex-1 pt-16 flex flex-col">
+            <main className="flex-1">{children}</main>
+          </Container>
+          <Footer />
+          <WhatsAppButton />
+        </ThemeProvider>
       </body>
     </html>
   );

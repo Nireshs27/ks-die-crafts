@@ -48,7 +48,7 @@ export default function Home() {
       <ContactSection />
       <FaqSection faqs={faqs} />
       <CareerSection />
-      <TestimonialsSection />
+      {/* <TestimonialsSection /> */}
     </>
   );
 }

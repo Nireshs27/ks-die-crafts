@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { useState, useRef, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Reveal } from "@/components/motion";
@@ -9,11 +8,8 @@ import { SectionHeader } from "@/components/section-header";
 import { recentWork, type RecentWorkItem } from "@/lib/recent-work";
 
 function WorkCard({ item }: { item: RecentWorkItem }) {
-  const cardClass =
-    "group relative block w-full overflow-hidden rounded-2xl";
-
-  const inner = (
-    <>
+  return (
+    <div className="group relative block w-full overflow-hidden rounded-2xl">
       <div className="relative aspect-[4/5] w-full overflow-hidden">
         <Image
           src={item.image}
@@ -33,18 +29,8 @@ function WorkCard({ item }: { item: RecentWorkItem }) {
           {item.title}
         </h3>
       </div>
-    </>
+    </div>
   );
-
-  if (item.href) {
-    return (
-      <Link href={item.href} className={cardClass}>
-        {inner}
-      </Link>
-    );
-  }
-
-  return <div className={cardClass}>{inner}</div>;
 }
 
 export function RecentWorkSection() {
@@ -74,7 +60,7 @@ export function RecentWorkSection() {
     const id = setInterval(() => {
       const { scrollLeft, scrollWidth, clientWidth } = el;
       const first = el.firstElementChild as HTMLElement | null;
-      const step = first ? first.offsetWidth + 24 : clientWidth;
+      const step = first ? first.offsetWidth + 20 : clientWidth;
       if (Math.ceil(scrollLeft + clientWidth) >= scrollWidth - 1) {
         el.scrollTo({ left: 0, behavior: "smooth" });
       } else {
@@ -87,8 +73,11 @@ export function RecentWorkSection() {
 
   const scroll = (direction: "left" | "right") => {
     if (scrollContainerRef.current) {
-      const { clientWidth } = scrollContainerRef.current;
-      const scrollAmount = direction === "left" ? -clientWidth : clientWidth;
+      const first = scrollContainerRef.current.firstElementChild as HTMLElement | null;
+      const step = first
+        ? first.offsetWidth + 20
+        : scrollContainerRef.current.clientWidth;
+      const scrollAmount = direction === "left" ? -step : step;
       scrollContainerRef.current.scrollBy({ left: scrollAmount, behavior: "smooth" });
     }
   };
@@ -129,13 +118,13 @@ export function RecentWorkSection() {
               onScroll={checkScroll}
               onMouseEnter={() => setIsPaused(true)}
               onMouseLeave={() => setIsPaused(false)}
-              className="flex snap-x snap-mandatory gap-6 overflow-x-auto pb-8 scrollbar-hide"
+              className="flex snap-x snap-mandatory gap-5 overflow-x-auto pb-8 scrollbar-hide"
               style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
             >
               {recentWork.map((item) => (
                 <div
                   key={item.id}
-                  className="min-w-[85vw] shrink-0 snap-start sm:min-w-[calc(50%-12px)] lg:min-w-[calc(25%-18px)]"
+                  className="min-w-[85vw] shrink-0 snap-start sm:min-w-[calc(50%-10px)] lg:min-w-[calc(25%-15px)]"
                 >
                   <WorkCard item={item} />
                 </div>

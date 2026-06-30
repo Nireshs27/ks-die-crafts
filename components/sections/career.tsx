@@ -6,25 +6,19 @@ import { siteConfig } from "@/lib/site";
 
 const openings = [
   {
-    title: "CNC Machinist",
+    title: "CNC Operator",
     type: "Full-time",
     description:
       "Operate CNC milling and turning centres for precision die components.",
   },
   {
-    title: "Die Design Engineer",
+    title: "Design Engineer",
     type: "Full-time",
     description:
       "Convert jewellery concepts to production-ready dies using ArtCAM and 3D tools.",
   },
   {
-    title: "Wire EDM Operator",
-    type: "Full-time",
-    description:
-      "Program and run wire EDM machines for intricate die cavities and inserts.",
-  },
-  {
-    title: "Quality Control Inspector",
+    title: "Supervisor",
     type: "Full-time",
     description:
       "Inspect finished dies for dimensional accuracy, hardness, and surface finish.",

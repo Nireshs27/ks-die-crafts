@@ -41,7 +41,7 @@ export function ProductsPageContent() {
               as="h1"
               badge="Our Products"
               title="Precision dies for every jewellery type"
-              description="Four core categories, each engineered with the same uncompromising attention to detail. Explore each range — or send us a brief and we'll build something entirely custom."
+              description="Four core categories, each engineered with the same uncompromising attention to detail. Explore each range or send us a brief and we'll build something entirely custom."
             />
           </Reveal>
 

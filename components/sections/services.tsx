@@ -7,9 +7,9 @@ const services = [
     tag: "Validation",
     title: "Prototype & Development",
     description:
-      "We don't directly jump to production. We validate. Design-to-die conversion with prototype development ensures your design works in real manufacturing — not just on screen.",
+      "We don't directly jump to production. We validate. Design-to-die conversion with prototype development ensures your design works in real manufacturing not just on screen.",
     image: "/images/process/prototype.jpg",
-    imageAlt: "Die prototype validation — precision measurement with digital caliper at KS Die Crafts workshop",
+    imageAlt: "Die prototype validation precision measurement with digital caliper at KS Die Crafts workshop",
     imagePosition: "object-center",
     highlights: ["Design-to-die conversion", "Production validation"],
     icon: (
@@ -42,7 +42,7 @@ const services = [
     tag: "Precision",
     title: "Finishes That Define Output",
     description:
-      "Each finish is not just visual — it is built on precision and accuracy at every level of the die. From micro-level detailing to surface consistency, these factors directly control the sharpness, clarity and overall quality of your final product.",
+      "Each finish is not just visual it is built on precision and accuracy at every level of the die. From micro-level detailing to surface consistency, these factors directly control the sharpness, clarity and overall quality of your final product.",
     image: "/images/process/finishes.jpg",
     imageAlt: "Three jewellery dies showing matte, mirror and Bombay polish finishes side by side",
     imagePosition: "object-center",
@@ -59,7 +59,7 @@ const services = [
     tag: "Turnaround",
     title: "Lead Time",
     description:
-      "Lead time depends on design complexity and order size. We'll tell you upfront — before we start. Regular updates at every key stage.",
+      "Lead time depends on design complexity and order size. We'll tell you upfront before we start. Regular updates at every key stage.",
     image: "/images/process/turnaround.jpg",
     imageAlt: "Finished precision dies packaged and ready for dispatch at the workshop",
     imagePosition: "object-center",
@@ -104,7 +104,7 @@ function ServiceRow({
               reversed ? "right-5 sm:right-6 lg:left-6 lg:right-auto" : "left-5 sm:left-6"
             }`}
           >
-            <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-white/95 text-foreground shadow-lg ring-1 ring-black/5 backdrop-blur-sm">
+            <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-surface/95 text-foreground shadow-lg ring-1 ring-black/5 backdrop-blur-sm">
               {service.icon}
             </span>
             <span className="rounded-full bg-black/50 px-3 py-1 text-badge font-semibold uppercase tracking-widest text-white backdrop-blur-md">

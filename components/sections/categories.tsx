@@ -1,8 +1,6 @@
-"use client";
-
 import Link from "next/link";
 import { CategoryCard } from "@/components/category-card";
-import { Reveal, StaggerContainer, StaggerItem } from "@/components/motion";
+import { Reveal } from "@/components/motion";
 import { SectionHeader } from "@/components/section-header";
 import { categories } from "@/lib/categories";
 
@@ -18,21 +16,22 @@ export function CategoriesSection() {
           />
         </Reveal>
 
-        <StaggerContainer className="mt-14 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4 lg:gap-5">
-          {categories.map((category) => (
-            <StaggerItem key={category.slug} className="w-full">
+        <Reveal delay={0.2}>
+          <div className="mt-14 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4 lg:gap-5">
+            {categories.map((category) => (
               <CategoryCard
+                key={category.slug}
                 title={category.title}
                 subtitle={category.subtitle}
                 image={category.image}
                 imageAlt={category.imageAlt}
                 href={`/products/${category.slug}`}
               />
-            </StaggerItem>
-          ))}
-        </StaggerContainer>
+            ))}
+          </div>
+        </Reveal>
 
-        <div className="mt-10 flex justify-center">
+        <div className="mt-6 flex justify-center">
           <Link
             href="/products"
             className="inline-flex items-center gap-2 text-sm font-medium text-cta transition-all hover:gap-3"

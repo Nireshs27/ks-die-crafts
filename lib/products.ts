@@ -6,7 +6,6 @@ export type Product = {
   longDescription: string;
   features: readonly string[];
   applications: readonly string[];
-  specifications: readonly { label: string; value: string }[];
   image: string;
   imageAlt: string;
   leadTime: string;
@@ -22,7 +21,7 @@ export const products: readonly Product[] = [
     shortDescription:
       "Precision-engineered coin dies that deliver crisp, repeatable strikes across gold, silver, brass, and copper coinage.",
     longDescription:
-      "Our coin dies are engineered for clarity of impression and longevity of run. We work across denominations, commemorative pieces, religious coinage, and corporate gift coins. Each die is finished by hand by our master craftsmen after CNC and Wire EDM machining to deliver the consistent strike quality that long production runs demand.",
+      "Our coin dies are engineered for clarity of impression and longevity of run. We work across denominations, commemorative pieces, religious coinage, and corporate gift coins. Each die is finished by hand by our master craftsmen after CNC to deliver the consistent strike quality that long production runs demand.",
     features: [
       "Precision dies across all metals",
       "Clean strikes & consistent quality finish",
@@ -35,13 +34,6 @@ export const products: readonly Product[] = [
       "Corporate branded coins",
       "Wedding & event coins",
     ],
-    specifications: [
-      { label: "Tolerance", value: "± 0.01 mm" },
-      { label: "Materials", value: "D2, H13, SKD11 tool steel" },
-      { label: "Diameter range", value: "8 mm – 80 mm" },
-      { label: "Typical life", value: "50,000+ strikes" },
-      { label: "Lead time", value: "7–12 working days" },
-    ],
     image: "/images/categories/coin-die.webp",
     imageAlt: "Precision-engineered coin dies",
     leadTime: "7–12 days",
@@ -53,9 +45,9 @@ export const products: readonly Product[] = [
     title: "Jewellery Dies",
     subtitle: "Pendants, ornamental & etc",
     shortDescription:
-      "Fine-detail dies for pendants, ornamental motifs, and Nagas pieces — capturing intricate jewellery design with absolute fidelity.",
+      "Fine-detail dies for pendants, ornamental motifs, and Nagas pieces capturing intricate jewellery design with absolute fidelity.",
     longDescription:
-      "From delicate filigree pendants to ornamental Nagas plates, our jewellery dies hold the finest detail. Wire EDM lets us cut sharp internal corners and complex profiles that conventional machining cannot reach. The result: dies that reproduce a designer's vision exactly, run after run.",
+      "From delicate pendants to ornamental Nagas, our jewellery dies hold the finest detail and complex profiles that conventional machining cannot reach. The result: dies that reproduce a designer's vision exactly, run after run.",
     features: [
       "Pendant dies of all complexities",
       "Ornamental & motif dies",
@@ -68,13 +60,6 @@ export const products: readonly Product[] = [
       "Nagas / Naga pathakkam dies",
       "Designer collections",
     ],
-    specifications: [
-      { label: "Tolerance", value: "± 0.01 mm" },
-      { label: "Materials", value: "D2, H13, SKD11 tool steel" },
-      { label: "Detail capability", value: "Down to 0.15 mm features" },
-      { label: "Typical life", value: "30,000+ impressions" },
-      { label: "Lead time", value: "10–15 working days" },
-    ],
     image: "/images/categories/jewellery-die.webp",
     imageAlt: "Detailed jewellery dies with intricate patterns",
     leadTime: "10–15 days",
@@ -86,7 +71,7 @@ export const products: readonly Product[] = [
     title: "Religious Dies",
     subtitle: "Vel, Soolam & God figure dies",
     shortDescription:
-      "Devotional dies crafted with reverence — Vel, Soolam, God figures, Thalli, Nagas Thalli, Pattagundu, and Manga Kasu.",
+      "Devotional dies crafted with reverence Vel, Soolam, God figures, Thalli, Nagas Thalli, Pattagundu, and Manga Kasu.",
     longDescription:
       "Religious jewellery demands both technical precision and sensitivity to traditional iconography. Our religious die range covers the full vocabulary of South Indian devotional jewellery: Vel and Soolam dies, God figure dies for popular deities, Thalli and Nagas Thalli dies, Pattagundu, and Manga Kasu. We work from your existing designs or develop new ones with you.",
     features: [
@@ -101,13 +86,6 @@ export const products: readonly Product[] = [
       "Devotional / festival jewellery",
       "Heritage collections",
     ],
-    specifications: [
-      { label: "Tolerance", value: "± 0.01 mm" },
-      { label: "Materials", value: "D2, H13, SKD11 tool steel" },
-      { label: "Hand-finishing", value: "Master craftsman touch-up included" },
-      { label: "Typical life", value: "30,000+ impressions" },
-      { label: "Lead time", value: "10–15 working days" },
-    ],
     image: "/images/categories/religious-die.webp",
     imageAlt: "Religious symbol dies",
     leadTime: "10–15 days",
@@ -119,9 +97,9 @@ export const products: readonly Product[] = [
     title: "Custom Dies",
     subtitle: "Logo, & special applications",
     shortDescription:
-      "Fully bespoke dies — from corporate logos to specialised industrial applications. Bring us a sketch or a STEP file; we'll do the rest.",
+      "Fully bespoke dies from corporate logos to specialised industrial applications. Bring us a sketch or a STEP file; we'll do the rest.",
     longDescription:
-      "When standard dies don't fit, we build from scratch. We accept DWG, DXF, STEP, IGES files, hand-drawn sketches, or even physical samples. Our engineering team will review the design for manufacturability, suggest refinements where helpful, and prototype before committing to full production. Most custom briefs are quoted within 24 hours.",
+      "From logos to specialised applications fully customised dies built to match your exact requirement.High-detail dies engineered for accurate human faces and portrait designs, delivering sharp definition and consistent results and includes precision cutting die models.",
     features: [
       "Fully customised dies",
       "Logo and branding dies",
@@ -133,13 +111,6 @@ export const products: readonly Product[] = [
       "Limited-edition collections",
       "Industrial / non-jewellery use",
       "Prototype validation runs",
-    ],
-    specifications: [
-      { label: "Tolerance", value: "± 0.01 mm" },
-      { label: "Inputs accepted", value: "DWG, DXF, STEP, IGES, sketches, samples" },
-      { label: "Prototyping", value: "Available before production commit" },
-      { label: "Lead time", value: "12–15 working days" },
-      { label: "Quote turnaround", value: "Within 24 hours" },
     ],
     image: "/images/categories/custom-die.webp",
     imageAlt: "Custom and branding dies",

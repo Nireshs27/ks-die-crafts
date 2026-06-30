@@ -1,14 +1,14 @@
 export const siteConfig = {
   name: "KS Diecrafts",
   legalName: "KS Diecrafts",
-  logo: "/images/ks-die-craft-logo.webp",
+  logo: "/images/ks-die-craft-logo.jpg",
   headerLogo: "/images/ks-logo-transparent.webp",
   tagline: "Precision steel dies for India's finest jewellers",
   description:
     "Precision steel die design and manufacturing for jewellery, coin, religious, and custom applications. CNC + Wire EDM craftsmanship from Chennai since 1998.",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://ksdiecrafts.com",
   locale: "en_IN",
-  foundingYear: 1998,
+  foundingYear: 1980,
   contact: {
     email: process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "info@ksdiecrafts.com",
     phone: process.env.NEXT_PUBLIC_CONTACT_PHONE ?? "+91 9376383876",

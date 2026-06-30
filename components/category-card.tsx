@@ -18,7 +18,7 @@ function BadgePill({ badge }: { badge?: string }) {
 
   return (
     <div className="absolute left-3 top-3 z-10">
-      <span className="rounded-full bg-foreground px-3 py-1 text-badge font-semibold uppercase tracking-wider text-white shadow-sm">
+      <span className="rounded-full bg-cta px-3 py-1 text-badge font-semibold uppercase tracking-wider text-cta-foreground shadow-sm">
         {badge}
       </span>
     </div>

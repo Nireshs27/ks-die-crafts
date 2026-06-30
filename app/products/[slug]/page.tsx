@@ -24,7 +24,7 @@ export async function generateMetadata({
   const product = getProduct(slug);
   if (!product) return { title: "Product not found" };
   return {
-    title: `${product.title} — ${product.subtitle}`,
+    title: `${product.title} ${product.subtitle}`,
     description: product.shortDescription,
     alternates: { canonical: `${siteConfig.url}/products/${product.slug}` },
     openGraph: {
@@ -103,7 +103,7 @@ export default async function ProductDetailPage({
                 className="object-cover"
                 sizes="(max-width: 1024px) 100vw, 50vw"
               />
-              <span className="absolute right-4 top-4 rounded-full bg-white/95 px-3 py-1.5 text-badge font-semibold uppercase tracking-wider text-foreground backdrop-blur-sm ring-1 ring-border">
+              <span className="absolute right-4 top-4 rounded-full bg-surface/95 px-3 py-1.5 text-badge font-semibold uppercase tracking-wider text-foreground backdrop-blur-sm ring-1 ring-border">
                 Lead time {product.leadTime}
               </span>
             </div>
@@ -147,22 +147,6 @@ export default async function ProductDetailPage({
                   WhatsApp Us
                 </Button>
               </div>
-
-              <dl className="mt-12 grid grid-cols-1 gap-x-8 gap-y-5 sm:grid-cols-2">
-                {product.specifications.map((spec) => (
-                  <div
-                    key={spec.label}
-                    className="border-t border-border pt-4"
-                  >
-                    <dt className="text-badge font-semibold uppercase tracking-wider text-silver">
-                      {spec.label}
-                    </dt>
-                    <dd className="mt-1.5 text-sm font-semibold text-foreground">
-                      {spec.value}
-                    </dd>
-                  </div>
-                ))}
-              </dl>
             </div>
           </div>
         </div>

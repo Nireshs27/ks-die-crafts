@@ -11,7 +11,7 @@ const clients = [
 
 function ClientLogo({ name, logo }: { name: string; logo: string }) {
   return (
-    <div className="flex h-24 w-48 flex-shrink-0 items-center justify-center gap-3 rounded-xl border border-border/60 bg-surface px-6 py-4 transition-all hover:border-border hover:shadow-sm">
+    <div className="flex h-24 w-48 flex-shrink-0 items-center justify-center gap-3 rounded-xl border border-border/60 bg-white px-6 py-4 transition-all hover:border-border hover:shadow-sm">
       <div className="relative h-full w-full">
         <Image
           src={logo}

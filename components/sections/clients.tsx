@@ -42,7 +42,7 @@ export function ClientsSection() {
                 Interested in working together?
               </p>
               <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-muted">
-                Whether you&apos;re a manufacturer, distributor, or brand — we&apos;d
+                Whether you&apos;re a manufacturer, distributor, or brand we&apos;d
                 love to explore a long-term partnership.
               </p>
               <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4">

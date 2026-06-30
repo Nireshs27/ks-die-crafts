@@ -162,7 +162,7 @@ export function AboutUsSection() {
           <SectionHeader
             badge="About KS Die Crafts"
             title="Four Decades of Manufacturing Heritage, Focused on Better Dies"
-            description="KS Die Crafts was founded with a simple belief — better dies create better products."
+            description="KS Die Crafts was founded with a simple belief better dies create better products."
           />
         </Reveal>
 

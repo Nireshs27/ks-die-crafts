@@ -9,8 +9,6 @@ import { LogoLink } from "@/components/logo";
 import { products } from "@/lib/products";
 
 const mapsUrl = `https://www.google.com/maps?q=${siteConfig.contact.geo.latitude},${siteConfig.contact.geo.longitude}`;
-const yearsInBusiness =
-  new Date().getFullYear() - siteConfig.foundingYear;
 
 function scrollToTop() {
   window.scrollTo({ top: 0, behavior: "smooth" });
@@ -38,11 +36,10 @@ export function Footer() {
               height={400}
             />
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-zinc-400">
-              Precision steel die design and manufacturing for the jewellery
-              industry. Where craftsmanship meets advanced technology.
+            We design and manufacture precision steel dies for the jewellery industry combining craftsmanship and modern technology.
             </p>
             <p className="mt-3 text-xs font-medium text-zinc-500">
-              Trusted since {siteConfig.foundingYear} &middot; {yearsInBusiness}+ years of precision craftsmanship
+              Trusted Since 1980 - Built on Quality and Reliability
             </p>
             <Link
               href="/#contact"
@@ -68,12 +65,8 @@ export function Footer() {
                   </Link>
                 </li>
               ))}
-              <li>
-                <Link href="/#recent-work" className="text-sm text-zinc-400 transition-colors hover:text-white">
-                  Our Work
-                </Link>
-              </li>
-              <li>
+      
+              {/* <li>
                 <Link href="/#why-us" className="text-sm text-zinc-400 transition-colors hover:text-white">
                   Why Choose Us
                 </Link>
@@ -82,7 +75,7 @@ export function Footer() {
                 <Link href="/#career" className="text-sm text-zinc-400 transition-colors hover:text-white">
                   Career
                 </Link>
-              </li>
+              </li> */}
             </ul>
           </div>
 
@@ -102,26 +95,8 @@ export function Footer() {
                   </Link>
                 </li>
               ))}
-              <li>
-                <Link href="/products" className="text-sm text-zinc-400 transition-colors hover:text-white">
-                  All Categories
-                </Link>
-              </li>
-              <li>
-                <Link href="/#contact" className="text-sm text-zinc-400 transition-colors hover:text-white">
-                  Request a Quote
-                </Link>
-              </li>
-              <li>
-                <Link href="/products/custom-dies" className="text-sm text-zinc-400 transition-colors hover:text-white">
-                  Custom Design
-                </Link>
-              </li>
-              <li>
-                <Link href="/#services" className="text-sm text-zinc-400 transition-colors hover:text-white">
-                  CNC & Wire EDM
-                </Link>
-              </li>
+           
+            
             </ul>
           </div>
 

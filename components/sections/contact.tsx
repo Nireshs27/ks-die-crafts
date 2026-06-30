@@ -21,7 +21,7 @@ export function ContactSection({
           <SectionHeader
             badge="Get in Touch"
             title="Contact us"
-            description="We are here to help with die orders, prototypes, tooling, and anything else you need. Reach us by phone or email, or send a message and we will respond as soon as we can."
+            description="We are here to help with die orders, prototypes, tooling, and anything else you need. Reach us by phone or email, or send a message and we will assit you further."
           >
             <p className="mt-4 text-xs text-silver">
               Operated by KSAN Industries LLP

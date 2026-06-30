@@ -7,7 +7,7 @@ import { siteConfig } from "@/lib/site";
 
 export function CtaBanner({
   title = "Ready to discuss your project?",
-  description = "Share your brief — CAD file, sketch, or sample. We respond within 24 hours with a clear timeline and quote.",
+  description = "Share your brief CAD file, sketch, or sample. We respond within 24 hours with a clear timeline and quote.",
   primaryHref = "/#contact",
   primaryLabel = "Request a Quote",
 }: {

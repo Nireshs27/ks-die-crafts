@@ -56,15 +56,28 @@ export function renderContactNotificationHtml(
 
   const rowsHtml = rows
     .map(
-      ({ label, value }) => `
+      ({ label, value }) => {
+        let displayValue = escapeHtml(value).replace(/\n/g, "<br />");
+        
+        // Make email clickable
+        if (label === "Email") {
+          displayValue = `<a href="mailto:${escapeHtml(value)}" style="color:#0066cc;text-decoration:none;">${escapeHtml(value)}</a>`;
+        }
+        
+        // Make phone clickable with WhatsApp link format
+        if (label === "Phone") {
+          const cleanPhone = value.replace(/[^0-9]/g, "");
+          displayValue = `<a href="https://wa.me/${cleanPhone}" target="_blank" style="color:#0066cc;text-decoration:none;">${escapeHtml(value)}</a>`;
+        }
+        
+        return `
         <tr>
           <td style="padding:10px 16px;border-bottom:1px solid #eee;font-size:13px;color:#666;font-weight:600;vertical-align:top;white-space:nowrap;">${escapeHtml(
             label
           )}</td>
-          <td style="padding:10px 16px;border-bottom:1px solid #eee;font-size:14px;color:#1a1a1a;">${escapeHtml(
-            value
-          ).replace(/\n/g, "<br />")}</td>
-        </tr>`
+          <td style="padding:10px 16px;border-bottom:1px solid #eee;font-size:14px;color:#1a1a1a;">${displayValue}</td>
+        </tr>`;
+      }
     )
     .join("");
 

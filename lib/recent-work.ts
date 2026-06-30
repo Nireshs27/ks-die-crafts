@@ -4,54 +4,50 @@ export type RecentWorkItem = {
   category: string;
   image: string;
   imageAlt: string;
-  href?: string;
 };
 
 export const recentWork: readonly RecentWorkItem[] = [
   {
-    id: "rw-1",
-    title: "Precision Coin Die",
-    category: "Coin Dies",
-    image: "/images/categories/coin-die.webp",
-    imageAlt: "Precision coin die",
-    href: "/products/coin-dies",
-  },
-  {
-    id: "rw-2",
-    title: "Intricate Jewellery Die",
-    category: "Jewellery Dies",
-    image: "/images/categories/jewellery-die.webp",
-    imageAlt: "Intricate jewellery die",
-    href: "/products/jewellery-dies",
-  },
-  {
-    id: "rw-3",
-    title: "Devotional Vel Die",
+    id: "rw-balaji",
+    title: "Balaji Die",
     category: "Religious Dies",
-    image: "/images/categories/religious-die.webp",
-    imageAlt: "Devotional religious die",
-    href: "/products/religious-dies",
+    image: "/images/recent-work/balaji.webp",
+    imageAlt: "Steel die engraved with Lord Balaji deity motif",
   },
   {
-    id: "rw-4",
-    title: "Custom Branding Die",
+    id: "rw-bangle",
+    title: "Bangle Profile Die",
+    category: "Jewellery Dies",
+    image: "/images/recent-work/bangle.webp",
+    imageAlt: "Curved steel bangle profile die with ornamental border",
+  },
+
+  {
+    id: "rw-pendant-laxmi-vilakku",
+    title: "Pendant Laxmi Vilakku Die",
+    category: "Jewellery Dies",
+    image: "/images/recent-work/pentant-laxmi-vilakku.webp",
+    imageAlt: "Pendant stamping die with Laxmi Vilakku motif",
+  },
+  {
+    id: "rw-plate",
+    title: "Plate Die",
     category: "Custom Dies",
-    image: "/images/categories/custom-die.webp",
-    imageAlt: "Custom branding die",
-    href: "/products/custom-dies",
+    image: "/images/recent-work/plate.webp",
+    imageAlt: "Decorative steel plate forming die",
   },
   {
-    id: "rw-5",
-    title: "Prototype Development",
-    category: "Process",
-    image: "/images/process/prototype.jpg",
-    imageAlt: "Prototype development",
+    id: "rw-trident",
+    title: "Trident Die",
+    category: "Religious Dies",
+    image: "/images/recent-work/Trident.webp",
+    imageAlt: "Steel die engraved with trident (trishul) motif",
   },
   {
-    id: "rw-6",
-    title: "3D Design Support",
-    category: "Process",
-    image: "/images/process/design-office.jpg",
-    imageAlt: "3D Design office",
+    id: "rw-vishvakarma",
+    title: "Vishvakarma Die",
+    category: "Religious Dies",
+    image: "/images/recent-work/Vishvakarma.webp",
+    imageAlt: "Steel die engraved with Lord Vishvakarma deity motif",
   },
 ];

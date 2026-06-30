@@ -4,13 +4,14 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import { Container } from "@/components/container";
 import { LogoLink } from "@/components/logo";
+import { QuoteModal } from "@/components/quote-modal";
+import { ThemeToggle } from "@/components/theme-toggle";
 import { siteConfig } from "@/lib/site";
-
-const QUOTE_HREF = "/#contact";
 
 export function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [quoteOpen, setQuoteOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -33,8 +34,8 @@ export function Header() {
             src={siteConfig.headerLogo}
             width={312}
             height={261}
-            className={`relative z-10 h-11 w-auto shrink-0 lg:h-14 transition-all duration-300 ${
-              scrolled ? "invert" : ""
+            className={`relative z-10 h-14 w-[48px] shrink-0 object-cover object-center lg:h-16 lg:w-[56px] transition-all duration-300 ${
+              scrolled ? "invert dark:invert-0" : ""
             }`}
             priority
             onClick={() => setMenuOpen(false)}
@@ -62,16 +63,31 @@ export function Header() {
             </ul>
           </nav>
 
-          <div className="ml-auto hidden items-center lg:flex">
-            <Link
-              href={QUOTE_HREF}
-              className="inline-flex h-10 items-center justify-center rounded-full bg-cta px-6 text-base font-medium text-white transition-all hover:scale-[1.02] hover:bg-cta-hover"
+          <div className="ml-auto hidden items-center gap-2 lg:flex">
+            <ThemeToggle
+              className={
+                scrolled
+                  ? "text-foreground hover:bg-surface-muted"
+                  : "text-white hover:bg-white/10"
+              }
+            />
+            <button
+              type="button"
+              onClick={() => setQuoteOpen(true)}
+              className="inline-flex h-10 items-center justify-center rounded-full bg-cta px-6 text-base font-medium text-cta-foreground transition-all hover:scale-[1.02] hover:bg-cta-hover"
             >
               Get Quote
-            </Link>
+            </button>
           </div>
 
           <div className="ml-auto flex items-center gap-2 lg:hidden">
+            <ThemeToggle
+              className={
+                scrolled
+                  ? "text-foreground hover:bg-surface-muted"
+                  : "text-white hover:bg-white/10"
+              }
+            />
             <button
               type="button"
               className={`inline-flex h-10 w-10 items-center justify-center rounded-full transition-colors ${
@@ -115,18 +131,23 @@ export function Header() {
                 </li>
               ))}
               <li className="pt-2">
-                <Link
-                  href={QUOTE_HREF}
-                  className="block rounded-full bg-cta px-6 py-3 text-center text-base font-medium text-white transition-colors hover:bg-cta-hover"
-                  onClick={() => setMenuOpen(false)}
+                <button
+                  type="button"
+                  className="block w-full rounded-full bg-cta px-6 py-3 text-center text-base font-medium text-cta-foreground transition-colors hover:bg-cta-hover"
+                  onClick={() => {
+                    setMenuOpen(false);
+                    setQuoteOpen(true);
+                  }}
                 >
                   Get Quote
-                </Link>
+                </button>
               </li>
             </ul>
           </div>
         </nav>
       </Container>
+
+      <QuoteModal open={quoteOpen} onClose={() => setQuoteOpen(false)} />
     </header>
   );
 }

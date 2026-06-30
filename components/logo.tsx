@@ -31,14 +31,15 @@ export function Logo({
 
 export function LogoLink({
   className,
+  wrapperClassName,
   priority,
   src,
   width,
   height,
   onClick,
-}: LogoProps & { onClick?: () => void }) {
+}: LogoProps & { wrapperClassName?: string; onClick?: () => void }) {
   return (
-    <Link href="/" className="inline-flex shrink-0" onClick={onClick}>
+    <Link href="/" className={`inline-flex shrink-0 ${wrapperClassName || ""}`} onClick={onClick}>
       <Logo
         className={className}
         priority={priority}

@@ -6,7 +6,7 @@ import { SectionHeader } from "@/components/section-header";
 const testimonials = [
   {
     quote:
-      "We have worked with KS Diecrafts for nearly a decade. The dies are precise, the lead times are kept, and the team understands jewellery — not just metal. That combination is rare.",
+      "We have worked with KS Diecrafts for nearly a decade. The dies are precise, the lead times are kept, and the team understands jewellery not just metal. That combination is rare.",
     name: "Senior Procurement Lead",
     title: "Leading Chennai jewellery manufacturer",
     initials: "C",
@@ -20,7 +20,7 @@ const testimonials = [
   },
   {
     quote:
-      "Twenty-five years of focus on jewellery dies shows. The finish on the strike, the consistency across pieces — it is exactly what a manufacturer wants from a die maker.",
+      "Twenty-five years of focus on jewellery dies shows. The finish on the strike, the consistency across pieces is exactly what a manufacturer wants from a die maker.",
     name: "Founder",
     title: "Boutique jeweller, Coimbatore",
     initials: "B",

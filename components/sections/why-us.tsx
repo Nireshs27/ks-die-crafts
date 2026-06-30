@@ -11,7 +11,7 @@ const features = [
         <path d="M8 10h8M8 14h5" />
       </svg>
     ),
-    text: "Fast, clear communication — no chasing",
+    text: "Fast, clear communication no chasing",
   },
   {
     icon: (
@@ -20,7 +20,7 @@ const features = [
         <path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z" />
       </svg>
     ),
-    text: "Practical design assistance — not just execution",
+    text: "Practical design assistance not just execution",
   },
   {
     icon: (
