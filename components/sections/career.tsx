@@ -50,25 +50,6 @@ export function CareerSection() {
                 <p className="mt-2 flex-1 text-xs leading-relaxed text-muted">
                   {role.description}
                 </p>
-                <a
-                  href={`mailto:${siteConfig.contact.email}?subject=Application%20-%20${encodeURIComponent(role.title)}`}
-                  className="mt-4 inline-flex items-center text-xs font-semibold text-cta transition-colors hover:text-cta-hover"
-                >
-                  Apply
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                    className="ml-1 h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5"
-                    aria-hidden="true"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                </a>
               </article>
             </StaggerItem>
           ))}
@@ -76,12 +57,12 @@ export function CareerSection() {
 
         <Reveal delay={0.2}>
           <p className="mt-8 text-center text-sm text-muted">
-            Don&apos;t see your role?{" "}
+            To apply, send your application to{" "}
             <a
               href={`mailto:${siteConfig.contact.email}?subject=Career%20Application`}
               className="font-semibold text-cta transition-colors hover:text-cta-hover"
             >
-              Send an open application
+              {siteConfig.contact.email}
             </a>
           </p>
         </Reveal>

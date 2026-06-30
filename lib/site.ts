@@ -3,8 +3,6 @@ export const siteConfig = {
   legalName: "KS Diecrafts",
   logo: "/images/ks-die-craft-logo.png",
   headerLogo: "/images/ks-logo-transparent.webp",
-  favicon: "/images/favicon-logo.webp",
-  appleTouchIcon: "/images/favicon-logo.webp",
   tagline: "Precision steel dies for India's finest jewellers",
   description:
     "Precision steel die design and manufacturing for jewellery, coin, religious, and custom applications. CNC + Wire EDM craftsmanship from Chennai since 1998.",

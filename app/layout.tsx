@@ -40,10 +40,6 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
-  icons: {
-    icon: [{ url: siteConfig.favicon, type: "image/webp" }],
-    apple: siteConfig.appleTouchIcon,
-  },
   openGraph: {
     type: "website",
     locale: siteConfig.locale,
