@@ -11,9 +11,9 @@ export const siteConfig = {
   foundingYear: 1980,
   contact: {
     email: process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "info@ksdiecrafts.com",
-    phone: process.env.NEXT_PUBLIC_CONTACT_PHONE ?? "+91 9376383876",
+    phone: process.env.NEXT_PUBLIC_CONTACT_PHONE || "+91 9376383876",
     phoneDigits: "919376383876",
-    whatsapp: process.env.NEXT_PUBLIC_CONTACT_WHATSAPP ?? "919376383876",
+    whatsapp: process.env.NEXT_PUBLIC_CONTACT_WHATSAPP || "919376383876",
     address:
       "New No : 46, Old No 70/1,\nSecond Floor, Bazullah Road, (Opposite to Baskin & Robins)\nT.Nagar, Chennai – 600017",
     addressShort: "T. Nagar, Chennai – 600017",

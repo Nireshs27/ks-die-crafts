@@ -53,7 +53,7 @@ export function FaqSection({ faqs }: { faqs: readonly Faq[] }) {
                 WhatsApp
               </Button>
               <Button
-                href={`mailto:${siteConfig.contact.email}`}
+                href={`tel:${siteConfig.contact.phone}`}
                 variant="primary"
                 size="sm"
               >

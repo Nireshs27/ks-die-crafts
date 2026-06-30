@@ -55,7 +55,7 @@ export function ClientsSection() {
                   WhatsApp
                 </Button>
                 <Button
-                  href={`mailto:${siteConfig.contact.email}?subject=Partnership%20Inquiry`}
+                  href={`tel:${siteConfig.contact.phone}`}
                   variant="primary"
                   size="md"
                   className="shadow-sm"
