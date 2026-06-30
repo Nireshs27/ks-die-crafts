@@ -40,8 +40,8 @@ export const metadata: Metadata = {
     follow: true,
   },
   icons: {
-    icon: siteConfig.logo,
-    apple: siteConfig.logo,
+    icon: siteConfig.headerLogo,
+    apple: siteConfig.headerLogo,
   },
   openGraph: {
     type: "website",
