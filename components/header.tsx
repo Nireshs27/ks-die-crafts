@@ -34,7 +34,7 @@ export function Header() {
             src={siteConfig.headerLogo}
             width={312}
             height={261}
-            className={`relative z-10 h-14 w-[48px] shrink-0 object-cover object-center lg:h-16 lg:w-[56px] transition-all duration-300 ${
+            className={`relative z-10 h-7 w-[24px] shrink-0 object-cover object-center lg:h-16 lg:w-[56px] transition-all duration-300 ${
               scrolled ? "invert dark:invert-0" : ""
             }`}
             priority
