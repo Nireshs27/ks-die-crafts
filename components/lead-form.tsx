@@ -10,10 +10,10 @@ import {
 } from "@/lib/validations/contact";
 
 const fieldClassName =
-  "w-full rounded-lg border border-border bg-background px-3 py-2 text-sm text-foreground placeholder:text-silver outline-none transition-all focus:border-cta/40 focus:ring-2 focus:ring-cta/10";
+  "w-full rounded-lg border border-border bg-background px-3 py-2 text-sm text-foreground placeholder:text-silver outline-none transition-all focus:border-cta/40 focus-visible:outline-none";
 
 const fieldErrorClassName =
-  "border-red-300 focus:border-red-400 focus:ring-red-100";
+  "border-red-300 focus:border-red-400";
 
 const labelClassName = "sr-only";
 
@@ -310,6 +310,8 @@ export function LeadForm({
             id="lead-name"
             type="text"
             name="name"
+            required
+            maxLength={100}
             placeholder="Full Name"
             onChange={() => clearFieldError("name")}
             aria-invalid={Boolean(fieldErrors.name)}
@@ -327,6 +329,8 @@ export function LeadForm({
               id="lead-email"
               type="email"
               name="email"
+              required
+              maxLength={254}
               placeholder="Email Address"
               onChange={() => clearFieldError("email")}
               aria-invalid={Boolean(fieldErrors.email)}
@@ -336,13 +340,22 @@ export function LeadForm({
           </div>
           <div>
             <label htmlFor="lead-phone" className={labelClassName}>
-              Phone / WhatsApp
+              Mobile Number
             </label>
             <input
               id="lead-phone"
               type="tel"
               name="phone"
-              placeholder="Phone / WhatsApp"
+              required
+              placeholder="Mobile Number"
+              inputMode="numeric"
+              autoComplete="tel-national"
+              maxLength={10}
+              pattern="[6-9][0-9]{9}"
+              onInput={(e) => {
+                const input = e.currentTarget;
+                input.value = input.value.replace(/\D/g, "").slice(0, 10);
+              }}
               onChange={() => clearFieldError("phone")}
               aria-invalid={Boolean(fieldErrors.phone)}
               className={`${fieldClassName} ${fieldErrors.phone ? fieldErrorClassName : ""}`}
@@ -359,6 +372,7 @@ export function LeadForm({
             id="lead-company"
             type="text"
             name="company"
+            maxLength={100}
             placeholder="Company / Brand (optional)"
             onChange={() => clearFieldError("company")}
             aria-invalid={Boolean(fieldErrors.company)}
@@ -414,6 +428,7 @@ export function LeadForm({
             id="lead-message"
             name="message"
             rows={4}
+            maxLength={2000}
             placeholder="Brief project details (optional)"
             onChange={() => clearFieldError("message")}
             aria-invalid={Boolean(fieldErrors.message)}

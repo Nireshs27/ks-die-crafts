@@ -35,12 +35,16 @@ export function getServiceLabel(value: string): string {
   return dieLabelByValue.get(value) ?? value;
 }
 
+const noHtmlChars = (value: string) => !/[<>{}]/.test(value);
+const htmlCharsMessage = "Invalid characters in this field";
+
 export const contactFormSchema = z.object({
   name: z
     .string()
     .trim()
     .min(2, { message: "Name must be at least 2 characters" })
-    .max(100, { message: "Name is too long (max 100 characters)" }),
+    .max(100, { message: "Name is too long (max 100 characters)" })
+    .refine(noHtmlChars, { message: htmlCharsMessage }),
   email: z
     .email({ message: "Please enter a valid email address" })
     .trim()
@@ -48,14 +52,15 @@ export const contactFormSchema = z.object({
   phone: z
     .string()
     .trim()
-    .min(1, { message: "Please enter your phone number" })
-    .regex(/^\+?[0-9\s-]{10,15}$/, {
-      message: "Please enter a valid phone number (10+ digits)",
+    .min(1, { message: "Please enter your mobile number" })
+    .regex(/^[6-9]\d{9}$/, {
+      message: "Enter a valid 10-digit mobile number",
     }),
   company: z
     .string()
     .trim()
     .max(100, { message: "Company name is too long (max 100 characters)" })
+    .refine(noHtmlChars, { message: htmlCharsMessage })
     .optional()
     .or(z.literal("")),
   service: z.enum(serviceValues, {
@@ -68,6 +73,7 @@ export const contactFormSchema = z.object({
     .string()
     .trim()
     .max(2000, { message: "Message is too long (max 2000 characters)" })
+    .refine(noHtmlChars, { message: htmlCharsMessage })
     .optional()
     .or(z.literal("")),
   // Honeypot field. Real users leave this empty.
