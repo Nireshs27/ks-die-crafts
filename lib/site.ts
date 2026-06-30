@@ -1,7 +1,7 @@
 export const siteConfig = {
   name: "KS Diecrafts",
   legalName: "KS Diecrafts",
-  logo: "/images/ks-die-craft-logo.jpg",
+  logo: "/images/ks-die-craft-logo.png",
   headerLogo: "/images/ks-logo-transparent.webp",
   tagline: "Precision steel dies for India's finest jewellers",
   description:
