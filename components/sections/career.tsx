@@ -57,13 +57,12 @@ export function CareerSection() {
 
         <Reveal delay={0.2}>
           <p className="mt-8 text-center text-body-sm text-muted">
-            To apply, send your application to{" "}
+            To apply, email your resume to{" "}
             <a
               href={`mailto:${siteConfig.contact.email}?subject=Career%20Application`}
               className="font-semibold text-cta transition-colors hover:text-cta-hover"
-              aria-label="Send email for career application"
             >
-              {siteConfig.contact.email}
+              {siteConfig.contact.email} (Career)
             </a>
           </p>
         </Reveal>
