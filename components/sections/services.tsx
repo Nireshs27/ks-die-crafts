@@ -119,13 +119,6 @@ function ServiceRow({
               : ""
           }`}
         >
-          <span
-            className="pointer-events-none absolute right-6 top-4 select-none text-[5.5rem] font-bold leading-none tracking-tighter text-foreground/[0.08] sm:right-8 sm:top-6 sm:text-[7rem]"
-            aria-hidden="true"
-          >
-            {service.number}
-          </span>
-
           <div className="relative">
             <h3 className="text-2xl font-semibold tracking-tight text-foreground sm:text-[1.75rem] lg:text-3xl lg:leading-tight">
               {service.title}
