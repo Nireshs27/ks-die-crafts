@@ -31,12 +31,12 @@ export const siteConfig = {
     },
   },
   social: {
-    instagram: "https://instagram.com/ksdiecrafts",
-    facebook: "https://facebook.com/ksdiecrafts",
+    instagram: "https://instagram.com/ksdiecrafts_",
+    facebook: "https://facebook.com/ksdiecraftsfb",
   },
   nav: [
     { label: "Home", href: "/" },
-    { label: "Products", href: "/products" },
+    { label: "Products", href: "/#categories" },
     { label: "Services", href: "/#services" },
     { label: "About", href: "/#about-us" },
     { label: "Contact", href: "/#contact" },

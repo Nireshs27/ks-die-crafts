@@ -9,14 +9,14 @@ export type RecentWorkItem = {
 export const recentWork: readonly RecentWorkItem[] = [
   {
     id: "rw-balaji",
-    title: "Balaji Die",
+    title: "Balaji (Balaji)",
     category: "Religious Dies",
     image: "/images/recent-work/balaji.webp",
     imageAlt: "Steel die engraved with Lord Balaji deity motif",
   },
   {
     id: "rw-bangle",
-    title: "Bangle Profile Die",
+    title: "Bangle Profile (Vallaiyal)",
     category: "Jewellery Dies",
     image: "/images/recent-work/bangle.webp",
     imageAlt: "Curved steel bangle profile die with ornamental border",
@@ -24,28 +24,28 @@ export const recentWork: readonly RecentWorkItem[] = [
 
   {
     id: "rw-pendant-laxmi-vilakku",
-    title: "Pendant Laxmi Vilakku Die",
+    title: "Pendant Laxmi Vilakku (Pathakkam Lakshmi Vilakku)",
     category: "Jewellery Dies",
     image: "/images/recent-work/pentant-laxmi-vilakku.webp",
     imageAlt: "Pendant stamping die with Laxmi Vilakku motif",
   },
   {
     id: "rw-plate",
-    title: "Plate Die",
+    title: "Plate (Thattu)",
     category: "Custom Dies",
     image: "/images/recent-work/plate.webp",
     imageAlt: "Decorative steel plate forming die",
   },
   {
     id: "rw-trident",
-    title: "Trident Die",
+    title: "Trident (Trisoolam)",
     category: "Religious Dies",
     image: "/images/recent-work/Trident.webp",
     imageAlt: "Steel die engraved with trident (trishul) motif",
   },
   {
     id: "rw-vishvakarma",
-    title: "Vishvakarma Die",
+    title: "Vishvakarma (Vishwakarma)",
     category: "Religious Dies",
     image: "/images/recent-work/Vishvakarma.webp",
     imageAlt: "Steel die engraved with Lord Vishvakarma deity motif",

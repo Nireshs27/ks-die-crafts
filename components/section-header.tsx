@@ -30,7 +30,7 @@ export function SectionHeader({
         {title}
       </Heading>
       {description ? (
-        <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-muted">
+        <p className="mx-auto mt-4 max-w-2xl text-body leading-relaxed text-muted">
           {description}
         </p>
       ) : null}

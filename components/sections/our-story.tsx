@@ -37,7 +37,7 @@ const stats = [
         <path d="M6 12h4M14 12h4M12 6v12" />
       </svg>
     ),
-    value: 6,
+    textValue: "High Precision",
     suffix: "",
     label: "CNC Machines",
   },
@@ -70,7 +70,7 @@ function HeritageIntro() {
           A Family Legacy in Manufacturing
         </h3>
 
-        <p className="mt-4 text-base leading-relaxed text-muted">
+        <p className="mt-4 text-body leading-relaxed text-muted">
           While our dedicated die manufacturing journey began three years ago, our
           roots go back more than four decades through our family&apos;s jewellery
           manufacturing business.
@@ -87,7 +87,7 @@ function HeritageIntro() {
                   <polyline points="20 6 9 17 4 12" />
                 </svg>
               </span>
-              <span className="text-sm leading-relaxed text-muted">{point}</span>
+              <span className="text-body-sm leading-relaxed text-muted">{point}</span>
             </li>
           ))}
         </ul>
@@ -109,7 +109,7 @@ function HeritageIntro() {
           <div className="relative aspect-[4/3] sm:aspect-[16/10] lg:aspect-[4/3] w-full overflow-hidden rounded-3xl bg-background shadow-sm ring-1 ring-border">
             <Image
               src="/images/ks-diecraft-owners.png"
-              alt="The team behind KS Die Crafts"
+              alt="The team behind KS Diecrafts"
               fill
               className="object-cover object-[center_35%]"
               sizes="(max-width: 1024px) 100vw, 60vw"
@@ -140,7 +140,7 @@ function HeritageIntro() {
                       </>
                     )}
                   </div>
-                  <p className="mt-2 text-xs font-medium leading-snug text-muted sm:text-sm">
+                  <p className="mt-2 text-sm font-medium leading-snug text-muted sm:text-body-sm">
                     {stat.label}
                   </p>
                 </StaggerItem>
@@ -160,9 +160,9 @@ export function AboutUsSection() {
       <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8">
         <Reveal>
           <SectionHeader
-            badge="About KS Die Crafts"
+            badge="About KS Diecrafts"
             title="Four Decades of Manufacturing Heritage, Focused on Better Dies"
-            description="KS Die Crafts was founded with a simple belief better dies create better products."
+            description="KS Diecrafts was founded with a simple belief that better dies create better products."
           />
         </Reveal>
 

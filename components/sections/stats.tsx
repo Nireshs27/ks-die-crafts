@@ -6,7 +6,7 @@ import { StaggerContainer, StaggerItem } from "@/components/motion";
 
 const stats = [
   { value: 5000, suffix: "+", label: "Dies Delivered" },
-  { value: 1000, suffix: "+", label: "Happy Clients" },
+  { value: 500, suffix: "+", label: "Happy Clients" },
   { value: 100, suffix: "%", label: "Quality Assured" },
 ];
 
@@ -24,7 +24,7 @@ export function StatsSection() {
                 <Counter to={stat.value} duration={2} />
                 <span>{stat.suffix}</span>
               </div>
-              <p className="mt-2 text-sm font-medium text-muted sm:text-base">
+              <p className="mt-2 text-body-sm font-medium text-muted sm:text-body">
                 {stat.label}
               </p>
             </StaggerItem>

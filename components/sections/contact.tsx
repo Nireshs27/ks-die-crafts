@@ -1,8 +1,8 @@
 "use client";
 
 import { Button } from "@/components/button";
-import { WhatsAppIcon } from "@/components/icons/whatsapp";
 import { LeadForm } from "@/components/lead-form";
+import { WhatsAppLink } from "@/components/whatsapp-link";
 import { Reveal } from "@/components/motion";
 import { SectionHeader } from "@/components/section-header";
 import { siteConfig } from "@/lib/site";
@@ -21,7 +21,7 @@ export function ContactSection({
           <SectionHeader
             badge="Get in Touch"
             title="Contact us"
-            description="We are here to help with die orders, prototypes, tooling, and anything else you need. Reach us by phone or email, or send a message and we will assit you further."
+            description="We are here to help with die orders, prototypes, tooling, and anything else you need. Reach us by phone or email, or send a message and we will assist you further."
           >
             <p className="mt-4 text-xs text-silver">
               Operated by KSAN Industries LLP
@@ -36,20 +36,12 @@ export function ContactSection({
                 <h3 className="text-base font-semibold text-foreground">
                   Reach us directly
                 </h3>
-                <p className="mt-1 text-sm text-muted">
+                <p className="mt-1 text-body-sm text-muted">
                   Prefer a quick conversation? Choose how you&apos;d like to connect.
                 </p>
 
                 <div className="mt-5 flex flex-wrap gap-3">
-                  <Button
-                    href={`https://wa.me/${siteConfig.contact.whatsapp}`}
-                    newTab
-                    variant="whatsapp"
-                    size="sm"
-                  >
-                    <WhatsAppIcon className="h-4 w-4" />
-                    WhatsApp
-                  </Button>
+                  <WhatsAppLink size="sm" />
                   {siteConfig.contact.phone && (
                     <Button
                       href={`tel:${siteConfig.contact.phone}`}
@@ -132,7 +124,7 @@ export function ContactSection({
                     <p className="font-medium text-foreground">
                       {locality}, Chennai
                     </p>
-                    <p className="mt-0.5 text-sm text-muted">
+                    <p className="mt-0.5 text-body-sm text-muted">
                       {locality}, Chennai, {region}, India
                     </p>
                   </div>

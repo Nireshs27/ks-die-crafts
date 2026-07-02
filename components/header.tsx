@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 import { Container } from "@/components/container";
 import { LogoLink } from "@/components/logo";
@@ -9,9 +10,12 @@ import { ThemeToggle } from "@/components/theme-toggle";
 import { siteConfig } from "@/lib/site";
 
 export function Header() {
+  const pathname = usePathname();
+  const isHome = pathname === "/";
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [quoteOpen, setQuoteOpen] = useState(false);
+  const solidHeader = scrolled || !isHome;
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -23,7 +27,7 @@ export function Header() {
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 animate-[header-slide-in_0.6s_cubic-bezier(0.25,0.4,0.25,1)] ${
-        scrolled
+        solidHeader
           ? "border-b border-border/50 bg-background shadow-sm"
           : "bg-transparent"
       }`}
@@ -35,7 +39,7 @@ export function Header() {
             width={312}
             height={261}
             className={`relative z-10 h-7 w-auto shrink-0 object-contain lg:h-16 transition-all duration-300 ${
-              scrolled ? "invert dark:invert-0" : ""
+              solidHeader ? "invert dark:invert-0" : ""
             }`}
             priority
             onClick={() => setMenuOpen(false)}
@@ -50,8 +54,8 @@ export function Header() {
                 <li key={item.href}>
                   <Link
                     href={item.href}
-                    className={`relative text-base font-medium transition-colors after:absolute after:-bottom-1 after:left-0 after:h-px after:w-0 after:transition-all hover:after:w-full ${
-                      scrolled
+                    className={`relative text-lg font-medium transition-colors after:absolute after:-bottom-1 after:left-0 after:h-px after:w-0 after:transition-all hover:after:w-full ${
+                      solidHeader
                         ? "text-muted hover:text-foreground after:bg-foreground"
                         : "text-white/75 hover:text-white after:bg-white"
                     }`}
@@ -66,7 +70,7 @@ export function Header() {
           <div className="ml-auto hidden items-center gap-2 lg:flex">
             <ThemeToggle
               className={
-                scrolled
+                solidHeader
                   ? "text-foreground hover:bg-surface-muted"
                   : "text-white hover:bg-white/10"
               }
@@ -83,7 +87,7 @@ export function Header() {
           <div className="ml-auto flex items-center gap-2 lg:hidden">
             <ThemeToggle
               className={
-                scrolled
+                solidHeader
                   ? "text-foreground hover:bg-surface-muted"
                   : "text-white hover:bg-white/10"
               }
@@ -91,7 +95,7 @@ export function Header() {
             <button
               type="button"
               className={`inline-flex h-10 w-10 items-center justify-center rounded-full transition-colors ${
-                scrolled ? "text-foreground hover:bg-surface-muted" : "text-white hover:bg-white/10"
+                solidHeader ? "text-foreground hover:bg-surface-muted" : "text-white hover:bg-white/10"
               }`}
               aria-expanded={menuOpen}
               aria-controls="mobile-nav"
@@ -123,7 +127,7 @@ export function Header() {
                 <li key={item.href}>
                   <Link
                     href={item.href}
-                    className="block rounded-lg px-3 py-3 text-base font-medium text-muted transition-colors hover:bg-surface-muted hover:text-foreground"
+                    className="block rounded-lg px-3 py-3 text-lg font-medium text-muted transition-colors hover:bg-surface-muted hover:text-foreground"
                     onClick={() => setMenuOpen(false)}
                   >
                     {item.label}

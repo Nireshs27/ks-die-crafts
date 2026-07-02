@@ -45,6 +45,8 @@
   --color-cta-foreground: var(--cta-foreground);
   --font-sans: var(--font-sans);
   --text-badge: 0.625rem;
+  --text-body: 1.0625rem;
+  --text-body-sm: 0.9375rem;
 }
 
 html {
@@ -124,6 +126,23 @@ footer :focus-visible {
 }
 .hero-fade-up {
   animation: hero-fade-up 0.8s cubic-bezier(0.25, 0.4, 0.25, 1) both;
+}
+
+/* --- Client logo marquee --- */
+@keyframes logo-marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.animate-logo-marquee {
+  animation: logo-marquee 30s linear infinite;
+}
+.animate-logo-marquee:hover {
+  animation-play-state: paused;
+}
+@media (prefers-reduced-motion: reduce) {
+  .animate-logo-marquee {
+    animation: none;
+  }
 }
 
 /* --- Accordion (FAQ / mobile menu) height animation via grid --- */

@@ -11,7 +11,7 @@ const features = [
         <path d="M8 10h8M8 14h5" />
       </svg>
     ),
-    text: "Fast, clear communication no chasing",
+    text: "Fast, clear communication and response",
   },
   {
     icon: (
@@ -20,7 +20,7 @@ const features = [
         <path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z" />
       </svg>
     ),
-    text: "Practical design assistance not just execution",
+    text: "Practical design assistance before execution",
   },
   {
     icon: (
@@ -71,7 +71,7 @@ export function WhyUsSection() {
         <Reveal>
           <SectionHeader
             badge="Why Choose Us"
-            title="Why Manufacturers Choose KS Die Crafts"
+            title="Why Manufacturers Choose KS Diecrafts"
           />
         </Reveal>
 
@@ -86,7 +86,7 @@ export function WhyUsSection() {
                         {item.icon}
                       </span>
                     </span>
-                    <p className="mt-6 text-base font-medium leading-relaxed text-foreground max-w-[280px]">
+                    <p className="mt-6 text-body font-medium leading-relaxed text-foreground max-w-[280px]">
                       {item.text}
                     </p>
                   </div>

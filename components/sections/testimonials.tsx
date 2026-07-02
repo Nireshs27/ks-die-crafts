@@ -53,7 +53,7 @@ export function TestimonialsSection() {
                     fill="currentColor"
                   />
                 </svg>
-                <blockquote className="mt-5 flex-1 text-base leading-relaxed text-foreground">
+                <blockquote className="mt-5 flex-1 text-body leading-relaxed text-foreground">
                   &ldquo;{t.quote}&rdquo;
                 </blockquote>
                 <figcaption className="mt-6 flex items-center gap-4 border-t border-border pt-5">

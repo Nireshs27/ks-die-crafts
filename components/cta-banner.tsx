@@ -2,8 +2,7 @@
 
 import { Reveal } from "@/components/motion";
 import { Button } from "@/components/button";
-import { WhatsAppIcon } from "@/components/icons/whatsapp";
-import { siteConfig } from "@/lib/site";
+import { WhatsAppLink } from "@/components/whatsapp-link";
 
 export function CtaBanner({
   title = "Ready to discuss your project?",
@@ -28,22 +27,14 @@ export function CtaBanner({
               <h2 className="text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
                 {title}
               </h2>
-              <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-muted">
+              <p className="mx-auto mt-4 max-w-xl text-body leading-relaxed text-muted">
                 {description}
               </p>
               <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4">
                 <Button href={primaryHref} variant="primary" size="md" className="shadow-sm">
                   {primaryLabel}
                 </Button>
-                <Button
-                  href={`https://wa.me/${siteConfig.contact.whatsapp}`}
-                  newTab
-                  variant="secondary"
-                  size="md"
-                >
-                  <WhatsAppIcon className="h-4 w-4 text-[#25D366]" />
-                  Chat on WhatsApp
-                </Button>
+                <WhatsAppLink size="md" />
               </div>
             </div>
           </div>

@@ -35,8 +35,8 @@ export function Footer() {
               width={600}
               height={400}
             />
-            <p className="mt-4 max-w-sm text-sm leading-relaxed text-zinc-400">
-            We design and manufacture precision steel dies for the jewellery industry combining craftsmanship and modern technology.
+            <p className="mt-4 max-w-sm text-body-sm leading-relaxed text-zinc-400">
+            We design and manufacture precision steel dies for the jewellery industry, combining craftsmanship and modern technology.
             </p>
             <p className="mt-3 text-xs font-medium text-zinc-500">
               Trusted Since 1980 - Built on Quality and Reliability
@@ -85,13 +85,13 @@ export function Footer() {
               Products
             </h3>
             <ul className="mt-4 space-y-2.5">
-              {products.map((p) => (
-                <li key={p.slug}>
+              {products.map((product) => (
+                <li key={product.slug}>
                   <Link
-                    href={`/products/${p.slug}`}
+                    href={`/products/${product.slug}`}
                     className="text-sm text-zinc-400 transition-colors hover:text-white"
                   >
-                    {p.title}
+                    {product.title}
                   </Link>
                 </li>
               ))}

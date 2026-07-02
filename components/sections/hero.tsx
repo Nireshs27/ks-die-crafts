@@ -76,33 +76,43 @@ export function HeroSection() {
         )}
       </div>
 
-      <div className="absolute inset-0 bg-black/40" aria-hidden="true" />
+      {/*
+        Two-layer darkening: a base gradient keeps the top/bottom edges
+        readable, and a radial vignette guarantees strong contrast right
+        behind the text block regardless of how bright the footage is there.
+      */}
+      <div
+        className="absolute inset-0 bg-gradient-to-b from-black/55 via-black/40 to-black/65"
+        aria-hidden="true"
+      />
+      <div
+        className="absolute inset-0 bg-[radial-gradient(ellipse_65%_60%_at_50%_45%,rgba(0,0,0,0.7)_0%,rgba(0,0,0,0.25)_60%,rgba(0,0,0,0)_100%)]"
+        aria-hidden="true"
+      />
 
       <div className="relative z-10 w-full px-6 pb-20 pt-32 sm:px-10 lg:px-16 lg:py-0">
         <div className="mx-auto max-w-[1400px]">
-          <div className="hero-fade-up flex items-center justify-center gap-3 [animation-delay:0.2s]">
-            
-            <span className="text-xs font-semibold uppercase tracking-widest text-white/90">
+          <div className="hero-fade-up flex items-center justify-center [animation-delay:0.2s]">
+            <span className="text-xs font-semibold uppercase tracking-widest text-white/90 [text-shadow:0_1px_10px_rgba(0,0,0,0.7)]">
               Trusted Die Manufacturing Experts
             </span>
-            
           </div>
 
-          <h1 className="hero-fade-up mx-auto mt-6 max-w-4xl text-center text-4xl font-semibold leading-[1.1] tracking-tight text-white sm:text-5xl lg:text-6xl [animation-delay:0.4s]">
+          <h1 className="hero-fade-up mx-auto mt-6 max-w-4xl text-center text-4xl font-semibold leading-[1.1] tracking-tight text-white [text-shadow:0_4px_28px_rgba(0,0,0,0.6)] sm:text-5xl lg:text-6xl [animation-delay:0.4s]">
             Precision Dies That Power{" "}
             <span className="italic font-medium">Quality</span> Manufacturing.
           </h1>
 
-          <p className="hero-fade-up mx-auto mt-5 max-w-2xl text-center text-base leading-relaxed text-white/80 sm:text-lg [animation-delay:0.6s]">
-            At KS Die Crafts, we craft high precision dies for coins, jewellery pendants, religious designs, portraits, and custom applications  built for exceptional detailing, durability, and consistent production performance.
+          <p className="hero-fade-up mx-auto mt-5 max-w-2xl text-center text-body leading-relaxed text-white/90 [text-shadow:0_2px_14px_rgba(0,0,0,0.6)] sm:text-lg [animation-delay:0.6s]">
+            At KS Diecrafts, we craft high-precision dies for coins, jewellery pendants, religious designs, portraits, and custom applications — built for exceptional detailing, durability, and consistent production performance.
           </p>
 
           <div className="hero-fade-up mt-8 flex justify-center [animation-delay:0.8s]">
             <Button
               href="/#categories"
-              variant="ghost"
+              variant="light"
               size="md"
-              className="focus-visible:outline-white"
+              className="shadow-lg shadow-black/30"
             >
               Explore Our Products
             </Button>

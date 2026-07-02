@@ -3,8 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Button } from "@/components/button";
-import { WhatsAppIcon } from "@/components/icons/whatsapp";
 import { ContactSection } from "@/components/sections/contact";
+import { WhatsAppLink } from "@/components/whatsapp-link";
 import { CtaBanner } from "@/components/cta-banner";
 import { products, getProduct } from "@/lib/products";
 import { siteConfig } from "@/lib/site";
@@ -76,7 +76,7 @@ export default async function ProductDetailPage({
             <ol className="flex flex-wrap items-center gap-2 text-xs text-muted">
               <li><Link href="/" className="transition-colors hover:text-foreground">Home</Link></li>
               <li aria-hidden="true">/</li>
-              <li><Link href="/products" className="transition-colors hover:text-foreground">Products</Link></li>
+              <li><Link href="/#categories" className="transition-colors hover:text-foreground">Products</Link></li>
               <li aria-hidden="true">/</li>
               <li className="text-foreground">{product.title}</li>
             </ol>
@@ -118,13 +118,27 @@ export default async function ProductDetailPage({
               <h1 className="mt-3 text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
                 {product.title}
               </h1>
-              <p className="mt-4 text-base leading-relaxed text-muted">
+              <p className="mt-4 text-body leading-relaxed text-muted">
                 {product.longDescription}
               </p>
 
+              <h2 className="mt-8 text-xl font-semibold tracking-tight text-foreground sm:text-2xl">
+                Features
+              </h2>
+              <ul className="mt-4 space-y-3">
+                {product.features.map((f, idx) => (
+                  <li key={idx} className="flex items-start gap-3 text-sm leading-relaxed text-muted">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" className="mt-0.5 h-4 w-4 shrink-0 text-cta">
+                      <polyline points="20 6 9 17 4 12" />
+                    </svg>
+                    <span>{f}</span>
+                  </li>
+                ))}
+              </ul>
+
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                 <Button
-                  href="/#contact"
+                  href="#contact"
                   variant="primary"
                   size="md"
                   className="shadow-lg shadow-cta/20"
@@ -135,76 +149,20 @@ export default async function ProductDetailPage({
                     <path d="m12 5 7 7-7 7" />
                   </svg>
                 </Button>
-                <Button
-                  href={`https://wa.me/${siteConfig.contact.whatsapp}?text=${encodeURIComponent(
-                    `Hi KS Diecrafts, I'd like a quote for ${product.title}.`
-                  )}`}
-                  newTab
-                  variant="secondary"
+                <WhatsAppLink
                   size="md"
-                >
-                  <WhatsAppIcon className="h-4 w-4 text-[#25D366]" />
-                  WhatsApp Us
-                </Button>
+                  message={`Hi KS Diecrafts, I'd like a quote for ${product.title}.`}
+                />
               </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="py-24 sm:py-32">
-        <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8">
-          <div className="grid gap-12 lg:grid-cols-2">
-            <div>
-              <div className="flex items-center gap-3">
-                <span className="h-px w-8 bg-cta" aria-hidden="true" />
-                <span className="text-xs font-semibold uppercase tracking-widest text-cta">
-                  What We Make
-                </span>
-              </div>
-              <h2 className="mt-3 text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
-                Features
-              </h2>
-              <ul className="mt-6 space-y-3">
-                {product.features.map((f, idx) => (
-                  <li key={idx} className="flex items-start gap-3 text-sm leading-relaxed text-muted">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" className="mt-0.5 h-4 w-4 shrink-0 text-cta">
-                      <polyline points="20 6 9 17 4 12" />
-                    </svg>
-                    <span>{f}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div>
-              <div className="flex items-center gap-3">
-                <span className="h-px w-8 bg-cta" aria-hidden="true" />
-                <span className="text-xs font-semibold uppercase tracking-widest text-cta">
-                  Use Cases
-                </span>
-              </div>
-              <h2 className="mt-3 text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
-                Common applications
-              </h2>
-              <ul className="mt-6 space-y-3">
-                {product.applications.map((a, idx) => (
-                  <li key={idx} className="flex items-start gap-3 text-sm leading-relaxed text-muted">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" className="mt-0.5 h-4 w-4 shrink-0 text-cta">
-                      <circle cx="12" cy="12" r="10" />
-                      <path d="M12 6v6l4 2" />
-                    </svg>
-                    <span>{a}</span>
-                  </li>
-                ))}
-              </ul>
             </div>
           </div>
         </div>
       </section>
 
       <CtaBanner
-        title={`Need a custom ${product.title.toLowerCase()}?`}
+        title={`Need a custom ${product.title.toLowerCase().replace(/\bdies\b/, "die")}?`}
         description="Send us your design or sample. We'll respond within 24 hours with a clear quote and timeline."
+        primaryHref="#contact"
       />
 
       <ContactSection defaultService={product.slug} />

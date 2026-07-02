@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { siteConfig } from "@/lib/site";
+import { useRouter } from "next/navigation";
 import {
   contactFormSchema,
   contactPreferences,
@@ -153,12 +153,13 @@ function ServiceSelect({
   );
 }
 
-type Status = "idle" | "submitting" | "success" | "error";
+type Status = "idle" | "submitting" | "error";
 
 export function LeadForm({
   defaultService,
   className,
 }: { defaultService?: string; className?: string } = {}) {
+  const router = useRouter();
   const [status, setStatus] = useState<Status>("idle");
   const [service, setService] = useState(defaultService ?? "");
   const [contactPref, setContactPref] = useState<string>("whatsapp");
@@ -221,10 +222,7 @@ export function LeadForm({
       const data = await res.json().catch(() => ({}));
 
       if (res.ok && data.success) {
-        setStatus("success");
-        form.reset();
-        setService("");
-        setContactPref("whatsapp");
+        router.push("/thank-you");
         return;
       }
 
@@ -244,45 +242,13 @@ export function LeadForm({
     }
   };
 
-  if (status === "success") {
-    return (
-      <div className="rounded-2xl border border-border bg-background p-8 text-center shadow-sm">
-        <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-emerald-50">
-          <svg className="h-7 w-7 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-          </svg>
-        </div>
-        <h3 className="text-xl font-semibold text-foreground">Thank You!</h3>
-        <p className="mt-2 text-sm text-muted">
-          Your request has been received. We&apos;ll get back to you within 24 hours.
-        </p>
-        <div className="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row">
-          <a
-            href={`https://wa.me/${siteConfig.contact.whatsapp}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex h-10 items-center justify-center gap-2 rounded-full bg-[#25D366] px-5 text-sm font-medium text-white transition-colors hover:opacity-90"
-          >
-            Continue on WhatsApp
-          </a>
-          <button
-            onClick={() => setStatus("idle")}
-            className="text-sm font-medium text-cta transition-colors hover:text-cta-hover"
-          >
-            Submit another request
-          </button>
-        </div>
-      </div>
-    );
-  }
-
   return (
     <div
       className={`flex flex-col rounded-2xl border border-border bg-background p-5 shadow-sm sm:p-6${className ? ` ${className}` : ""}`}
     >
       <div className="mb-4 shrink-0">
         <h3 className="text-base font-semibold text-foreground">Request a Free Quote</h3>
-        <p className="mt-0.5 text-xs text-muted">
+        <p className="mt-0.5 text-sm text-muted">
           Tell us about your project and we&apos;ll respond within 24 hours.
         </p>
       </div>

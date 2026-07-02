@@ -40,7 +40,7 @@ export function FaqItem({ question, answer }: FaqItemProps) {
       </button>
       <div className="accordion-panel" data-open={open}>
         <div>
-          <p className="pb-5 text-sm leading-relaxed text-muted">{answer}</p>
+          <p className="pb-5 text-body-sm leading-relaxed text-muted">{answer}</p>
         </div>
       </div>
     </div>

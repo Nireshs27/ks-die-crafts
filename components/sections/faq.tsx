@@ -1,10 +1,8 @@
 "use client";
 
-import { Button } from "@/components/button";
 import { FaqItem } from "@/components/faq-item";
 import { Reveal } from "@/components/motion";
 import { SectionHeader } from "@/components/section-header";
-import { siteConfig } from "@/lib/site";
 
 type Faq = {
   question: string;
@@ -32,34 +30,6 @@ export function FaqSection({ faqs }: { faqs: readonly Faq[] }) {
                 answer={faq.answer}
               />
             ))}
-          </div>
-        </Reveal>
-
-        <Reveal delay={0.3}>
-          <div className="mt-12 rounded-2xl border border-border bg-surface p-8 text-center">
-            <p className="text-base font-medium text-foreground">
-              Still have questions?
-            </p>
-            <p className="mt-1.5 text-sm text-muted">
-              We typically respond within 24 hours.
-            </p>
-            <div className="mt-5 flex flex-col items-center justify-center gap-3 sm:flex-row">
-              <Button
-                href={`https://wa.me/${siteConfig.contact.whatsapp}`}
-                newTab
-                variant="whatsapp"
-                size="sm"
-              >
-                WhatsApp
-              </Button>
-              <Button
-                href={`tel:${siteConfig.contact.phone}`}
-                variant="primary"
-                size="sm"
-              >
-                Contact Us
-              </Button>
-            </div>
           </div>
         </Reveal>
       </div>

@@ -9,7 +9,7 @@ type CategoryCardProps = {
   features?: readonly string[];
   image: string;
   imageAlt: string;
-  href: string;
+  href?: string;
   badge?: string;
 };
 
@@ -33,11 +33,10 @@ export function CategoryCard({
   href,
   badge,
 }: CategoryCardProps) {
-  return (
-    <Link
-      href={href}
-      className="group relative block w-full overflow-hidden rounded-2xl"
-    >
+  const cardClassName = "group relative block w-full overflow-hidden rounded-2xl";
+
+  const content = (
+    <>
       <div className="relative aspect-[4/5] w-full overflow-hidden">
         <Image
           src={image}
@@ -62,23 +61,35 @@ export function CategoryCard({
         ) : null}
       </div>
 
-      <span className="absolute bottom-4 right-4 z-10 flex translate-x-2 items-center gap-1.5 text-xs font-medium text-white opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100 sm:text-sm">
-        View Details
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          className="h-4 w-4"
-          aria-hidden="true"
-        >
-          <path d="M5 12h14" />
-          <path d="m12 5 7 7-7 7" />
-        </svg>
-      </span>
-    </Link>
+      {href ? (
+        <span className="absolute bottom-4 right-4 z-10 flex translate-x-2 items-center gap-1.5 text-xs font-medium text-white opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100 sm:text-sm">
+          View Details
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="h-4 w-4"
+            aria-hidden="true"
+          >
+            <path d="M5 12h14" />
+            <path d="m12 5 7 7-7 7" />
+          </svg>
+        </span>
+      ) : null}
+    </>
   );
+
+  if (href) {
+    return (
+      <Link href={href} className={cardClassName}>
+        {content}
+      </Link>
+    );
+  }
+
+  return <div className={cardClassName}>{content}</div>;
 }

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 
-type Variant = "primary" | "secondary" | "ghost" | "whatsapp";
+type Variant = "primary" | "secondary" | "ghost" | "whatsapp" | "light";
 type Size = "sm" | "md";
 
 const sizeStyles: Record<Size, string> = {
@@ -14,8 +14,11 @@ const variantStyles: Record<Variant, string> = {
   secondary:
     "border border-border bg-background text-foreground hover:border-foreground/20 hover:shadow-md",
   ghost:
-    "border border-white/25 bg-white/10 text-white backdrop-blur-sm hover:bg-white/20",
+    "border border-white/50 bg-white/15 text-white backdrop-blur-md hover:border-white/70 hover:bg-white/25",
   whatsapp: "bg-[#25D366] text-white hover:opacity-90",
+  // Fixed light pill for use over dark/photo backgrounds — intentionally
+  // theme-independent so it stays high-contrast regardless of light/dark mode.
+  light: "bg-white text-zinc-900 hover:bg-zinc-100 hover:scale-[1.02]",
 };
 
 function buttonClasses(variant: Variant, size: Size, className?: string) {

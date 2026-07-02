@@ -33,9 +33,9 @@ export const categories: readonly Category[] = [
   {
     slug: "religious-dies",
     title: "Religious Dies",
-    subtitle: "Vel, Soolam, Villaku, God figures & more",
+    subtitle: "Vel, Soolam, Vilakku, God figures & more",
     features: [
-      "Vel, Soolam, Villaku, God figures, Thalli, Patta Gundu, Manga Kasu and more",
+      "Vel, Soolam, Vilakku, God figures, Thalli, Patta Gundu, Manga Kasu and more",
       "Designed with clarity, depth and traditional accuracy",
     ],
     image: "/images/categories/religious-die.webp",

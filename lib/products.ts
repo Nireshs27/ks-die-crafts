@@ -43,7 +43,7 @@ export const products: readonly Product[] = [
   {
     slug: "jewellery-dies",
     title: "Jewellery Dies",
-    subtitle: "Pendants, ornamental & etc",
+    subtitle: "Pendants, ornamental & more",
     shortDescription:
       "Fine-detail dies for pendants, ornamental motifs, and Nagas pieces capturing intricate jewellery design with absolute fidelity.",
     longDescription:
@@ -71,14 +71,14 @@ export const products: readonly Product[] = [
     title: "Religious Dies",
     subtitle: "Vel, Soolam & God figure dies",
     shortDescription:
-      "Devotional dies crafted with reverence Vel, Soolam, God figures, Thalli, Nagas Thalli, Pattagundu, and Manga Kasu.",
+      "Devotional dies crafted with reverence: Vel, Soolam, God figures, Thalli, Nagas Thalli, Patta Gundu, and Manga Kasu.",
     longDescription:
-      "Religious jewellery demands both technical precision and sensitivity to traditional iconography. Our religious die range covers the full vocabulary of South Indian devotional jewellery: Vel and Soolam dies, God figure dies for popular deities, Thalli and Nagas Thalli dies, Pattagundu, and Manga Kasu. We work from your existing designs or develop new ones with you.",
+      "Religious jewellery demands both technical precision and sensitivity to traditional iconography. Our religious die range covers the full vocabulary of South Indian devotional jewellery: Vel and Soolam dies, God figure dies for popular deities, Thalli and Nagas Thalli dies, Patta Gundu, and Manga Kasu. We work from your existing designs or develop new ones with you.",
     features: [
       "Vel die & Soolam die",
       "God figure dies for religious symbols",
       "Thalli & Nagas Thalli dies",
-      "Pattagundu & Manga Kasu dies",
+      "Patta Gundu & Manga Kasu dies",
     ],
     applications: [
       "Temple jewellery manufacturing",
@@ -95,11 +95,11 @@ export const products: readonly Product[] = [
   {
     slug: "custom-dies",
     title: "Custom Dies",
-    subtitle: "Logo, & special applications",
+    subtitle: "Logos & special applications",
     shortDescription:
       "Fully bespoke dies from corporate logos to specialised industrial applications. Bring us a sketch or a STEP file; we'll do the rest.",
     longDescription:
-      "From logos to specialised applications fully customised dies built to match your exact requirement.High-detail dies engineered for accurate human faces and portrait designs, delivering sharp definition and consistent results and includes precision cutting die models.",
+      "From logos to specialised applications, fully customised dies are built to match your exact requirement. High-detail dies engineered for accurate human faces and portrait designs deliver sharp definition and consistent results, and include precision cutting die models.",
     features: [
       "Fully customised dies",
       "Logo and branding dies",

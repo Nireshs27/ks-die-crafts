@@ -47,7 +47,7 @@ export function CareerSection() {
                 <h3 className="mt-3 text-sm font-semibold text-foreground">
                   {role.title}
                 </h3>
-                <p className="mt-2 flex-1 text-xs leading-relaxed text-muted">
+                <p className="mt-2 flex-1 text-sm leading-relaxed text-muted">
                   {role.description}
                 </p>
               </article>
@@ -56,7 +56,7 @@ export function CareerSection() {
         </StaggerContainer>
 
         <Reveal delay={0.2}>
-          <p className="mt-8 text-center text-sm text-muted">
+          <p className="mt-8 text-center text-body-sm text-muted">
             To apply, send your application to{" "}
             <a
               href={`mailto:${siteConfig.contact.email}?subject=Career%20Application`}

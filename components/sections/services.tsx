@@ -4,12 +4,11 @@ import { SectionHeader } from "@/components/section-header";
 const services = [
   {
     number: "01",
-    tag: "Validation",
     title: "Prototype & Development",
     description:
-      "We don't directly jump to production. We validate. Design-to-die conversion with prototype development ensures your design works in real manufacturing not just on screen.",
+      "We don't directly jump to production. We validate. Design-to-die conversion with prototype development ensures your design works in real manufacturing, not just on screen.",
     image: "/images/process/prototype.jpg",
-    imageAlt: "Die prototype validation precision measurement with digital caliper at KS Die Crafts workshop",
+    imageAlt: "Die prototype validation precision measurement with digital caliper at KS Diecrafts workshop",
     imagePosition: "object-center",
     highlights: ["Design-to-die conversion", "Production validation"],
     icon: (
@@ -22,14 +21,13 @@ const services = [
   },
   {
     number: "02",
-    tag: "3D & ArtCAM",
     title: "Design Support",
     description:
-      "From concept to final die, we support the full process: 3D modelling, ARTCAM execution, and design optimisation for die compatibility. We also help coin die makers refine and improve their designs before production.",
+      "From concept to final die, we support the full process with high-end 3D modelling, sculpting, and design refinement — ensuring every detail is ready for production. We also help coin die makers refine and improve their designs before manufacturing begins.",
     image: "/images/process/design-office.jpg",
-    imageAlt: "Designer working on 3D jewellery die model in ArtCAM at the design office",
+    imageAlt: "Designer working on a 3D jewellery die model at the design office",
     imagePosition: "object-center",
-    highlights: ["3D modelling & ARTCAM execution", "Design optimisation for die compatibility"],
+    highlights: ["High-end 3D modelling & sculpting", "Design refinement for production"],
     icon: (
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5">
         <path d="M12 20h9" />
@@ -39,10 +37,9 @@ const services = [
   },
   {
     number: "03",
-    tag: "Precision",
     title: "Finishes That Define Output",
     description:
-      "Each finish is not just visual it is built on precision and accuracy at every level of the die. From micro-level detailing to surface consistency, these factors directly control the sharpness, clarity and overall quality of your final product.",
+      "Each finish is not just visual — it is built on precision and accuracy at every level of the die. From micro-level detailing to surface consistency, these factors directly control the sharpness, clarity, and overall quality of your final product.",
     image: "/images/process/finishes.jpg",
     imageAlt: "Three jewellery dies showing matte, mirror and Bombay polish finishes side by side",
     imagePosition: "object-center",
@@ -56,14 +53,13 @@ const services = [
   },
   {
     number: "04",
-    tag: "Turnaround",
     title: "Lead Time",
     description:
       "Lead time depends on design complexity and order size. We'll tell you upfront before we start. Regular updates at every key stage.",
     image: "/images/process/turnaround.jpg",
     imageAlt: "Finished precision dies packaged and ready for dispatch at the workshop",
     imagePosition: "object-center",
-    highlights: ["Upfront timelines", "Regular stage updates"],
+    highlights: ["Upfront timelines", "Regular updates at every key stage"],
     icon: (
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5">
         <circle cx="12" cy="12" r="10" />
@@ -128,18 +124,11 @@ function ServiceRow({
           </span>
 
           <div className="relative">
-            <div className="flex items-center gap-3">
-              <span className="h-px w-8 bg-foreground/20" aria-hidden="true" />
-              <span className="text-xs font-semibold uppercase tracking-widest text-muted">
-                {service.tag}
-              </span>
-            </div>
-
-            <h3 className="mt-4 text-2xl font-semibold tracking-tight text-foreground sm:text-[1.75rem] lg:text-3xl lg:leading-tight">
+            <h3 className="text-2xl font-semibold tracking-tight text-foreground sm:text-[1.75rem] lg:text-3xl lg:leading-tight">
               {service.title}
             </h3>
 
-            <p className="mt-4 max-w-lg text-base leading-relaxed text-muted">
+            <p className="mt-4 max-w-lg text-body leading-relaxed text-muted">
               {service.description}
             </p>
 

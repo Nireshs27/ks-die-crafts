@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { CategoryCard } from "@/components/category-card";
 import { Reveal } from "@/components/motion";
 import { SectionHeader } from "@/components/section-header";
@@ -30,27 +29,6 @@ export function CategoriesSection() {
             ))}
           </div>
         </Reveal>
-
-        <div className="mt-6 flex justify-center">
-          <Link
-            href="/products"
-            className="inline-flex items-center gap-2 text-sm font-medium text-cta transition-all hover:gap-3"
-          >
-            View more details
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.75"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="h-4 w-4"
-            >
-              <path d="M5 12h14" />
-              <path d="m12 5 7 7-7 7" />
-            </svg>
-          </Link>
-        </div>
       </div>
     </section>
   );
