@@ -61,6 +61,7 @@ export function CareerSection() {
             <a
               href={`mailto:${siteConfig.contact.email}?subject=Career%20Application`}
               className="font-semibold text-cta transition-colors hover:text-cta-hover"
+              aria-label="Send email for career application"
             >
               {siteConfig.contact.email}
             </a>

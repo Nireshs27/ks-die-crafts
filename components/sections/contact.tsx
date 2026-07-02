@@ -68,6 +68,7 @@ export function ContactSection({
                     href={`mailto:${siteConfig.contact.email}`}
                     variant="secondary"
                     size="sm"
+                    aria-label="Send email for general enquiries"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"

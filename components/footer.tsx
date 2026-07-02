@@ -134,6 +134,7 @@ export function Footer() {
                   <a
                     href={`mailto:${siteConfig.contact.email}`}
                     className="text-sm leading-snug text-zinc-300 transition-colors hover:text-white"
+                    aria-label="Send email to KS Diecrafts"
                   >
                     {siteConfig.contact.email}
                   </a>
