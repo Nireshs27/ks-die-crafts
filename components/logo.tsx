@@ -24,6 +24,7 @@ export function Logo({
       width={width}
       height={height}
       priority={priority}
+      fetchPriority={priority ? "high" : "auto"}
       className={className}
     />
   );
