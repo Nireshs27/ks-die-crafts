@@ -43,7 +43,7 @@ export function CategoryCard({
           alt={imageAlt}
           fill
           loading={priority ? "eager" : "lazy"}
-          sizes="(max-width: 640px) 50vw, 25vw"
+          sizes="(max-width: 480px) 180px, (max-width: 640px) 50vw, 350px"
           className="object-cover transition-transform duration-500 ease-out group-hover:scale-110"
         />
         <div

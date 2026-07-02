@@ -92,7 +92,7 @@ function ServiceRow({
             fill
             loading={priority ? "eager" : "lazy"}
             className={`object-cover transition-transform duration-500 group-hover:scale-[1.03] ${service.imagePosition}`}
-            sizes="(max-width: 1024px) 100vw, 45vw"
+            sizes="(max-width: 480px) 100vw, (max-width: 1024px) 100vw, 600px"
           />
           <div
             className="absolute inset-0 bg-gradient-to-br from-black/20 via-transparent to-black/40 lg:bg-gradient-to-r lg:from-transparent lg:via-transparent lg:to-black/10"

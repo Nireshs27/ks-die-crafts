@@ -113,7 +113,7 @@ function HeritageIntro() {
               fill
               loading="lazy"
               className="object-cover object-[center_35%]"
-              sizes="(max-width: 1024px) 100vw, 60vw"
+              sizes="(max-width: 480px) 100vw, (max-width: 1024px) 100vw, 800px"
             />
           </div>
         </Reveal>

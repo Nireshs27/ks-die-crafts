@@ -18,7 +18,7 @@ function WorkCard({ item, priority = false }: { item: RecentWorkItem; priority?:
           alt={item.imageAlt}
           fill
           loading={priority ? "eager" : "lazy"}
-          sizes="(max-width: 640px) 85vw, (max-width: 1024px) 50vw, 25vw"
+          sizes="(max-width: 480px) 320px, (max-width: 640px) 85vw, (max-width: 1024px) 50vw, 350px"
           className="object-cover transition-transform duration-500 ease-out group-hover:scale-110"
         />
         <div
