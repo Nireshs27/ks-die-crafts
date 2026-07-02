@@ -1,3 +1,4 @@
+import { categories } from "@/lib/categories";
 import { siteConfig } from "@/lib/site";
 import { faqs } from "@/lib/faqs";
 
@@ -11,7 +12,9 @@ export function StructuredData() {
     url: siteConfig.url,
     logo: `${siteConfig.url}${siteConfig.logo}`,
     description: siteConfig.description,
+    slogan: siteConfig.tagline,
     foundingDate: String(siteConfig.foundingYear),
+    knowsAbout: categories.map((c) => c.title),
     sameAs: [siteConfig.social.instagram, siteConfig.social.facebook],
     contactPoint: {
       "@type": "ContactPoint",
@@ -30,9 +33,16 @@ export function StructuredData() {
     name: siteConfig.name,
     image: `${siteConfig.url}${siteConfig.logo}`,
     url: siteConfig.url,
+    description: siteConfig.description,
+    slogan: siteConfig.tagline,
     telephone: siteConfig.contact.phone,
     email: siteConfig.contact.email,
     priceRange: "₹₹",
+    areaServed: {
+      "@type": "Country",
+      name: "India",
+    },
+    knowsAbout: categories.map((c) => c.title),
     address: {
       "@type": "PostalAddress",
       streetAddress: siteConfig.contact.streetAddress,

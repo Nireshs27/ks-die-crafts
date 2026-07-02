@@ -5,7 +5,8 @@ export const siteConfig = {
   headerLogo: "/images/ks-logo-transparent.webp",
   tagline: "Precision steel dies for India's finest jewellers",
   description:
-    "Precision steel die design and manufacturing for jewellery, coin, religious, and custom applications. CNC + Wire EDM craftsmanship from Chennai since 1998.",
+    "High-precision dies for coins, jewellery pendants, religious designs, portraits, and custom applications — built for exceptional detailing, durability, and consistent production.",
+  ogImage: "/images/hero-poster.webp",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://ksdiecrafts.com",
   locale: "en_IN",
   foundingYear: 1980,

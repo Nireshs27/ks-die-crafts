@@ -15,6 +15,10 @@ export function generateStaticParams() {
   return products.map((p) => ({ slug: p.slug }));
 }
 
+function productKeywords(product: NonNullable<ReturnType<typeof getProduct>>) {
+  return [...product.features, ...product.applications];
+}
+
 export async function generateMetadata({
   params,
 }: {
@@ -24,13 +28,22 @@ export async function generateMetadata({
   const product = getProduct(slug);
   if (!product) return { title: "Product not found" };
   return {
-    title: `${product.title} ${product.subtitle}`,
+    title: `${product.title} — ${product.subtitle} | Chennai`,
     description: product.shortDescription,
+    keywords: productKeywords(product),
     alternates: { canonical: `${siteConfig.url}/products/${product.slug}` },
     openGraph: {
-      title: `${product.title} | ${siteConfig.name}`,
+      type: "website",
+      title: `${product.title} — ${product.subtitle} | ${siteConfig.name}`,
       description: product.shortDescription,
+      url: `${siteConfig.url}/products/${product.slug}`,
       images: [{ url: product.image, alt: product.imageAlt }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${product.title} — ${product.subtitle} | ${siteConfig.name}`,
+      description: product.shortDescription,
+      images: [product.image],
     },
   };
 }
@@ -43,6 +56,8 @@ export default async function ProductDetailPage({
   const { slug } = await params;
   const product = getProduct(slug);
   if (!product) notFound();
+
+  const productUrl = `${siteConfig.url}/products/${product.slug}`;
 
   const productJsonLd = {
     "@context": "https://schema.org",
@@ -59,8 +74,33 @@ export default async function ProductDetailPage({
       availability: "https://schema.org/InStock",
       priceCurrency: "INR",
       seller: { "@type": "Organization", name: siteConfig.name },
-      url: `${siteConfig.url}/products/${product.slug}`,
+      url: productUrl,
     },
+  };
+
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: siteConfig.url,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Products",
+        item: `${siteConfig.url}/#categories`,
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: product.title,
+        item: productUrl,
+      },
+    ],
   };
 
   return (
@@ -68,6 +108,10 @@ export default async function ProductDetailPage({
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
 
       <section className="bg-surface py-24 sm:py-32">

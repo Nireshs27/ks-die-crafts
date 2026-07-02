@@ -7,7 +7,7 @@ const services = [
     title: "Prototype & Development",
     description:
       "We don't directly jump to production. We validate. Design-to-die conversion with prototype development ensures your design works in real manufacturing, not just on screen.",
-    image: "/images/process/prototype.jpg",
+    image: "/images/process/prototype.webp",
     imageAlt: "Die prototype validation precision measurement with digital caliper at KS Diecrafts workshop",
     imagePosition: "object-center",
     highlights: ["Design-to-die conversion", "Production validation"],
@@ -24,7 +24,7 @@ const services = [
     title: "Design Support",
     description:
       "From concept to final die, we support the full process with high-end 3D modelling, sculpting, and design refinement — ensuring every detail is ready for production. We also help coin die makers refine and improve their designs before manufacturing begins.",
-    image: "/images/process/design-office.jpg",
+    image: "/images/process/design-office.webp",
     imageAlt: "Designer working on a 3D jewellery die model at the design office",
     imagePosition: "object-center",
     highlights: ["High-end 3D modelling & sculpting", "Design refinement for production"],
@@ -40,7 +40,7 @@ const services = [
     title: "Finishes That Define Output",
     description:
       "Each finish is not just visual — it is built on precision and accuracy at every level of the die. From micro-level detailing to surface consistency, these factors directly control the sharpness, clarity, and overall quality of your final product.",
-    image: "/images/process/finishes.jpg",
+    image: "/images/process/finishes.webp",
     imageAlt: "Three jewellery dies showing matte, mirror and Bombay polish finishes side by side",
     imagePosition: "object-center",
     highlights: ["Matte Finish", "Mirror Finish", "Bombay Polish"],
@@ -56,7 +56,7 @@ const services = [
     title: "Lead Time",
     description:
       "Lead time depends on design complexity and order size. We'll tell you upfront before we start. Regular updates at every key stage.",
-    image: "/images/process/turnaround.jpg",
+    image: "/images/process/turnaround.webp",
     imageAlt: "Finished precision dies packaged and ready for dispatch at the workshop",
     imagePosition: "object-center",
     highlights: ["Upfront timelines", "Regular updates at every key stage"],

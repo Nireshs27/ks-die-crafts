@@ -1,7 +1,30 @@
+import type { Metadata } from "next";
 import dynamic from "next/dynamic";
 import { HeroSection } from "@/components/sections/hero";
 import { StatsSection } from "@/components/sections/stats";
 import { faqs } from "@/lib/faqs";
+import { siteConfig } from "@/lib/site";
+
+export const metadata: Metadata = {
+  title: "Coin, Jewellery, Religious & Custom Steel Dies",
+  description:
+    "From coin and jewellery dies to religious designs and fully custom solutions, we manufacture dies that match your exact production needs with consistent quality and craftsmanship.",
+  alternates: { canonical: siteConfig.url },
+  openGraph: {
+    title: `Coin, Jewellery, Religious & Custom Steel Dies | ${siteConfig.name}`,
+    description:
+      "From coin and jewellery dies to religious designs and fully custom solutions, we manufacture dies that match your exact production needs with consistent quality and craftsmanship.",
+    url: siteConfig.url,
+    images: [
+      {
+        url: siteConfig.ogImage,
+        width: 1200,
+        height: 630,
+        alt: "Precision Dies That Power Quality Manufacturing",
+      },
+    ],
+  },
+};
 
 const CategoriesSection = dynamic(() =>
   import("@/components/sections/categories").then((m) => ({ default: m.CategoriesSection })),
