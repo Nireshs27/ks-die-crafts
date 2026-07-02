@@ -10,11 +10,24 @@ const PREFILL_MESSAGE = encodeURIComponent(
 
 export function WhatsAppButton() {
   const [mounted, setMounted] = useState(false);
+  const [showPulse, setShowPulse] = useState(false);
 
   useEffect(() => {
-    const timer = setTimeout(() => setMounted(true), 1200);
-    return () => clearTimeout(timer);
+    const mountTimer = setTimeout(() => setMounted(true), 1200);
+    return () => clearTimeout(mountTimer);
   }, []);
+
+  useEffect(() => {
+    if (!mounted) return;
+    
+    const pulseTimer = setTimeout(() => setShowPulse(true), 500);
+    const stopPulseTimer = setTimeout(() => setShowPulse(false), 4500);
+    
+    return () => {
+      clearTimeout(pulseTimer);
+      clearTimeout(stopPulseTimer);
+    };
+  }, [mounted]);
 
   const href = `https://wa.me/${siteConfig.contact.whatsapp}?text=${PREFILL_MESSAGE}`;
 
@@ -28,7 +41,9 @@ export function WhatsAppButton() {
         mounted ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
       }`}
     >
-      <span className="absolute inset-0 -z-10 rounded-full bg-[#25D366] opacity-40 animate-ping" aria-hidden="true" />
+      {showPulse && (
+        <span className="absolute inset-0 -z-10 rounded-full bg-[#25D366] opacity-40 animate-ping" aria-hidden="true" />
+      )}
       <WhatsAppIcon full className="h-7 w-7" />
     </a>
   );

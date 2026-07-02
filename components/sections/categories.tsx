@@ -17,7 +17,7 @@ export function CategoriesSection() {
 
         <Reveal delay={0.2}>
           <div className="mt-14 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4 lg:gap-5">
-            {categories.map((category) => (
+            {categories.map((category, index) => (
               <CategoryCard
                 key={category.slug}
                 title={category.title}
@@ -25,6 +25,7 @@ export function CategoriesSection() {
                 image={category.image}
                 imageAlt={category.imageAlt}
                 href={`/products/${category.slug}`}
+                priority={index < 2}
               />
             ))}
           </div>

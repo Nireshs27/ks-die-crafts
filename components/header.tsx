@@ -18,7 +18,15 @@ export function Header() {
   const solidHeader = scrolled || !isHome;
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 20);
+    let ticking = false;
+    const handleScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        setScrolled(window.scrollY > 20);
+        ticking = false;
+      });
+    };
     handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
@@ -26,7 +34,7 @@ export function Header() {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 animate-[header-slide-in_0.6s_cubic-bezier(0.25,0.4,0.25,1)] ${
+      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 header-animate ${
         solidHeader
           ? "border-b border-border/50 bg-background shadow-sm"
           : "bg-transparent"

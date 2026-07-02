@@ -52,6 +52,11 @@
 html {
   scroll-behavior: smooth;
   color-scheme: light dark;
+  text-rendering: optimizeSpeed;
+}
+
+.contain-layout {
+  contain: layout;
 }
 
 html:not(.dark) {
@@ -112,6 +117,15 @@ footer :focus-visible {
   from { transform: translateY(-100%); }
   to { transform: translateY(0); }
 }
+.header-animate {
+  animation: header-slide-in 0.6s cubic-bezier(0.25, 0.4, 0.25, 1);
+}
+@media (prefers-reduced-motion: reduce) {
+  .header-animate {
+    animation: none;
+    transform: none;
+  }
+}
 
 /* --- Hero entrance --- */
 @keyframes hero-fade-up {
@@ -126,6 +140,13 @@ footer :focus-visible {
 }
 .hero-fade-up {
   animation: hero-fade-up 0.8s cubic-bezier(0.25, 0.4, 0.25, 1) both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-fade-up {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
 }
 
 /* --- Client logo marquee --- */

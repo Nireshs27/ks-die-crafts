@@ -5,8 +5,18 @@ import { useRef, useEffect, useState, type ReactNode, type CSSProperties } from 
 function useIntersection(margin = "-40px") {
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
 
   useEffect(() => {
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- intentional sync with external system (matchMedia)
+    setPrefersReducedMotion(mq.matches);
+    
+    if (mq.matches) {
+      setVisible(true);
+      return;
+    }
+
     const el = ref.current;
     if (!el) return;
     const observer = new IntersectionObserver(
@@ -22,7 +32,7 @@ function useIntersection(margin = "-40px") {
     return () => observer.disconnect();
   }, [margin]);
 
-  return { ref, visible };
+  return { ref, visible, prefersReducedMotion };
 }
 
 const offsets: Record<string, string> = {
@@ -48,14 +58,16 @@ export function Reveal({
   direction = "up",
   duration = 0.6,
 }: RevealProps) {
-  const { ref, visible } = useIntersection();
+  const { ref, visible, prefersReducedMotion } = useIntersection();
 
-  const style: CSSProperties = {
-    opacity: visible ? 1 : 0,
-    transform: visible ? "translate(0,0)" : offsets[direction],
-    transition: `opacity ${duration}s cubic-bezier(0.25,0.4,0.25,1) ${delay}s, transform ${duration}s cubic-bezier(0.25,0.4,0.25,1) ${delay}s`,
-    willChange: visible ? "auto" : "opacity, transform",
-  };
+  const style: CSSProperties = prefersReducedMotion
+    ? {}
+    : {
+        opacity: visible ? 1 : 0,
+        transform: visible ? "translate(0,0)" : offsets[direction],
+        transition: `opacity ${duration}s cubic-bezier(0.25,0.4,0.25,1) ${delay}s, transform ${duration}s cubic-bezier(0.25,0.4,0.25,1) ${delay}s`,
+        willChange: visible ? "auto" : "opacity, transform",
+      };
 
   return (
     <div ref={ref} className={className} style={style}>

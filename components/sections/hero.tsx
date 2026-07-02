@@ -1,27 +1,45 @@
 "use client";
 
-import { useRef, useEffect, useState } from "react";
+import Image from "next/image";
+import { useRef, useEffect, useState, useCallback } from "react";
 import { Button } from "@/components/button";
 
 export function HeroSection() {
   const ref = useRef<HTMLElement>(null);
-  // Start false so the server-rendered HTML matches the first client render
-  // (avoids a hydration mismatch); the effect upgrades to video after mount.
-  const [showVideo, setShowVideo] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [isDesktop, setIsDesktop] = useState(false);
+  const [videoLoaded, setVideoLoaded] = useState(false);
 
   useEffect(() => {
     const mq = window.matchMedia("(min-width: 768px)");
-    // Intentional post-mount sync with an external system (matchMedia); safe here.
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    if (mq.matches) setShowVideo(true);
-    const handler = (e: MediaQueryListEvent) => setShowVideo(e.matches);
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- intentional sync with external system (matchMedia)
+    setIsDesktop(mq.matches);
+    const handler = (e: MediaQueryListEvent) => setIsDesktop(e.matches);
     mq.addEventListener("change", handler);
     return () => mq.removeEventListener("change", handler);
   }, []);
 
   useEffect(() => {
+    if (!isDesktop) return;
+    
+    const timer = setTimeout(() => {
+      if (videoRef.current) {
+        videoRef.current.src = "/hero-section-video.mp4";
+        videoRef.current.load();
+      }
+    }, 100);
+    
+    return () => clearTimeout(timer);
+  }, [isDesktop]);
+
+  const handleVideoCanPlay = useCallback(() => {
+    setVideoLoaded(true);
+    videoRef.current?.play().catch(() => {});
+  }, []);
+
+  useEffect(() => {
     const section = ref.current;
-    if (!section || !showVideo) return;
+    if (!section || !isDesktop) return;
 
     const bg = section.querySelector<HTMLElement>("[data-hero-bg]");
     if (!bg) return;
@@ -40,47 +58,41 @@ export function HeroSection() {
 
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, [showVideo]);
+  }, [isDesktop]);
 
   return (
     <section
       ref={ref}
       id="home"
-      className="relative w-[100vw] ml-[calc(50%-50vw)] -mt-16 flex min-h-[100svh] items-center overflow-hidden bg-zinc-900"
+      className="relative w-[100vw] ml-[calc(50%-50vw)] -mt-16 flex min-h-[100svh] items-center overflow-hidden bg-zinc-900 contain-layout"
     >
       <div
         data-hero-bg
-        className="absolute -top-[20%] left-0 right-0 h-[140%] w-full"
+        className="absolute -top-[20%] left-0 right-0 h-[140%] w-full will-change-transform"
       >
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
+        <Image
           src="/images/hero-poster.webp"
           alt=""
-          fetchPriority="high"
-          decoding="async"
-          className={`absolute inset-0 h-full w-full object-cover${showVideo ? " hidden" : ""}`}
+          fill
+          priority
+          sizes="100vw"
+          className={`object-cover transition-opacity duration-500 ${videoLoaded ? "opacity-0" : "opacity-100"}`}
         />
 
-        {showVideo && (
+        {isDesktop && (
           <video
-            autoPlay
+            ref={videoRef}
             loop
             muted
             playsInline
             aria-hidden="true"
             preload="none"
-            className="absolute inset-0 h-full w-full object-cover"
-          >
-            <source src="/hero-section-video.mp4" type="video/mp4" />
-          </video>
+            onCanPlay={handleVideoCanPlay}
+            className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ${videoLoaded ? "opacity-100" : "opacity-0"}`}
+          />
         )}
       </div>
 
-      {/*
-        Two-layer darkening: a base gradient keeps the top/bottom edges
-        readable, and a radial vignette guarantees strong contrast right
-        behind the text block regardless of how bright the footage is there.
-      */}
       <div
         className="absolute inset-0 bg-gradient-to-b from-black/55 via-black/40 to-black/65"
         aria-hidden="true"

@@ -9,14 +9,15 @@ import { recentWork, type RecentWorkItem } from "@/lib/recent-work";
 
 const GAP = 20;
 
-function WorkCard({ item }: { item: RecentWorkItem }) {
+function WorkCard({ item, priority = false }: { item: RecentWorkItem; priority?: boolean }) {
   return (
-    <div className="group relative block w-full overflow-hidden rounded-2xl">
+    <div className="group relative block w-full overflow-hidden rounded-2xl contain-layout">
       <div className="relative aspect-[4/5] w-full overflow-hidden">
         <Image
           src={item.image}
           alt={item.imageAlt}
           fill
+          loading={priority ? "eager" : "lazy"}
           sizes="(max-width: 640px) 85vw, (max-width: 1024px) 50vw, 25vw"
           className="object-cover transition-transform duration-500 ease-out group-hover:scale-110"
         />
@@ -212,7 +213,7 @@ export function RecentWorkSection() {
                   key={`${item.id}-${index}`}
                   className="min-w-[85vw] shrink-0 sm:min-w-[calc(50%-10px)] lg:min-w-[calc(25%-15px)]"
                 >
-                  <WorkCard item={item} />
+                  <WorkCard item={item} priority={index < 4} />
                 </div>
               ))}
             </div>

@@ -1,5 +1,3 @@
-"use client";
-
 import Image from "next/image";
 import Link from "next/link";
 
@@ -11,6 +9,7 @@ type CategoryCardProps = {
   imageAlt: string;
   href?: string;
   badge?: string;
+  priority?: boolean;
 };
 
 function BadgePill({ badge }: { badge?: string }) {
@@ -32,8 +31,9 @@ export function CategoryCard({
   imageAlt,
   href,
   badge,
+  priority = false,
 }: CategoryCardProps) {
-  const cardClassName = "group relative block w-full overflow-hidden rounded-2xl";
+  const cardClassName = "group relative block w-full overflow-hidden rounded-2xl contain-layout";
 
   const content = (
     <>
@@ -42,6 +42,7 @@ export function CategoryCard({
           src={image}
           alt={imageAlt}
           fill
+          loading={priority ? "eager" : "lazy"}
           sizes="(max-width: 640px) 50vw, 25vw"
           className="object-cover transition-transform duration-500 ease-out group-hover:scale-110"
         />

@@ -72,12 +72,14 @@ const services = [
 function ServiceRow({
   service,
   reversed = false,
+  priority = false,
 }: {
   service: (typeof services)[number];
   reversed?: boolean;
+  priority?: boolean;
 }) {
   return (
-    <article className="group overflow-hidden rounded-3xl bg-background shadow-sm transition-all duration-500 hover:shadow-xl">
+    <article className="group overflow-hidden rounded-3xl bg-background shadow-sm transition-all duration-500 hover:shadow-xl contain-layout">
       <div className="grid lg:grid-cols-[1fr_1.05fr]">
         <div
           className={`relative min-h-[16rem] sm:min-h-[20rem] lg:min-h-[26rem] ${
@@ -88,6 +90,7 @@ function ServiceRow({
             src={service.image}
             alt={service.imageAlt}
             fill
+            loading={priority ? "eager" : "lazy"}
             className={`object-cover transition-transform duration-500 group-hover:scale-[1.03] ${service.imagePosition}`}
             sizes="(max-width: 1024px) 100vw, 45vw"
           />
@@ -179,6 +182,7 @@ export function ServicesSection() {
               key={service.title}
               service={service}
               reversed={index % 2 === 1}
+              priority={index === 0}
             />
           ))}
         </div>

@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { useEffect, useState } from "react";
 
 const clients = [
   { name: "GRT Jewellers", logo: "/images/client-logo/grt-jewellers.png" },
@@ -18,16 +19,17 @@ function ClientLogo({ name, logo }: { name: string; logo: string }) {
   const isSvg = logo.endsWith(".svg");
 
   return (
-    <div className="flex h-24 w-48 flex-shrink-0 items-center justify-center gap-3 rounded-xl border border-border/60 bg-white px-6 py-4 transition-all hover:border-border hover:shadow-sm">
+    <div className="flex h-24 w-48 flex-shrink-0 items-center justify-center gap-3 rounded-xl border border-border/60 bg-white px-6 py-4 transition-all hover:border-border hover:shadow-sm contain-layout">
       <div className="relative h-full w-full">
         {isSvg ? (
           // eslint-disable-next-line @next/next/no-img-element
-          <img src={logo} alt={`${name} logo`} className="h-full w-full object-contain" />
+          <img src={logo} alt={`${name} logo`} loading="lazy" className="h-full w-full object-contain" />
         ) : (
           <Image
             src={logo}
             alt={`${name} logo`}
             fill
+            loading="lazy"
             sizes="160px"
             className="object-contain"
           />
@@ -38,6 +40,16 @@ function ClientLogo({ name, logo }: { name: string; logo: string }) {
 }
 
 export function ClientLogos() {
+  const [shouldAnimate, setShouldAnimate] = useState(false);
+
+  useEffect(() => {
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (!prefersReducedMotion) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- intentional sync with external system (matchMedia)
+      setShouldAnimate(true);
+    }
+  }, []);
+
   return (
     <div
       className="relative overflow-hidden py-2"
@@ -48,7 +60,7 @@ export function ClientLogos() {
           "linear-gradient(to right, transparent, black 8%, black 92%, transparent)",
       }}
     >
-      <div className="flex w-max animate-logo-marquee gap-6">
+      <div className={`flex w-max gap-6 ${shouldAnimate ? "animate-logo-marquee" : ""}`}>
         {marqueeClients.map((client, i) => (
           <ClientLogo
             key={`${client.name}-${i}`}

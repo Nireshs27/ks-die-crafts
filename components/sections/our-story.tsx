@@ -111,9 +111,9 @@ function HeritageIntro() {
               src="/images/ks-diecraft-owners.png"
               alt="The team behind KS Diecrafts"
               fill
+              loading="lazy"
               className="object-cover object-[center_35%]"
               sizes="(max-width: 1024px) 100vw, 60vw"
-              priority={false}
             />
           </div>
         </Reveal>
